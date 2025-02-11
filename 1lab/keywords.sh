@@ -6,7 +6,7 @@ KEYWORDS="int|alignas|alignof|and|and_eq|asm|atomic_cancel|atomic_commit|atomic_
 
 for f in $(find $DIR -name "*.cpp"); do
     echo "*** File $f"
-    sed -e ':a' -e '/\/\*/ { :b; /\*\//!{N; bb}; s|/\*.*\*/|| }' -e 's|//.*||' "$f" |
+    sed -e '/\/\*/ { :b; /\*\//!{N; bb}; s|/\*.*\*/|| }' -e 's|//.*||' "$f" |
     grep -v '^#' |
     grep -Eow "$KEYWORDS"
 done
