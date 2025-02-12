@@ -19,7 +19,8 @@ double d4 = .1E4f;
 double d = 2.4028234e38;
 double d = 0x1.4p3; // hex fraction 1.4 (decimal 1.25) scaled by 23, that is 10.0
 long double d = -1.4028234e38l;
-std::bfloat16_t bfc = 0.1f64BF16; // C++23
+std::bfloat16_t bfc = 0.1f64; // C++23
+std::bfloat16_t bfc = 0.1BF16; // C++23
 // String literal
 char *s = "s-char-seq";
 const wchar_t *s5 = L"ABCDEF";
