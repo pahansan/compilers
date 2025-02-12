@@ -1,10 +1,10 @@
 #!/bin/sh
 
-DIR="folly"
+DIR="."
 
 REGEXP="==|!=|<|>|<=|>=|<=>"
 
-for f in $(find $DIR -name "*.cpp"); do
+for f in $(find $DIR -name "test.cpp"); do
     echo "*** File $f"
     sed -e '/\/\*/ { :b; /\*\//!{N; bb}; s|/\*.*\*/|| }' -e 's|//.*||' "$f" |
     grep -Eo "$REGEXP"

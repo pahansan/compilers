@@ -1,8 +1,8 @@
 #!/bin/sh
 
-DIR="folly"
+DIR="."
 
-for f in $(find $DIR -name "*.cpp"); do
+for f in $(find $DIR -name "test.cpp"); do
     echo "*** File $f"
     grep -Pzo '/\*[\s\S]*?\*/' $f
     echo ''

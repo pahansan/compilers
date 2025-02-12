@@ -1,10 +1,10 @@
 #!/bin/sh
 
-DIR="folly"
+DIR="."
 
 REGEXP="0([']?[0-7]+)+[Zz]?[UuLl]?[UuLl]?[UuLl]?[Zz]?"
 
-for f in $(find $DIR -name "*.cpp"); do
+for f in $(find $DIR -name "test.cpp"); do
     echo "*** File $f"
     sed -e '/\/\*/ { :b; /\*\//!{N; bb}; s|/\*.*\*/|| }' -e 's|//.*||' "$f" |
     grep -v '^#' |
