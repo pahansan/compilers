@@ -24,4 +24,5 @@ std::bfloat16_t bfc = 0.1BF16; // C++23
 // String literal
 char *s = "s-char-seq";
 const wchar_t *s5 = L"ABCDEF";
+char* raw = R"(/)";
 #if
