@@ -32,7 +32,28 @@ namespace tok
         /* literals */
         lt_int,
         lt_str,
-        lt_bad_str
+        /* operators */
+        op_dot,
+        op_at,
+        op_tilda,
+        op_asterisk,
+        op_slash,
+        op_arrow,
+        op_plus,
+        op_minus,
+        op_less_eq,
+        op_less,
+        op_eq,
+        /* special symbols */
+        sp_colon,
+        sp_semi_colon,
+        sp_big_arrow,
+        sp_comma,
+        /* brackets */
+        br_r_open,
+        br_r_close,
+        br_c_open,
+        br_c_close
     };
 }
 

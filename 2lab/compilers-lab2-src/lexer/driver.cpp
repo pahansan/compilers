@@ -59,8 +59,43 @@ std::string get_token_name(int token)
         return "lt_int";
     case (tok::lt_str):
         return "lt_str";
-    case (tok::lt_bad_str):
-        return "lt_bad_str";
+    case (tok::op_dot):
+        return "op_dot";
+    case (tok::op_at):
+        return "op_at";
+    case (tok::op_tilda):
+        return "op_tilda";
+    case (tok::op_asterisk):
+        return "op_asterisk";
+    case (tok::op_slash):
+        return "op_slash";
+    case (tok::op_arrow):
+        return "op_arrow";
+    case (tok::op_plus):
+        return "op_plus";
+    case (tok::op_minus):
+        return "op_minus";
+    case (tok::op_less_eq):
+        return "op_less_eq";
+    case (tok::op_less):
+        return "op_less";
+    case (tok::op_eq):
+        return "op_eq";
+    case (tok::sp_colon):
+        return "sp_colon";
+    case (tok::sp_semi_colon):
+        return "sp_semi_colon";
+    case (tok::sp_comma):
+        return "sp_comma";
+    case (tok::br_r_open):
+        return "br_r_open";
+    case (tok::br_r_close):
+        return "br_r_close";
+    case (tok::br_c_open):
+        return "br_c_open";
+    case (tok::br_c_close):
+        return "br_c_close";
+
     default:
         return "error_token";
     }
@@ -82,6 +117,8 @@ std::string format_lt_str(std::string str)
     replaceAllSubstrings(str, "\t", "\\t");
     replaceAllSubstrings(str, "\n", "\\n");
     replaceAllSubstrings(str, "\f", "\\f");
+    str.erase(0, 1);
+    str.erase(str.size() - 1);
     return str;
 }
 
@@ -102,7 +139,7 @@ int main(int argc, char **argv)
     CoolLexer *lexer = new CoolLexer(ifs, std::cout);
     for (int token = lexer->yylex(); token; token = lexer->yylex())
     {
-        if (token == tok::lt_str || token == tok::lt_bad_str)
+        if (token == tok::lt_str)
             std::cout << "Token: " << std::setw(12) << std::left << get_token_name(token) << " '" << format_lt_str(lexer->YYText()) << "'\n";
         else
             std::cout << "Token: " << std::setw(12) << std::left << get_token_name(token) << " '" << lexer->YYText() << "'\n";

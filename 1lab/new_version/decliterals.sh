@@ -20,3 +20,4 @@ for f in $(find $DIR -name "test.cpp"); do
     grep -Ev "$FLOAT" |
     grep -Eo "$DEC"
 done
+

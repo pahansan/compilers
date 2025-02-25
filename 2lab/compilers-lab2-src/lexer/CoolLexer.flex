@@ -13,11 +13,11 @@
 %}
 
 /* base symbols */
-white_space       [ \n\t\f\r\t\v]*
+white_space       [ \t\f\r\t\v]*
 lower             [a-z]
 upper             [A-Z]
 letter            {lower}|{upper}
-underscore        _
+underscore        \_
 digit             [0-9]
 id_body           ({letter}|{underscore}|{digit})*
 
@@ -48,11 +48,32 @@ object            {lower}{id_body}
 
 /* literals */
 int               {digit}+
-string            \"(.|\\\n)*\"
-bad_string        \"(.|\n|\0)*\"
+string            \"(.|\\\n|[^\n])*\"
 
-%x COMMENT
+/* operators */
+dot               \.
+at                \@
+tilda             \~
+asterisk          \*
+slash             \/
+arrow             \<\-
+plus              \+
+minus             \-
+less_eq           \<\=
+less              \<
+eq                \=
 
+/* special symbols */
+colon             \:
+semi_colon        \;
+big_arrow         \=\>
+comma             \,
+
+/* brackets */
+r_open            \(
+r_close           \)
+c_open            \{
+c_close           \}
 
 %option warn nodefault batch noyywrap c++
 %option yylineno
@@ -85,7 +106,29 @@ bad_string        \"(.|\n|\0)*\"
 
 {int}             return tok::lt_int;
 {string}          return tok::lt_str;
-{bad_string}      return tok::lt_bad_str;
+
+{dot}             return tok::op_dot;
+{at}              return tok::op_at;
+{tilda}           return tok::op_tilda;
+{asterisk}        return tok::op_asterisk;
+{slash}           return tok::op_slash;
+{arrow}           return tok::op_arrow;
+{plus}            return tok::op_plus;
+{minus}           return tok::op_minus;
+{less_eq}         return tok::op_less_eq;
+{less}            return tok::op_less;
+{eq}              return tok::op_eq;
+
+{colon}           return tok::sp_colon;
+{semi_colon}      return tok::sp_semi_colon;
+{big_arrow}       return tok::sp_big_arrow;
+{comma}           return tok::sp_comma;
+
+{r_open}          return tok::br_r_open;
+{r_close}         return tok::br_r_close;
+{c_open}          return tok::br_c_open;
+{c_close}         return tok::br_c_close;
+
 
 \n                   lineno++;
 {white_space}        { /* skip spaces */ }
