@@ -1,3 +1,11 @@
+(*
+    APP (* text text *)
+   **** (lol) 
+
+*)
+
+-- -- aboba
+
 class CellularAutomaton inherits IO {
     population_map : String;
    

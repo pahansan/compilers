@@ -75,11 +75,29 @@ r_close           \)
 c_open            \{
 c_close           \}
 
+open              \(\*
+close             \*\)
+
+%x COMMENT
+
 %option warn nodefault batch noyywrap c++
 %option yylineno
 %option yyclass="CoolLexer"
 
 %%
+--.*$                    {}
+{open}                           {BEGIN(COMMENT); comment_level = 1;}
+<COMMENT>{open}                  {comment_level++;}
+<COMMENT>.                       { /* skip*/ }
+<COMMENT>\n                      { lineno++; }
+<COMMENT><<EOF>>                 Error("EOF in comment");
+<COMMENT>{close}       {
+    comment_level--;
+    if(comment_level == 0)
+        BEGIN(INITIAL);
+};
+
+"*)"                Error("Comment close without open");
 
 {class}           return tok::kw_class;
 {else}            return tok::kw_else;

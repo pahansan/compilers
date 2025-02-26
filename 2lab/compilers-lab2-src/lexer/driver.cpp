@@ -139,6 +139,7 @@ int main(int argc, char **argv)
     CoolLexer *lexer = new CoolLexer(ifs, std::cout);
     for (int token = lexer->yylex(); token; token = lexer->yylex())
     {
+        std::cout << std::setw(3) << std::left << lexer->line() << ':';
         if (token == tok::lt_str)
             std::cout << "Token: " << std::setw(12) << std::left << get_token_name(token) << " '" << format_lt_str(lexer->YYText()) << "'\n";
         else
