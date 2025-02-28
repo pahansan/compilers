@@ -1,10 +1,11 @@
+-- This is simple comment
+
 (*
-    APP (* text text *)
-   **** (lol) 
-
+    This
+    (* is *)
+    (* my (* super *) *)
+    comment
 *)
-
--- -- aboba
 
 class CellularAutomaton inherits IO {
     population_map : String;
@@ -18,7 +19,7 @@ class CellularAutomaton inherits IO {
 
     print() : SELF_TYPE {
         {
-            out_string(population_map.concat("\n"));
+            out_string(population_map.concat("aboba\c"));
             self;
         }
     };
