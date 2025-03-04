@@ -117,6 +117,19 @@ std::string format_lt_str(std::string str)
     replaceAllSubstrings(str, "\t", "\\t");
     replaceAllSubstrings(str, "\n", "\\n");
     replaceAllSubstrings(str, "\f", "\\f");
+    std::string tmp = "\\a";
+    std::string tmp2 = "a";
+    for (char s = 'A'; s <= 'z'; s++)
+    {
+        if (s == 'b' || s == 't' || s == 'n' || s == 'f')
+            continue;
+        if ((s >= 'a' && s <= 'z') || (s >= 'A' && s <= 'Z'))
+        {
+            tmp[1] = s;
+            tmp2[0] = s;
+            replaceAllSubstrings(str, tmp, tmp2);
+        }
+    }
     str.erase(0, 1);
     str.erase(str.size() - 1);
     return str;

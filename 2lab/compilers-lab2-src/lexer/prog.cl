@@ -19,7 +19,7 @@ class CellularAutomaton inherits IO {
 
     print() : SELF_TYPE {
         {
-            out_string(population_map.concat("aboba\c"));
+            out_string(population_map.concat("aboba\c\n\Z"));
             self;
         }
     };
