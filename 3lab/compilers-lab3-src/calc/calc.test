@@ -1,0 +1,26 @@
+#!/bin/sh
+
+PROG="./calc"
+TESTFILE="./input"
+
+run()
+{
+    ${PROG} < ${TESTFILE} >res 2>res-err
+    if [ "$?" -eq "$1" ]; then
+        TEST=`cat $TESTFILE`
+        echo $2 > res-exp
+        if diff res res-exp >/dev/null 2>&1; then
+            echo "${TEST} -- passed"
+        else
+            echo "${TEST} -- FAILED"
+        fi
+    else
+        echo "${TEST} -- failed (exit status)"
+    fi
+    rm res res-err res-exp $TESTFILE
+}
+
+cat >input <<EOF
+1 + 2
+EOF
+run 0 3
