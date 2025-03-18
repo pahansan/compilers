@@ -24,3 +24,53 @@ cat >input <<EOF
 1 + 2
 EOF
 run 0 3
+
+cat >input <<EOF
+1 - 2
+EOF
+run 0 -1
+
+cat >input <<EOF
+3 * 2
+EOF
+run 0 6
+
+cat >input <<EOF
+3 / 2
+EOF
+run 0 1.5
+
+cat >input <<EOF
+- 2
+EOF
+run 0 -2
+
+cat >input <<EOF
+3 ^ 2
+EOF
+run 0 9
+
+cat >input <<EOF
+5 - (5 - 3)
+EOF
+run 0 3
+
+cat >input <<EOF
+2 + 3 * 3
+EOF
+run 0 11
+
+cat >input <<EOF
+3 / 2 * 3
+EOF
+run 0 4.5
+
+cat >input <<EOF
+1.5 + 2e2
+EOF
+run 0 201.5
+
+cat >input <<EOF
+.1 + .2
+EOF
+run 0 0.3
