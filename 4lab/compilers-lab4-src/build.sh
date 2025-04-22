@@ -2,7 +2,7 @@
 
 CXXFLAGS="-Wall -g -O0 -I ./src/ -Wno-unused -Wno-deprecated  -Wno-write-strings -Wno-free-nonheap-object"
 
-bison -d -v -y -b cool --debug -p cool_yy -o cool-bison-parser.cc cool.y
+bison -d -v -y -b cool --debug -Wcounterexamples -p cool_yy -o cool-bison-parser.cc cool.y
 flex -d -o cool-flex-lexer.cc ./cool.flex
 
 g++ $CXXFLAGS -c parser-phase.cc

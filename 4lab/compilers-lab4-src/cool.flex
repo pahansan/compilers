@@ -93,7 +93,7 @@ DIGIT           [0-9]
 
  /* if seen '\n' in inline comment, the comment ends */
 <INLINE_COMMENTS>\n {
-    curr_lineno++;
+    /* curr_lineno++; */
     BEGIN 0;
 }
 
@@ -116,7 +116,7 @@ DIGIT           [0-9]
 
  /* seen a '\\' at the end of a line, the string continues */
 <STRING>\\\n {
-    curr_lineno++;
+    /* curr_lineno++; */
     yymore();
 }
 
@@ -132,7 +132,7 @@ DIGIT           [0-9]
 <STRING>\n {
     yylval.error_msg = "Unterminated string constant";
     BEGIN 0;
-    curr_lineno++;
+    /* curr_lineno++; */
     return ERROR;
 }
 
@@ -289,7 +289,7 @@ f(?i:alse) {
 
  /* To treat lines. */
 "\n" {
-    curr_lineno++;
+    /* curr_lineno++; */
 }
 
  /* OBJECTID */

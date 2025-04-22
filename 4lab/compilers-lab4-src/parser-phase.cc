@@ -9,7 +9,8 @@ extern Classes parse_results;
 extern Program ast_root;
 
 extern int curr_lineno;
-const char *curr_filename = "<stdin>";
+// const char *curr_filename = "<stdin>";
+char *curr_filename;
 extern int parse_errors;
 
 // Debug flags
@@ -27,13 +28,14 @@ int main(int argc, char **argv)
 
     for (int i = 1; i < argc; i++)
     {
+        curr_filename = argv[i];
         token_file = std::fopen(argv[i], "r");
         if (token_file == NULL)
         {
             std::cerr << "Error: can not open file " << argv[i] << std::endl;
             std::exit(1);
         }
-        curr_lineno = 1;
+        curr_lineno = 0;
 
         cool_yyparse();
         if (parse_errors != 0)
