@@ -44,6 +44,10 @@ int main(int argc, char **argv)
             std::exit(1);
         }
 
+        idtable.print();
+        stringtable.print();
+        inttable.print();
+
         ast_root->dump_with_types(std::cerr, 0);
         /* TODO: dump AST tree (ast_root) to std::cerr */
 

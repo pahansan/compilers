@@ -22,7 +22,7 @@ void list_map(void f(T*), List<T> *l)
 template <class S, class T>
 void list_print(S &str, List<T> *l)
 {
-    str << "[\n";
+    str << "[ ";
     for(; l != NULL; l = l->tl())
 	    str << *(l->hd()) << " ";
     str << "]\n";

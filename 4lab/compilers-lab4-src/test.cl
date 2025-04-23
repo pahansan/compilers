@@ -13,7 +13,7 @@ class Main inherits Aboba{
                     }
                 pool
             );
-            10
+            10;
         }
     };
 };
