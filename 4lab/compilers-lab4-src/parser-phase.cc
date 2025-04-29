@@ -35,7 +35,7 @@ int main(int argc, char **argv)
             std::cerr << "Error: can not open file " << argv[i] << std::endl;
             std::exit(1);
         }
-        curr_lineno = 0;
+        curr_lineno = 1;
 
         cool_yyparse();
         if (parse_errors != 0)
