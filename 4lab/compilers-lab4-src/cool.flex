@@ -93,7 +93,7 @@ DIGIT           [0-9]
 
  /* if seen '\n' in inline comment, the comment ends */
 <INLINE_COMMENTS>\n {
-    /* curr_lineno++; */
+    // curr_lineno++;
     BEGIN 0;
 }
 
@@ -133,14 +133,6 @@ DIGIT           [0-9]
     yylval.error_msg = "Unterminated string constant";
     BEGIN 0;
     /* curr_lineno++; */
-    return ERROR;
-}
-
- /* meet a "\\0" ??? */
-<STRING>\\0 {
-    yylval.error_msg = "Unterminated string constant";
-    BEGIN 0;
-    //curr_lineno++;
     return ERROR;
 }
 
