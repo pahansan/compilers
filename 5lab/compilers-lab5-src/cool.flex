@@ -45,11 +45,10 @@ extern YYSTYPE cool_yylval;
 
 %option noyywrap
 
-DARROW          =>
 DIGIT           [0-9]
-%Start          COMMENTS
-%Start          INLINE_COMMENTS
-%Start          STRING
+%s              COMMENTS
+%s              INLINE_COMMENTS
+%s              STRING
 
 %%
 
