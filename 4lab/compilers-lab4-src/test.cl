@@ -1,6 +1,10 @@
+--
+--
+-- jopa
+
 class Main inherits Aboba{
     aboba1 : Int <- 10;
-    aboba2 : Int <- aboba1 / 10;
+    aboba2 : Int <- aboba1 / 10
 
     main(): Int {
         {
