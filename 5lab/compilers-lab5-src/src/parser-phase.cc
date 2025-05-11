@@ -79,6 +79,7 @@ int main(int argc, char **argv)
         // std::cout << '\n';
         std::fclose(token_file);
 
+        count_classes();
         make_inheritance_graph();
     }
 

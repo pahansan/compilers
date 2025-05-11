@@ -8,6 +8,8 @@
 
 extern Program ast_root;
 
+extern bool faults_attend;
+
 template <typename Vertex>
 class Graph
 {
@@ -64,4 +66,5 @@ namespace std
 
 bool operator==(const GraphNode &lhs, const GraphNode &rhs);
 std::ostream &operator<<(std::ostream &out, const GraphNode &node);
+void count_classes();
 Graph<GraphNode> make_inheritance_graph();

@@ -1,5 +1,7 @@
 #include "inheritance_graph.h"
 
+bool faults_attend = false;
+
 bool operator==(const GraphNode &lhs, const GraphNode &rhs)
 {
     return lhs.class_name == rhs.class_name;
@@ -11,7 +13,7 @@ std::ostream &operator<<(std::ostream &out, const GraphNode &node)
     return out;
 }
 
-Graph<GraphNode> make_inheritance_graph()
+void count_classes()
 {
     Classes classes = ast_root->classes;
     std::unordered_map<GraphNode, size_t> classes_count;
@@ -21,6 +23,30 @@ Graph<GraphNode> make_inheritance_graph()
     classes_count[GraphNode("Int")] = 1;
     classes_count[GraphNode("String")] = 1;
     classes_count[GraphNode("Bool")] = 1;
+
+    for (int i = 0; i < classes->len(); ++i)
+    {
+        std::string name = classes->nth(i)->name->get_string();
+
+        if (classes_count.find(name) == classes_count.end())
+            classes_count[GraphNode(name, classes->nth(i))] = 1;
+        else
+            classes_count[GraphNode(name, classes->nth(i))]++;
+    }
+
+    for (const auto &[name, count] : classes_count)
+    {
+        if (count > 1)
+        {
+            std::cerr << "Error: file \"" << name.class_->filename->get_string() << "\" contains " << count << " classes with name \"" << name << "\"\n";
+            bool faults_attend = true;
+        }
+    }
+}
+
+Graph<GraphNode> make_inheritance_graph()
+{
+    Classes classes = ast_root->classes;
 
     Graph<GraphNode> graph;
 
@@ -38,21 +64,12 @@ Graph<GraphNode> make_inheritance_graph()
         graph.add_edge(GraphNode(parent, classes->nth(i)), GraphNode(child, classes->nth(i)));
         if (child == "Main")
             contains_main = true;
-
-        if (classes_count.find(child) == classes_count.end())
-            classes_count[child] = 1;
-        else
-            classes_count[child]++;
     }
 
     if (!contains_main)
-        std::cerr << "Error: File does not contain class Main\n";
-
-    for (const auto &[name, count] : classes_count)
     {
-        if (count > 1)
-            std::cerr << "Error: file contains " << count << " classes with name \"" << name << "\"\n";
+        std::cerr << "Error: File does not contain class Main\n";
+        bool faults_attend = true;
     }
-
     return graph;
 }
