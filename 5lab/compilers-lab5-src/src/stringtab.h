@@ -1,5 +1,4 @@
-#ifndef STRINGTAB_H
-#define STRINGTAB_H
+#pragma once
 
 #include <iostream>
 #include <cstring>
@@ -19,7 +18,7 @@ protected:
     int len;   // length of the string (without trailing \0)
     int index; // unique index for each string
 public:
-    Entry(char *s, int l, int i) : len(l), index(i)
+    Entry(const char *s, int l, int i) : len(l), index(i)
     {
         str = new char[len + 1];
         std::strncpy(str, s, len);
@@ -160,5 +159,3 @@ void StringTable<Elem>::print()
 {
     list_print(std::cerr, tbl);
 }
-
-#endif

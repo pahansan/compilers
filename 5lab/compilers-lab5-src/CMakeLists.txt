@@ -18,6 +18,9 @@ flex_target(Lexer src/cool.flex
 
 add_flex_bison_dependency(Lexer Parser)
 
+set(CXX_STANDARD 20)
+set(CXX_STANDARD_REQUIRED True)
+
 add_executable(parser
             src/parser-phase.cc
             src/utilities.cc

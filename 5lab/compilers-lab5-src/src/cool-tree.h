@@ -27,12 +27,12 @@ public:
    Features features;
    Symbol filename;
 
-   Class__class(Symbol a1, Symbol a2, Features a3, Symbol a4)
+   Class__class(Symbol class_name, Symbol class_parent, Features features_list, Symbol name_of_file)
    {
-      name = a1;
-      parent = a2;
-      features = a3;
-      filename = a4;
+      name = class_name;
+      parent = class_parent;
+      features = features_list;
+      filename = name_of_file;
       type_ = "Class_";
    }
    tree_node *copy() { return copy_Class_(); }
@@ -64,12 +64,12 @@ public:
 class method_class : public Feature_class
 {
 public:
-   method_class(Symbol a1, Formals a2, Symbol a3, Expression a4)
+   method_class(Symbol class_name, Formals method_formals, Symbol return_value_type, Expression method_expr)
    {
-      name = a1;
-      formals = a2;
-      return_type = a3;
-      expr = a4;
+      name = class_name;
+      formals = method_formals;
+      return_type = return_value_type;
+      expr = method_expr;
       type_ = "method";
    }
    Feature copy_Feature();
@@ -80,11 +80,11 @@ public:
 class attr_class : public Feature_class
 {
 public:
-   attr_class(Symbol a1, Symbol a2, Expression a3)
+   attr_class(Symbol class_name, Symbol decl_type, Expression init_val)
    {
-      name = a1;
-      type_decl = a2;
-      init = a3;
+      name = class_name;
+      type_decl = decl_type;
+      init = init_val;
       type_ = "attr";
    }
    Feature copy_Feature();
@@ -97,10 +97,10 @@ class Formal_class : public tree_node
 public:
    Symbol type_decl;
 
-   Formal_class(Symbol a1, Symbol a2)
+   Formal_class(Symbol name_, Symbol decl_type)
    {
-      name = a1;
-      type_decl = a2;
+      name = name_;
+      type_decl = decl_type;
       type_ = "Formal";
    }
    Formal copy_Formal();
