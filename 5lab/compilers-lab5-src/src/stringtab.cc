@@ -7,6 +7,7 @@ std::ostream& operator<<(std::ostream &s, const Entry &sym)
     return s << sym.get_string();
 }
 
+
 std::ostream& operator<<(std::ostream& s, Symbol sym)
 {
     return s << *sym;

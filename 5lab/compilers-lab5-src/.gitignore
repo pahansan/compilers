@@ -10,3 +10,4 @@ parser
 parser-phase.o
 stringtab.o
 utilities.o
+build
