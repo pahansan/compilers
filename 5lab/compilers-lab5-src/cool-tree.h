@@ -1,41 +1,52 @@
 #ifndef COOL_TREE_H
 #define COOL_TREE_H
-//////////////////////////////////////////////////////////
-//
-// file: cool-tree.h
-//
-// This file defines classes for each phylum and constructor
-//
-//////////////////////////////////////////////////////////
 
 #include "tree.h"
 #include "cool-tree.handcode.h"
 
-// define the class for phylum
-// define simple phylum - Program
 typedef class Program_class *Program;
 
 class Program_class : public tree_node
 {
+protected:
+   Classes classes;
+
 public:
+   Program_class(Classes a1)
+   {
+      classes = a1;
+   }
    tree_node *copy() { return copy_Program(); }
-   virtual Program copy_Program() = 0;
-   virtual void dump_with_types(std::ostream &, int) = 0;
+   Program copy_Program();
+   void dump(std::ostream &stream, int n);
+   void dump_with_types(std::ostream &, int);
 };
 
-// define simple phylum - Class_
 typedef class Class__class *Class_;
 
 class Class__class : public tree_node
 {
+protected:
+   Symbol name;
+   Symbol parent;
+   Features features;
+   Symbol filename;
+
 public:
+   Class__class(Symbol a1, Symbol a2, Features a3, Symbol a4)
+   {
+      name = a1;
+      parent = a2;
+      features = a3;
+      filename = a4;
+   }
    tree_node *copy() { return copy_Class_(); }
-   virtual Class_ copy_Class_() = 0;
-   virtual Symbol get_filename() = 0;
-   virtual void dump_with_types(std::ostream &, int) = 0;
+   Class_ copy_Class_();
+   void dump(std::ostream &stream, int n);
+   Symbol get_filename() { return filename; }
+   void dump_with_types(std::ostream &, int);
 };
 
-// define simple phylum - Feature
 typedef class Feature_class *Feature;
 
 class Feature_class : public tree_node
@@ -46,18 +57,26 @@ public:
    virtual void dump_with_types(std::ostream &, int) = 0;
 };
 
-// define simple phylum - Formal
 typedef class Formal_class *Formal;
 
 class Formal_class : public tree_node
 {
+protected:
+   Symbol name;
+   Symbol type_decl;
+
 public:
+   Formal_class(Symbol a1, Symbol a2)
+   {
+      name = a1;
+      type_decl = a2;
+   }
+   Formal copy_Formal();
+   void dump(std::ostream &stream, int n);
+   void dump_with_types(std::ostream &, int);
    tree_node *copy() { return copy_Formal(); }
-   virtual Formal copy_Formal() = 0;
-   virtual void dump_with_types(std::ostream &, int) = 0;
 };
 
-// define simple phylum - Expression
 typedef class Expression_class *Expression;
 
 class Expression_class : public tree_node
@@ -79,80 +98,43 @@ public:
    Expression_class() { type = (Symbol)NULL; }
 };
 
-// define simple phylum - Case
 typedef class Case_class *Case;
 
 class Case_class : public tree_node
 {
+protected:
+   Symbol name;
+   Symbol type_decl;
+   Expression expr;
+
 public:
+   Case_class(Symbol a1, Symbol a2, Expression a3)
+   {
+      name = a1;
+      type_decl = a2;
+      expr = a3;
+   }
+   Case copy_Case();
+   void dump(std::ostream &stream, int n);
+   void dump_with_types(std::ostream &, int);
    tree_node *copy() { return copy_Case(); }
-   virtual Case copy_Case() = 0;
-   virtual void dump_with_types(std::ostream &, int) = 0;
 };
 
-// define the class for phylum - LIST
-// define list phlyum - Classes
 typedef list_node<Class_> Classes_class;
 typedef Classes_class *Classes;
 
-// define list phlyum - Features
 typedef list_node<Feature> Features_class;
 typedef Features_class *Features;
 
-// define list phlyum - Formals
 typedef list_node<Formal> Formals_class;
 typedef Formals_class *Formals;
 
-// define list phlyum - Expressions
 typedef list_node<Expression> Expressions_class;
 typedef Expressions_class *Expressions;
 
-// define list phlyum - Cases
 typedef list_node<Case> Cases_class;
 typedef Cases_class *Cases;
 
-// define the class for constructors
-// define constructor - program
-class program_class : public Program_class
-{
-protected:
-   Classes classes;
-
-public:
-   program_class(Classes a1)
-   {
-      classes = a1;
-   }
-   Program copy_Program();
-   void dump(std::ostream &stream, int n);
-   void dump_with_types(std::ostream &, int);
-};
-
-// define constructor - class_
-class class__class : public Class__class
-{
-protected:
-   Symbol name;
-   Symbol parent;
-   Features features;
-   Symbol filename;
-
-public:
-   class__class(Symbol a1, Symbol a2, Features a3, Symbol a4)
-   {
-      name = a1;
-      parent = a2;
-      features = a3;
-      filename = a4;
-   }
-   Class_ copy_Class_();
-   void dump(std::ostream &stream, int n);
-
-   Symbol get_filename() { return filename; }
-   void dump_with_types(std::ostream &, int);
-};
-
-// define constructor - method
 class method_class : public Feature_class
 {
 protected:
@@ -174,7 +156,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - attr
 class attr_class : public Feature_class
 {
 protected:
@@ -194,45 +175,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - formal
-class formal_class : public Formal_class
-{
-protected:
-   Symbol name;
-   Symbol type_decl;
-
-public:
-   formal_class(Symbol a1, Symbol a2)
-   {
-      name = a1;
-      type_decl = a2;
-   }
-   Formal copy_Formal();
-   void dump(std::ostream &stream, int n);
-   void dump_with_types(std::ostream &, int);
-};
-
-// define constructor - branch
-class branch_class : public Case_class
-{
-protected:
-   Symbol name;
-   Symbol type_decl;
-   Expression expr;
-
-public:
-   branch_class(Symbol a1, Symbol a2, Expression a3)
-   {
-      name = a1;
-      type_decl = a2;
-      expr = a3;
-   }
-   Case copy_Case();
-   void dump(std::ostream &stream, int n);
-   void dump_with_types(std::ostream &, int);
-};
-
-// define constructor - assign
 class assign_class : public Expression_class
 {
 protected:
@@ -250,7 +192,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - static_dispatch
 class static_dispatch_class : public Expression_class
 {
 protected:
@@ -272,7 +213,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - dispatch
 class dispatch_class : public Expression_class
 {
 protected:
@@ -292,7 +232,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - cond
 class cond_class : public Expression_class
 {
 protected:
@@ -313,7 +252,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - loop
 class loop_class : public Expression_class
 {
 protected:
@@ -331,7 +269,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - typcase
 class typcase_class : public Expression_class
 {
 protected:
@@ -349,7 +286,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - block
 class block_class : public Expression_class
 {
 protected:
@@ -365,7 +301,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - let
 class let_class : public Expression_class
 {
 protected:
@@ -392,7 +327,6 @@ public:
    }
 };
 
-// define constructor - plus
 class plus_class : public Expression_class
 {
 protected:
@@ -410,7 +344,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - sub
 class sub_class : public Expression_class
 {
 protected:
@@ -428,7 +361,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - mul
 class mul_class : public Expression_class
 {
 protected:
@@ -446,7 +378,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - divide
 class divide_class : public Expression_class
 {
 protected:
@@ -464,7 +395,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - neg
 class neg_class : public Expression_class
 {
 protected:
@@ -480,7 +410,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - lt
 class lt_class : public Expression_class
 {
 protected:
@@ -498,7 +427,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - eq
 class eq_class : public Expression_class
 {
 protected:
@@ -516,7 +444,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - leq
 class leq_class : public Expression_class
 {
 protected:
@@ -534,7 +461,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - comp
 class comp_class : public Expression_class
 {
 protected:
@@ -550,7 +476,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - int_const
 class int_const_class : public Expression_class
 {
 protected:
@@ -566,7 +491,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - bool_const
 class bool_const_class : public Expression_class
 {
 protected:
@@ -582,7 +506,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - string_const
 class string_const_class : public Expression_class
 {
 protected:
@@ -598,7 +521,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - new_
 class new__class : public Expression_class
 {
 protected:
@@ -614,7 +536,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - isvoid
 class isvoid_class : public Expression_class
 {
 protected:
@@ -630,7 +551,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - no_expr
 class no_expr_class : public Expression_class
 {
 protected:
@@ -643,7 +563,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define constructor - object
 class object_class : public Expression_class
 {
 protected:
@@ -659,7 +578,6 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-// define the prototypes of the interface
 Classes nil_Classes();
 Classes single_Classes(Class_);
 Classes append_Classes(Classes, Classes);
