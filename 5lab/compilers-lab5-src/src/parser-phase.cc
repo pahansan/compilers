@@ -53,8 +53,17 @@ int main(int argc, char **argv)
         Classes classes = ast_root->get_classes();
 
         for (int i = 0; classes->more(i); i = classes->next(i))
-            std::cout << classes->nth(i)->get_name()->get_string() << '|';
-
+        {
+            if (std::string(classes->nth(i)->get_name()->get_string()) == "Main")
+            {
+                Features features = classes->nth(i)->get_features();
+                for (int i = 0; features->more(i); i = features->next(i))
+                {
+                    std::cout << features->nth(i)->get_name()->get_string() << ':';
+                    std::cout << features->nth(i)->get_type() << '\n';
+                }
+            }
+        }
         std::cout << '\n';
         std::fclose(token_file);
     }

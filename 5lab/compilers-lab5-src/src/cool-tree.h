@@ -4,8 +4,6 @@
 #include "tree.h"
 #include "cool-tree.handcode.h"
 
-typedef class Program_class *Program;
-
 class Program_class : public tree_node
 {
 protected:
@@ -24,12 +22,9 @@ public:
    Classes get_classes();
 };
 
-typedef class Class__class *Class_;
-
 class Class__class : public tree_node
 {
 protected:
-   
    Symbol parent;
    Features features;
    Symbol filename;
@@ -52,22 +47,21 @@ public:
    Features get_features();
 };
 
-typedef class Feature_class *Feature;
-
 class Feature_class : public tree_node
 {
+protected:
+   std::string type_;
+
 public:
    tree_node *copy() { return copy_Feature(); }
    virtual Feature copy_Feature() = 0;
    virtual void dump_with_types(std::ostream &, int) = 0;
+   std::string get_type() { return type_; }
 };
-
-typedef class Formal_class *Formal;
 
 class Formal_class : public tree_node
 {
 protected:
-   
    Symbol type_decl;
 
 public:
@@ -81,8 +75,6 @@ public:
    void dump_with_types(std::ostream &, int);
    tree_node *copy() { return copy_Formal(); }
 };
-
-typedef class Expression_class *Expression;
 
 class Expression_class : public tree_node
 {
@@ -103,12 +95,9 @@ public:
    Expression_class() { type = (Symbol)NULL; }
 };
 
-typedef class Case_class *Case;
-
 class Case_class : public tree_node
 {
 protected:
-   
    Symbol type_decl;
    Expression expr;
 
@@ -143,18 +132,18 @@ typedef Cases_class *Cases;
 class method_class : public Feature_class
 {
 protected:
-   
    Formals formals;
    Symbol return_type;
    Expression expr;
 
 public:
-   method_class(Symbol a1, Formals a2, Symbol a3, Expression a4)
+   method_class(Symbol a1, Formals a2, Symbol a3, Expression a4, std::string type = "method")
    {
       name = a1;
       formals = a2;
       return_type = a3;
       expr = a4;
+      type_ = type;
    }
    Feature copy_Feature();
    void dump(std::ostream &stream, int n);
@@ -164,16 +153,16 @@ public:
 class attr_class : public Feature_class
 {
 protected:
-   
    Symbol type_decl;
    Expression init;
 
 public:
-   attr_class(Symbol a1, Symbol a2, Expression a3)
+   attr_class(Symbol a1, Symbol a2, Expression a3, std::string type = "attr")
    {
       name = a1;
       type_decl = a2;
       init = a3;
+      type_ = type;
    }
    Feature copy_Feature();
    void dump(std::ostream &stream, int n);
@@ -183,7 +172,6 @@ public:
 class assign_class : public Expression_class
 {
 protected:
-   
    Expression expr;
 
 public:
@@ -202,7 +190,7 @@ class static_dispatch_class : public Expression_class
 protected:
    Expression expr;
    Symbol type_name;
-   
+
    Expressions actual;
 
 public:
@@ -222,7 +210,7 @@ class dispatch_class : public Expression_class
 {
 protected:
    Expression expr;
-   
+
    Expressions actual;
 
 public:
@@ -571,8 +559,6 @@ public:
 class object_class : public Expression_class
 {
 protected:
-   
-
 public:
    object_class(Symbol a1)
    {
