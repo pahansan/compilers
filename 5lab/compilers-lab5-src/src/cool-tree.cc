@@ -16,11 +16,6 @@ void Program_class::dump(std::ostream &stream, int n)
    classes->dump(stream, n + 2);
 }
 
-Classes Program_class::get_classes()
-{
-   return classes;
-}
-
 Class_ Class__class::copy_Class_()
 {
    return new Class__class(copy_Symbol(name), copy_Symbol(parent), features->copy_list(), copy_Symbol(filename));
@@ -33,15 +28,6 @@ void Class__class::dump(std::ostream &stream, int n)
    dump_Symbol(stream, n + 2, parent);
    features->dump(stream, n + 2);
    dump_Symbol(stream, n + 2, filename);
-}
-
-Symbol Class__class::get_parent()
-{
-   return parent;
-}
-Features Class__class::get_features()
-{
-   return features;
 }
 
 Feature method_class::copy_Feature()
@@ -174,13 +160,13 @@ void typcase_class::dump(std::ostream &stream, int n)
 
 Expression block_class::copy_Expression()
 {
-   return new block_class(body->copy_list());
+   return new block_class(bodys->copy_list());
 }
 
 void block_class::dump(std::ostream &stream, int n)
 {
    stream << pad(n) << "block\n";
-   body->dump(stream, n + 2);
+   bodys->dump(stream, n + 2);
 }
 
 Expression let_class::copy_Expression()
@@ -892,8 +878,8 @@ void block_class::dump_with_types(std::ostream &stream, int n)
 {
    dump_line(stream, n, this);
    stream << pad(n) << "_block\n";
-   for (int i = body->first(); body->more(i); i = body->next(i))
-      body->nth(i)->dump_with_types(stream, n + 2);
+   for (int i = bodys->first(); bodys->more(i); i = bodys->next(i))
+      bodys->nth(i)->dump_with_types(stream, n + 2);
    dump_type(stream, n);
 }
 

@@ -50,17 +50,21 @@ int main(int argc, char **argv)
         inttable.print();
         idtable.print();
 
-        Classes classes = ast_root->get_classes();
+        Classes classes = ast_root->classes;
 
         for (int i = 0; classes->more(i); i = classes->next(i))
         {
             if (std::string(classes->nth(i)->get_name()->get_string()) == "Main")
             {
-                Features features = classes->nth(i)->get_features();
+                Features features = classes->nth(i)->features;
                 for (int i = 0; features->more(i); i = features->next(i))
                 {
-                    std::cout << features->nth(i)->get_name()->get_string() << ':';
-                    std::cout << features->nth(i)->get_type() << '\n';
+                    std::cout << features->nth(i)->name->get_string() << ':';
+                    std::cout << features->nth(i)->type_ << ':';
+                    if (features->nth(i)->type_ == "method")
+                        std::cout << features->nth(i)->return_type << '\n';
+                    else
+                        std::cout << features->nth(i)->type_decl << '\n';
                 }
             }
         }

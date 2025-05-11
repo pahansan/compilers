@@ -18,12 +18,12 @@ class append_node;
 
 class tree_node
 {
-protected:
+public:
     // line number when node is created
     int line_number;
     Symbol name;
+    std::string type_;
 
-public:
     tree_node() : line_number(node_lineno) {}
     virtual tree_node *copy() = 0;
     virtual ~tree_node() {}
