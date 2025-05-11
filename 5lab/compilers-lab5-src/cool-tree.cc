@@ -16,6 +16,11 @@ void Program_class::dump(std::ostream &stream, int n)
    classes->dump(stream, n + 2);
 }
 
+Classes Program_class::get_classes()
+{
+   return classes;
+}
+
 Class_ Class__class::copy_Class_()
 {
    return new Class__class(copy_Symbol(name), copy_Symbol(parent), features->copy_list(), copy_Symbol(filename));
@@ -28,6 +33,15 @@ void Class__class::dump(std::ostream &stream, int n)
    dump_Symbol(stream, n + 2, parent);
    features->dump(stream, n + 2);
    dump_Symbol(stream, n + 2, filename);
+}
+
+Symbol Class__class::get_parent()
+{
+   return parent;
+}
+Features Class__class::get_features()
+{
+   return features;
 }
 
 Feature method_class::copy_Feature()

@@ -50,6 +50,12 @@ int main(int argc, char **argv)
         inttable.print();
         idtable.print();
 
+        Classes classes = ast_root->get_classes();
+
+        for (int i = 0; classes->more(i); i = classes->next(i))
+            std::cout << classes->nth(i)->get_name()->get_string() << '|';
+
+        std::cout << '\n';
         std::fclose(token_file);
     }
 

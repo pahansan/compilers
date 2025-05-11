@@ -20,6 +20,8 @@ public:
    Program copy_Program();
    void dump(std::ostream &stream, int n);
    void dump_with_types(std::ostream &, int);
+
+   Classes get_classes();
 };
 
 typedef class Class__class *Class_;
@@ -27,7 +29,7 @@ typedef class Class__class *Class_;
 class Class__class : public tree_node
 {
 protected:
-   Symbol name;
+   
    Symbol parent;
    Features features;
    Symbol filename;
@@ -45,6 +47,9 @@ public:
    void dump(std::ostream &stream, int n);
    Symbol get_filename() { return filename; }
    void dump_with_types(std::ostream &, int);
+
+   Symbol get_parent();
+   Features get_features();
 };
 
 typedef class Feature_class *Feature;
@@ -62,7 +67,7 @@ typedef class Formal_class *Formal;
 class Formal_class : public tree_node
 {
 protected:
-   Symbol name;
+   
    Symbol type_decl;
 
 public:
@@ -103,7 +108,7 @@ typedef class Case_class *Case;
 class Case_class : public tree_node
 {
 protected:
-   Symbol name;
+   
    Symbol type_decl;
    Expression expr;
 
@@ -138,7 +143,7 @@ typedef Cases_class *Cases;
 class method_class : public Feature_class
 {
 protected:
-   Symbol name;
+   
    Formals formals;
    Symbol return_type;
    Expression expr;
@@ -159,7 +164,7 @@ public:
 class attr_class : public Feature_class
 {
 protected:
-   Symbol name;
+   
    Symbol type_decl;
    Expression init;
 
@@ -178,7 +183,7 @@ public:
 class assign_class : public Expression_class
 {
 protected:
-   Symbol name;
+   
    Expression expr;
 
 public:
@@ -197,7 +202,7 @@ class static_dispatch_class : public Expression_class
 protected:
    Expression expr;
    Symbol type_name;
-   Symbol name;
+   
    Expressions actual;
 
 public:
@@ -217,7 +222,7 @@ class dispatch_class : public Expression_class
 {
 protected:
    Expression expr;
-   Symbol name;
+   
    Expressions actual;
 
 public:
@@ -566,7 +571,7 @@ public:
 class object_class : public Expression_class
 {
 protected:
-   Symbol name;
+   
 
 public:
    object_class(Symbol a1)

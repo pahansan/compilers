@@ -21,9 +21,10 @@ class tree_node
 protected:
     // line number when node is created
     int line_number;
+    Symbol name;
 
 public:
-    tree_node() { line_number = node_lineno; }
+    tree_node() : line_number(node_lineno) {}
     virtual tree_node *copy() = 0;
     virtual ~tree_node() {}
     virtual void dump(std::ostream &stream, int n) = 0;
@@ -32,6 +33,11 @@ public:
     {
         line_number = t->line_number;
         return this;
+    }
+
+    Symbol get_name()
+    {
+        return name;
     }
 };
 
@@ -154,13 +160,15 @@ public:
     }
 };
 
-template <class Elem> single_list_node<Elem> *list(Elem x);
+template <class Elem>
+single_list_node<Elem> *list(Elem x);
 template <class Elem>
 append_node<Elem> *cons(Elem x, list_node<Elem> *l);
 template <class Elem>
 append_node<Elem> *xcons(list_node<Elem> *l, Elem x);
 
-template <class Elem> single_list_node<Elem> *list(Elem x)
+template <class Elem>
+single_list_node<Elem> *list(Elem x)
 {
     return new single_list_node<Elem>(x);
 }
