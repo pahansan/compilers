@@ -2,18 +2,20 @@
 #define LIST_H
 
 template <class T>
-class List {
+class List
+{
 private:
     T *head;
     List<T> *tail;
+
 public:
-    List(T *h, List<T>* t = nullptr): head(h), tail(t) { }
+    List(T *h, List<T> *t = nullptr) : head(h), tail(t) {}
     T *hd() const { return head; }
-    List<T>* tl() const { return tail; }
+    List<T> *tl() const { return tail; }
 };
 
 template <class T>
-void list_map(void f(T*), List<T> *l)
+void list_map(void f(T *), List<T> *l)
 {
     for (l; l != nullptr; l = l->tl())
         f(l->hd());
@@ -22,9 +24,9 @@ void list_map(void f(T*), List<T> *l)
 template <class S, class T>
 void list_print(S &str, List<T> *l)
 {
-    str << "[\n";
-    for(; l != NULL; l = l->tl())
-	    str << *(l->hd()) << " ";
+    str << "[";
+    for (; l != NULL; l = l->tl())
+        str << *(l->hd()) << " ";
     str << "]\n";
 }
 
@@ -38,4 +40,3 @@ int list_length(List<T> *l)
 }
 
 #endif
-

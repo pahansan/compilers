@@ -1,3 +1,4 @@
+.vscode
 cool-bison-parser.cc
 cool-bison-parser.hh
 cool-bison-parser.o

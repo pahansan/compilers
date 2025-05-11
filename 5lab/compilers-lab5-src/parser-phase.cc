@@ -46,6 +46,10 @@ int main(int argc, char **argv)
         /* TODO: dump AST tree (ast_root) to std::cerr */
         ast_root->dump_with_types(std::cerr, 0);
 
+        stringtable.print();
+        inttable.print();
+        idtable.print();
+
         std::fclose(token_file);
     }
 

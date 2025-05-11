@@ -1,5 +1,5 @@
 #!/bin/sh
 
-rm *.o *.d ./parser *.output cool-flex-lexer.cc cool-bison-parser.*
+rm -f cool-flex-lexer.cc cool-bison-parser.* *.o ./parser *.output 
 
 
