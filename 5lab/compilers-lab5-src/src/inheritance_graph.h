@@ -186,7 +186,6 @@ public:
             }
             else
             {
-                std::cout << "Cycle\n";
                 continue;
             }
             std::cout << (*vertex).class_name << ": ";
@@ -202,5 +201,5 @@ public:
 
 bool operator==(const GraphNode &lhs, const GraphNode &rhs);
 std::ostream &operator<<(std::ostream &out, const GraphNode &node);
-void count_classes();
+std::unordered_map<GraphNode, size_t> count_classes();
 Graph make_inheritance_graph();

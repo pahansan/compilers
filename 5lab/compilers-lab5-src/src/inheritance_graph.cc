@@ -13,16 +13,10 @@ std::ostream &operator<<(std::ostream &out, const GraphNode &node)
     return out;
 }
 
-void count_classes()
+std::unordered_map<GraphNode, size_t> count_classes()
 {
     Classes classes = ast_root->classes;
     std::unordered_map<GraphNode, size_t> classes_count;
-
-    classes_count[GraphNode("Object")] = 1;
-    classes_count[GraphNode("IO")] = 1;
-    classes_count[GraphNode("Int")] = 1;
-    classes_count[GraphNode("String")] = 1;
-    classes_count[GraphNode("Bool")] = 1;
 
     for (int i = 0; i < classes->len(); ++i)
     {
@@ -34,14 +28,22 @@ void count_classes()
             classes_count[GraphNode(name, classes->nth(i))]++;
     }
 
-    for (const auto &[name, count] : classes_count)
-    {
-        if (count > 1)
-        {
-            std::cerr << "Error: file \"" << name.class_->filename->get_string() << "\" contains " << count << " classes with name \"" << name << "\"\n";
-            bool faults_attend = true;
-        }
-    }
+    classes_count[GraphNode("Object")]++;
+    classes_count[GraphNode("IO")]++;
+    classes_count[GraphNode("Int")]++;
+    classes_count[GraphNode("String")]++;
+    classes_count[GraphNode("Bool")]++;
+
+    // for (const auto &[name, count] : classes_count)
+    // {
+    //     if (count > 1)
+    //     {
+    //         std::cerr << "Error: file \"" << name.class_->filename->get_string() << "\" contains " << count << " classes with name \"" << name << "\"\n";
+    //         bool faults_attend = true;
+    //     }
+    // }
+
+    return classes_count;
 }
 
 Graph make_inheritance_graph()
