@@ -61,8 +61,7 @@ Graph make_inheritance_graph()
     {
         std::string child = classes->nth(i)->name->get_string();
         std::string parent = classes->nth(i)->parent->get_string();
-        if (!graph.add_edge(GraphNode(parent, classes->nth(i)), GraphNode(child, classes->nth(i))))
-            std::cout << "Найден цикл\n";
+        graph.add_edge(GraphNode(parent, classes->nth(i)), GraphNode(child, classes->nth(i)));
         if (child == "Main")
             contains_main = true;
     }

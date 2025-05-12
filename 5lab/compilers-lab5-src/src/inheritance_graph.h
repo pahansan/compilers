@@ -101,7 +101,7 @@ public:
                 if (kid->class_name == v.class_name)
                 {
                     graph_node_ptr detached = kid;
-                    first_level_.erase(std::ranges::find(first_level_, kid));
+                    (*vertex).kids.erase(std::ranges::find((*vertex).kids, kid));
                     return detached;
                 }
                 stack_.push(kid);
@@ -110,14 +110,10 @@ public:
         return nullptr;
     }
 
-    bool add_edge(const GraphNode &parent, const GraphNode &kid)
+    void add_edge(const GraphNode &parent, const GraphNode &kid)
     {
         auto parent_vertex = find(parent);
         auto kid_vertex = find(kid);
-
-        if (parent_vertex && kid_vertex)
-            if ((*parent_vertex).class_name == kid.class_name && (*kid_vertex).class_name == parent.class_name)
-                return false;
 
         if (kid_vertex == nullptr)
         {
@@ -141,7 +137,6 @@ public:
             if (!find(kid))
                 first_level_.push_back(old_kid);
         }
-        return true;
     }
 
     std::vector<std::vector<std::string>> find_cycles()
