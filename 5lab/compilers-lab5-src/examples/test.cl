@@ -1,5 +1,5 @@
 class A inherits B {};
-class B inherits A {};
+class B {};
 -- class C {};
 -- class A inherits B {};
 

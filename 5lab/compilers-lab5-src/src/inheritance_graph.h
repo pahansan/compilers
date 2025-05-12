@@ -75,15 +75,15 @@ public:
     {
         std::stack<graph_node_ptr> stack_;
 
-        for (auto &vertex : first_level_)
+        for (auto &kid : first_level_)
         {
-            if (vertex->class_name == v.class_name)
+            if (kid->class_name == v.class_name)
             {
-                graph_node_ptr detached = vertex;
-                first_level_.erase(std::ranges::find(first_level_, vertex));
+                graph_node_ptr detached = kid;
+                first_level_.erase(std::ranges::find(first_level_, kid));
                 return detached;
             }
-            stack_.push(vertex);
+            stack_.push(kid);
         }
 
         std::vector<std::string> visited;
@@ -100,11 +100,11 @@ public:
             {
                 if (kid->class_name == v.class_name)
                 {
-                    graph_node_ptr detached = vertex;
-                    first_level_.erase(std::ranges::find(first_level_, vertex));
+                    graph_node_ptr detached = kid;
+                    first_level_.erase(std::ranges::find(first_level_, kid));
                     return detached;
                 }
-                stack_.push(vertex);
+                stack_.push(kid);
             }
         }
         return nullptr;
@@ -145,8 +145,8 @@ public:
     void print() const
     {
         std::stack<graph_node_ptr> stack_;
-        for (auto &vertex : first_level_)
-            stack_.push(vertex);
+        for (auto &kid : first_level_)
+            stack_.push(kid);
         std::vector<std::string> visited;
         while (!stack_.empty())
         {
