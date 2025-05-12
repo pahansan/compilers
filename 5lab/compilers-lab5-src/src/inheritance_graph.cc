@@ -74,5 +74,14 @@ Graph make_inheritance_graph()
     }
 
     graph.print();
+    std::cout << '\n';
+
+    std::vector<std::vector<std::string>> cycles = graph.find_cycles();
+    for (const auto &cycle : cycles)
+    {
+        for (const auto &node : cycle)
+            std::cout << node << ':';
+        std::cout << '\n';
+    }
     return graph;
 }

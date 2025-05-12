@@ -144,6 +144,37 @@ public:
         return true;
     }
 
+    std::vector<std::vector<std::string>> find_cycles()
+    {
+        std::vector<std::vector<std::string>> cycles;
+        std::vector<std::string> cycle;
+        std::stack<graph_node_ptr> stack_;
+        for (auto &kid : first_level_)
+            stack_.push(kid);
+        std::vector<std::string> visited;
+        while (!stack_.empty())
+        {
+            graph_node_ptr vertex = stack_.top();
+            stack_.pop();
+            const auto &it = std::ranges::find(visited, vertex->class_name);
+            if (it == visited.end())
+            {
+                visited.push_back(vertex->class_name);
+            }
+            else
+            {
+                std::copy(it, visited.end(), std::back_inserter(cycle));
+                cycles.push_back(std::move(cycle));
+                continue;
+            }
+            for (auto &kid : vertex->kids)
+            {
+                stack_.push(kid);
+            }
+        }
+        return cycles;
+    }
+
     void print() const
     {
         std::stack<graph_node_ptr> stack_;
