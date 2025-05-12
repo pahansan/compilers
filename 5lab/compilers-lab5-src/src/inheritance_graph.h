@@ -138,6 +138,8 @@ public:
                 parent_vertex = find(parent);
             }
             (*parent_vertex).kids.push_back(old_kid);
+            if (!find(kid))
+                first_level_.push_back(old_kid);
         }
         return true;
     }
@@ -151,13 +153,17 @@ public:
         while (!stack_.empty())
         {
             graph_node_ptr vertex = stack_.top();
-            std::cout << (*vertex).class_name << ": ";
             stack_.pop();
             if (std::ranges::find(visited, vertex->class_name) == visited.end())
+            {
                 visited.push_back(vertex->class_name);
+            }
             else
+            {
+                std::cout << "Cycle\n";
                 continue;
-
+            }
+            std::cout << (*vertex).class_name << ": ";
             for (auto &kid : vertex->kids)
             {
                 std::cout << (*kid).class_name << ", ";

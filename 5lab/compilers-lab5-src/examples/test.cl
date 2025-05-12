@@ -1,10 +1,10 @@
 class A inherits B {};
-class B {};
--- class C {};
--- class A inherits B {};
+class B inherits C{};
+class C inherits A{};
+class D {};
 
--- class C inherits IO {};
-
+class E inherits G {};
+class G inherits E {};
 class Main {
     aboba : Float <- 10;
     main(): Int {
