@@ -44,11 +44,11 @@ void count_classes()
     }
 }
 
-Graph<GraphNode> make_inheritance_graph()
+Graph make_inheritance_graph()
 {
     Classes classes = ast_root->classes;
 
-    Graph<GraphNode> graph;
+    Graph graph;
 
     bool contains_main = false;
 
@@ -71,5 +71,7 @@ Graph<GraphNode> make_inheritance_graph()
         std::cerr << "Error: File does not contain class Main\n";
         bool faults_attend = true;
     }
+
+    // graph.print();
     return graph;
 }
