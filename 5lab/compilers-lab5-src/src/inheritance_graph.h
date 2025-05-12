@@ -71,67 +71,101 @@ public:
         return nullptr;
     }
 
-    // void detach(const GraphNode &v)
-    // {
-    //     std::stack<GraphNode *> stack_;
+    graph_node_ptr detach(const GraphNode &v)
+    {
+        std::stack<graph_node_ptr> stack_;
 
-    //     for (auto &vertex : first_level_)
-    //     {
-    //         if (vertex->class_name == v.class_name)
-    //             first_level_.erase(std::ranges::find(first_level_, vertex));
-    //         stack_.push(vertex.get());
-    //     }
-    //     std::vector<std::string> visited;
-    //     while (!stack_.empty())
-    //     {
-    //         GraphNode *vertex = stack_.top();
-    //         stack_.pop();
-    //         if (std::find(visited.begin(), visited.end(), vertex->class_name) == visited.end())
-    //             visited.push_back(vertex->class_name);
-    //         else
-    //             continue;
+        for (auto &vertex : first_level_)
+        {
+            if (vertex->class_name == v.class_name)
+            {
+                graph_node_ptr detached = vertex;
+                first_level_.erase(std::ranges::find(first_level_, vertex));
+                return detached;
+            }
+            stack_.push(vertex);
+        }
 
-    //         if (vertex->class_name == v.class_name)
-    //             return vertex;
-    //         else
-    //             for (auto &kid : vertex->kids)
-    //                 stack_.push(kid.get());
-    //     }
-    // }
+        std::vector<std::string> visited;
+        while (!stack_.empty())
+        {
+            graph_node_ptr vertex = stack_.top();
+            stack_.pop();
+            if (std::ranges::find(visited, vertex->class_name) == visited.end())
+                visited.push_back(vertex->class_name);
+            else
+                continue;
+
+            for (auto &kid : (*vertex).kids)
+            {
+                if (kid->class_name == v.class_name)
+                {
+                    graph_node_ptr detached = vertex;
+                    first_level_.erase(std::ranges::find(first_level_, vertex));
+                    return detached;
+                }
+                stack_.push(vertex);
+            }
+        }
+        return nullptr;
+    }
 
     bool add_edge(const GraphNode &parent, const GraphNode &kid)
     {
         auto parent_vertex = find(parent);
         auto kid_vertex = find(kid);
 
+        if (parent_vertex && kid_vertex)
+            if ((*parent_vertex).class_name == kid.class_name && (*kid_vertex).class_name == parent.class_name)
+                return false;
+
         if (kid_vertex == nullptr)
         {
             if (parent_vertex == nullptr)
-                first_level_.push_back(std::make_shared<GraphNode>(kid.class_name, kid.class_));
-            else
-                parent_vertex->kids.push_back(std::make_shared<GraphNode>(kid.class_name, kid.class_));
+            {
+                first_level_.push_back(std::make_shared<GraphNode>(parent.class_name, parent.class_));
+                parent_vertex = find(parent);
+            }
+            (*parent_vertex).kids.push_back(std::make_shared<GraphNode>(kid.class_name, kid.class_));
         }
         else
         {
-            // Удалить kid_vertex там, где он уже есть
-            // Поставить kid_vertex на новое место
+            auto old_kid = detach(kid);
+            (*old_kid).class_ = kid.class_;
+            if (parent_vertex == nullptr)
+            {
+                first_level_.push_back(std::make_shared<GraphNode>(parent.class_name, parent.class_));
+                parent_vertex = find(parent);
+            }
+            (*parent_vertex).kids.push_back(old_kid);
         }
-        std::cout << parent.class_name << ':' << kid.class_name << '\n';
         return true;
     }
 
-    // void print() const
-    // {
-    //     std::stack<std::unique_ptr<GraphNode> &> stack_;
-    //     stack_.push(root_);
-    //     while (!stack_.empty())
-    //     {
-    //         std::unique_ptr<GraphNode> &vertex = stack_.top();
-    //         stack_.pop();
-    //         for (auto &kid : vertex->kids)
-    //             stack_.push(kid);
-    //     }
-    // }
+    void print() const
+    {
+        std::stack<graph_node_ptr> stack_;
+        for (auto &vertex : first_level_)
+            stack_.push(vertex);
+        std::vector<std::string> visited;
+        while (!stack_.empty())
+        {
+            graph_node_ptr vertex = stack_.top();
+            std::cout << (*vertex).class_name << ": ";
+            stack_.pop();
+            if (std::ranges::find(visited, vertex->class_name) == visited.end())
+                visited.push_back(vertex->class_name);
+            else
+                continue;
+
+            for (auto &kid : vertex->kids)
+            {
+                std::cout << (*kid).class_name << ", ";
+                stack_.push(kid);
+            }
+            std::cout << '\n';
+        }
+    }
 };
 
 bool operator==(const GraphNode &lhs, const GraphNode &rhs);

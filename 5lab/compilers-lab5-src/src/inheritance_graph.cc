@@ -61,7 +61,8 @@ Graph make_inheritance_graph()
     {
         std::string child = classes->nth(i)->name->get_string();
         std::string parent = classes->nth(i)->parent->get_string();
-        graph.add_edge(GraphNode(parent, classes->nth(i)), GraphNode(child, classes->nth(i)));
+        if (!graph.add_edge(GraphNode(parent, classes->nth(i)), GraphNode(child, classes->nth(i))))
+            std::cout << "Найден цикл\n";
         if (child == "Main")
             contains_main = true;
     }
@@ -72,6 +73,6 @@ Graph make_inheritance_graph()
         bool faults_attend = true;
     }
 
-    // graph.print();
+    graph.print();
     return graph;
 }
