@@ -50,39 +50,11 @@ int main(int argc, char **argv)
             std::exit(1);
         }
 
-        /* TODO: dump AST tree (ast_root) to std::cerr */
-        // ast_root->dump_with_types(std::cerr, 0);
+        ast_roots.push_back(ast_root);
 
-        // stringtable.print();
-        // inttable.print();
-        // idtable.print();
-
-        Classes classes = ast_root->classes;
-
-        // for (int i = 0; classes->more(i); i = classes->next(i))
-        // {
-        //     Class_ class_ = classes->nth(i);
-        //     std::cout << class_->name->get_string() << ':' << class_->parent->get_string() << '\n';
-        //     if (std::string(classes->nth(i)->get_name()->get_string()) == "Main")
-        //     {
-        //         Features features = classes->nth(i)->features;
-        //         for (int i = 0; features->more(i); i = features->next(i))
-        //         {
-        //             std::cout << features->nth(i)->name->get_string() << ':';
-        //             std::cout << features->nth(i)->type_ << ':';
-        //             if (features->nth(i)->type_ == "method")
-        //                 std::cout << features->nth(i)->return_type << '\n';
-        //             else
-        //                 std::cout << features->nth(i)->type_decl << '\n';
-        //         }
-        //     }
-        // }
-        // std::cout << '\n';
         std::fclose(token_file);
-
-        count_classes();
-        make_inheritance_graph();
     }
+    semant();
 
     return 0;
 }

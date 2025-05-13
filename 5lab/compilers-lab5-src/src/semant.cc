@@ -1,28 +1,52 @@
 #include "inheritance_graph.h"
 #include "semant.h"
 
-std::unordered_map<GraphNode, size_t> count_classes()
+#include <cstdlib>
+
+std::vector<Program> ast_roots;
+
+std::string get_full_path(const std::string &filename)
 {
-    Classes classes = ast_root->classes;
-    std::unordered_map<GraphNode, size_t> classes_count;
+    char resolved_path[PATH_MAX];
+    if (realpath(filename.c_str(), resolved_path))
+        return resolved_path;
+    else
+        return "";
+}
 
-    for (int i = 0; i < classes->len(); ++i)
+void print_error_message(const std::string &filename, const int &line, const std::string &message)
+{
+    std::string full_path = get_full_path(filename);
+    std::cerr << "\033[1m" << full_path << ':';
+    if (line != -1)
+        std::cerr << line << ':';
+    std::cerr << " \033[31m" << "error:" << "\033[0m " << message << '\n';
+}
+
+bool find_class_redefinitions()
+{
+    std::set<std::string> classes_set{"Object", "IO", "Int", "String", "Bool"};
+    bool redefinitions = false;
+
+    for (const auto root : ast_roots)
     {
-        std::string name = classes->nth(i)->name->get_string();
+        auto classes = root->classes;
 
-        if (classes_count.find(name) == classes_count.end())
-            classes_count[GraphNode(name, classes->nth(i))] = 1;
-        else
-            classes_count[GraphNode(name, classes->nth(i))]++;
+        for (int i = 0; i < classes->len(); ++i)
+        {
+            auto current_class = classes->nth(i);
+            std::string name = current_class->name->get_string();
+            if (classes_set.find(name) != classes_set.end())
+            {
+                print_error_message(current_class->filename->get_string(), current_class->line_number, "redifinition of class " + name);
+                redefinitions = true;
+            }
+            else
+                classes_set.insert(name);
+        }
     }
 
-    classes_count[GraphNode("Object")]++;
-    classes_count[GraphNode("IO")]++;
-    classes_count[GraphNode("Int")]++;
-    classes_count[GraphNode("String")]++;
-    classes_count[GraphNode("Bool")]++;
-
-    return classes_count;
+    return redefinitions;
 }
 
 Graph make_inheritance_graph()
@@ -86,4 +110,9 @@ std::set<std::string> make_types_table()
         types_table.insert(classes->nth(i)->name->get_string());
 
     return types_table;
+}
+
+bool semant()
+{
+    return find_class_redefinitions();
 }

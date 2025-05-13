@@ -190,6 +190,9 @@ void Graph::make_all_checks(std::set<std::string> types_table)
     for (auto &kid : first_level_)
         stack_.push(kid);
     std::vector<std::string> visited;
+
+    size_t current_level = 0;
+
     while (!stack_.empty())
     {
         graph_node_ptr vertex = stack_.top();
@@ -200,14 +203,15 @@ void Graph::make_all_checks(std::set<std::string> types_table)
         else
             continue;
 
+        for (size_t i = current_level; i >= (*vertex).level_; i--)
+            features_table.pop();
+
+        current_level = (*vertex).level_;
         features_table.push((*vertex).class_->features);
 
-        std::cout << (*vertex).class_name << ": ";
+        
+
         for (auto &kid : vertex->kids)
-        {
-            std::cout << (*kid).class_name << ", ";
             stack_.push(kid);
-        }
-        std::cout << '\n';
     }
 }

@@ -5,6 +5,9 @@
 #include <unordered_map>
 #include <set>
 
-std::unordered_map<GraphNode, size_t> count_classes();
+extern std::vector<Program> ast_roots;
+
+bool find_class_redefinitions();
 Graph make_inheritance_graph();
 std::set<std::string> make_types_table();
+bool semant();
