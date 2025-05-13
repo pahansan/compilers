@@ -3,6 +3,7 @@
 #include "cool-parse.h"
 
 #include "inheritance_graph.h"
+#include "semant.h"
 
 #include <unistd.h>
 #include <cstdio>

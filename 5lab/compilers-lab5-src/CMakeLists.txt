@@ -27,6 +27,7 @@ add_executable(parser
             src/stringtab.cc
             src/cool-tree.cc
             src/inheritance_graph.cc
+            src/semant.cc
             ${BISON_Parser_OUTPUTS}
             ${FLEX_Lexer_OUTPUTS} )
 

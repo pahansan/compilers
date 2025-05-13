@@ -1,5 +1,4 @@
-#ifndef COOL_TREE_H
-#define COOL_TREE_H
+#pragma once
 
 #include "tree.h"
 #include "cool-tree.handcode.h"
@@ -64,9 +63,9 @@ public:
 class method_class : public Feature_class
 {
 public:
-   method_class(Symbol class_name, Formals method_formals, Symbol return_value_type, Expression method_expr)
+   method_class(Symbol method_name, Formals method_formals, Symbol return_value_type, Expression method_expr)
    {
-      name = class_name;
+      name = method_name;
       formals = method_formals;
       return_type = return_value_type;
       expr = method_expr;
@@ -565,4 +564,9 @@ Expression isvoid(Expression);
 Expression no_expr();
 Expression object(Symbol);
 
-#endif
+Symbol make_symbol(std::string str);
+Class_ make_object_class();
+Class_ make_io_class();
+Class_ make_int_class();
+Class_ make_string_class();
+Class_ make_bool_class();

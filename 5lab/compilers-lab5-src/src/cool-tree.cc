@@ -592,6 +592,134 @@ Expression object(Symbol name)
 }
 
 //
+// Basic classes definition
+//
+
+Symbol make_symbol(std::string str)
+{
+   return new Entry(str.c_str(), str.length(), 0);
+}
+
+Class_ make_object_class()
+{
+   auto abort_method = single_Features(
+       method(
+           make_symbol("abort"),
+           nil_Formals(),
+           make_symbol("Object"),
+           no_expr()));
+   auto object_features = append_Features(
+       abort_method,
+       single_Features(
+           method(
+               make_symbol("type_name"),
+               nil_Formals(),
+               make_symbol("String"),
+               no_expr())));
+   object_features = append_Features(
+       object_features,
+       single_Features(
+           method(
+               make_symbol("copy"),
+               nil_Formals(),
+               make_symbol("SELF_TYPE"),
+               no_expr())));
+
+   return class_(make_symbol("Object"), make_symbol(""), object_features, make_symbol(""));
+}
+
+Class_ make_io_class()
+{
+   auto out_string_method = single_Features(
+       method(
+           make_symbol("out_string"),
+           single_Formals(
+               formal(
+                   make_symbol("x"),
+                   make_symbol("String"))),
+           make_symbol("SELF_TYPE"),
+           no_expr()));
+   auto io_features = append_Features(
+       out_string_method,
+       single_Features(
+           method(
+               make_symbol("out_int"),
+               single_Formals(
+                   formal(
+                       make_symbol("x"),
+                       make_symbol("Int"))),
+               make_symbol("SELF_TYPE"),
+               no_expr())));
+   io_features = append_Features(
+       io_features,
+       single_Features(
+           method(
+               make_symbol("in_string"),
+               nil_Formals(),
+               make_symbol("String"),
+               no_expr())));
+   io_features = append_Features(
+       io_features,
+       single_Features(
+           method(
+               make_symbol("in_int"),
+               nil_Formals(),
+               make_symbol("Int"),
+               no_expr())));
+
+   return class_(make_symbol("IO"), make_symbol("Object"), io_features, make_symbol(""));
+}
+
+Class_ make_int_class()
+{
+   return class_(make_symbol("Int"), make_symbol("Object"), nil_Features(), make_symbol(""));
+}
+
+Class_ make_string_class()
+{
+   auto length_method = single_Features(
+       method(
+           make_symbol("length"),
+           nil_Formals(),
+           make_symbol("Int"),
+           no_expr()));
+   auto string_features = append_Features(
+       length_method,
+       single_Features(
+           method(
+               make_symbol("concat"),
+               single_Formals(
+                   formal(
+                       make_symbol("s"),
+                       make_symbol("String"))),
+               make_symbol("String"),
+               no_expr())));
+   string_features = append_Features(
+       string_features,
+       single_Features(
+           method(
+               make_symbol("substr"),
+               append_Formals(
+                   single_Formals(
+                       formal(
+                           make_symbol("i"),
+                           make_symbol("Int"))),
+                   single_Formals(
+                       formal(
+                           make_symbol("l"),
+                           make_symbol("Int")))),
+               make_symbol("String"),
+               no_expr())));
+
+   return class_(make_symbol("String"), make_symbol("Object"), string_features, make_symbol(""));
+}
+
+Class_ make_bool_class()
+{
+   return class_(make_symbol("Bool"), make_symbol("Object"), nil_Features(), make_symbol(""));
+}
+
+//
 // AST dump
 //
 
