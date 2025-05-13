@@ -1,4 +1,5 @@
 #include "inheritance_graph.h"
+#include "semant.h"
 
 std::unordered_map<GraphNode, size_t> count_classes()
 {
@@ -20,15 +21,6 @@ std::unordered_map<GraphNode, size_t> count_classes()
     classes_count[GraphNode("Int")]++;
     classes_count[GraphNode("String")]++;
     classes_count[GraphNode("Bool")]++;
-
-    // for (const auto &[name, count] : classes_count)
-    // {
-    //     if (count > 1)
-    //     {
-    //         std::cerr << "Error: file \"" << name.class_->filename->get_string() << "\" contains " << count << " classes with name \"" << name << "\"\n";
-    //         bool faults_attend = true;
-    //     }
-    // }
 
     return classes_count;
 }
@@ -66,6 +58,15 @@ Graph make_inheritance_graph()
     graph.print();
     std::cout << '\n';
 
+    std::vector<graph_node_ptr> extra_classes = graph.check_first_level();
+
+    std::cout << "Classes without parents: ";
+    for (const auto &node : extra_classes)
+    {
+        std::cout << node->class_name << ", ";
+    }
+    std::cout << '\n';
+
     std::vector<std::vector<std::string>> cycles = graph.find_cycles();
     for (const auto &cycle : cycles)
     {
@@ -74,4 +75,15 @@ Graph make_inheritance_graph()
         std::cout << '\n';
     }
     return graph;
+}
+
+std::set<std::string> make_types_table()
+{
+    std::set<std::string> types_table{"Object", "IO", "Int", "String", "Bool"};
+    auto classes = ast_root->classes;
+
+    for (int i = 0; i < classes->len(); i++)
+        types_table.insert(classes->nth(i)->name->get_string());
+
+    return types_table;
 }

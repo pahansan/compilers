@@ -168,3 +168,17 @@ void Graph::print() const
         std::cout << '\n';
     }
 }
+
+std::vector<graph_node_ptr> Graph::check_first_level()
+{
+    std::vector<graph_node_ptr> extra_classes;
+    if (first_level_.size() > 1)
+        std::copy_if(first_level_.begin(), first_level_.end(), std::back_inserter(extra_classes), [](graph_node_ptr node)
+                     { return node->class_name != "Object"; });
+
+    return extra_classes;
+}
+
+void Graph::make_all_checks(std::set<std::string> types_table)
+{
+}

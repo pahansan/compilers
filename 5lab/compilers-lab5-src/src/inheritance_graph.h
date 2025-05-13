@@ -9,6 +9,7 @@
 #include <stack>
 #include <utility>
 #include <ranges>
+#include <set>
 
 extern Program ast_root;
 
@@ -48,6 +49,8 @@ public:
     void add_edge(const GraphNode &parent, const GraphNode &kid);
     std::vector<std::vector<std::string>> find_cycles();
     void print() const;
+    std::vector<graph_node_ptr> check_first_level();
+    void make_all_checks(std::set<std::string> types_table);
 };
 
 bool operator==(const GraphNode &lhs, const GraphNode &rhs);
