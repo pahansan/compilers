@@ -90,10 +90,10 @@ void Graph::add_edge(const GraphNode &parent, const GraphNode &kid)
     {
         if (parent_vertex == nullptr)
         {
-            first_level_.push_back(std::make_shared<GraphNode>(parent.class_name, parent.class_));
+            first_level_.push_back(std::make_shared<GraphNode>(parent.class_name, parent.class_, 1));
             parent_vertex = find(parent);
         }
-        (*parent_vertex).kids.push_back(std::make_shared<GraphNode>(kid.class_name, kid.class_));
+        (*parent_vertex).kids.push_back(std::make_shared<GraphNode>(kid.class_name, kid.class_, (*parent_vertex).level_ + 1));
     }
     else
     {
@@ -101,12 +101,16 @@ void Graph::add_edge(const GraphNode &parent, const GraphNode &kid)
         (*old_kid).class_ = kid.class_;
         if (parent_vertex == nullptr)
         {
-            first_level_.push_back(std::make_shared<GraphNode>(parent.class_name, parent.class_));
+            first_level_.push_back(std::make_shared<GraphNode>(parent.class_name, parent.class_, 1));
             parent_vertex = find(parent);
         }
+        old_kid->level_ = (*parent_vertex).level_ + 1;
         (*parent_vertex).kids.push_back(old_kid);
         if (!find(kid))
+        {
+            old_kid->level_ = 1;
             first_level_.push_back(old_kid);
+        }
     }
 }
 
@@ -181,4 +185,29 @@ std::vector<graph_node_ptr> Graph::check_first_level()
 
 void Graph::make_all_checks(std::set<std::string> types_table)
 {
+    std::stack<Features> features_table;
+    std::stack<graph_node_ptr> stack_;
+    for (auto &kid : first_level_)
+        stack_.push(kid);
+    std::vector<std::string> visited;
+    while (!stack_.empty())
+    {
+        graph_node_ptr vertex = stack_.top();
+        stack_.pop();
+
+        if (std::ranges::find(visited, vertex->class_name) == visited.end())
+            visited.push_back(vertex->class_name);
+        else
+            continue;
+
+        features_table.push((*vertex).class_->features);
+
+        std::cout << (*vertex).class_name << ": ";
+        for (auto &kid : vertex->kids)
+        {
+            std::cout << (*kid).class_name << ", ";
+            stack_.push(kid);
+        }
+        std::cout << '\n';
+    }
 }

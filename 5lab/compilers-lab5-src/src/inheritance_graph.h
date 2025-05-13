@@ -20,8 +20,9 @@ struct GraphNode
     std::string class_name;
     Class_ class_;
     std::vector<std::shared_ptr<GraphNode>> kids;
+    size_t level_;
 
-    GraphNode(const std::string name = "", Class_ cl = nullptr) : class_name(name), class_(cl) {}
+    GraphNode(const std::string name = "", Class_ cl = nullptr, size_t level = 0) : class_name(name), class_(cl), level_(level) {}
 };
 
 using graph_node_ptr = std::shared_ptr<GraphNode>;
