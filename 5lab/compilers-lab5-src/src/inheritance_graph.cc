@@ -1,4 +1,5 @@
 #include "inheritance_graph.h"
+#include "semant.h"
 
 bool operator==(const GraphNode &lhs, const GraphNode &rhs)
 {
@@ -190,8 +191,125 @@ std::vector<graph_node_ptr> Graph::check_first_level()
     return extra_classes;
 }
 
-void Graph::make_all_checks(std::set<std::string> types_table)
+std::vector<Feature> unroll_stack(std::stack<Features> stack)
 {
+    std::vector<Feature> features_list;
+    while (!stack.empty())
+    {
+        auto frame = stack.top();
+        stack.pop();
+        for (int i = 0; i < frame->len(); i++)
+            features_list.push_back(frame->nth(i));
+    }
+    return features_list;
+}
+
+bool check_signatures(const Feature &first, const Feature &second)
+{
+    auto first_formals = first->formals;
+    auto second_formals = second->formals;
+    auto first_return_type = first->return_type;
+    auto second_return_type = second->return_type;
+    if (std::string(first_return_type->get_string()) != std::string(second_return_type->get_string()))
+        return false;
+    if (first_formals->len() != second_formals->len())
+        return false;
+    for (int i = 0; i < first_formals->len(); i++)
+        if (std::string(first_formals->nth(i)->type_decl->get_string()) != std::string(second_formals->nth(i)->type_decl->get_string()))
+            return false;
+    return true;
+}
+
+size_t check_feature_redefinitions(const Features &features, const std::string &filename, const std::stack<Features> &stack)
+{
+    size_t redefinitions = 0;
+    auto scope = unroll_stack(stack);
+    std::set<std::string> local_scope;
+
+    for (int i = 0; i < features->len(); ++i)
+    {
+        auto current_feature = features->nth(i);
+        std::string type = current_feature->type_;
+        std::string name = current_feature->name->get_string();
+        auto it = std::ranges::find_if(scope, [current_feature](Feature feature)
+                                       { return std::string(current_feature->name->get_string()) == std::string(feature->name->get_string()); });
+
+        if (it != scope.end())
+        {
+            if (type == "method")
+            {
+                if ((*it)->type_ == "method")
+                {
+                    if (!check_signatures((*it), current_feature))
+                    {
+                        print_error_message(filename, current_feature->line_number, "redifinition of method \"" + name + "\" with wrong signature");
+                    }
+                }
+                else
+                {
+                    print_error_message(filename, current_feature->line_number, "redifinition of attribute \"" + std::string((*it)->name->get_string()) + "\" with method \"" + name + "\"");
+                }
+            }
+            else
+            {
+                if ((*it)->type_ == "method")
+                {
+                    print_error_message(filename, current_feature->line_number, "redifinition of method \"" + std::string((*it)->name->get_string()) + "\" with attribute \"" + name + "\"");
+                }
+                else
+                {
+                    print_error_message(filename, current_feature->line_number, "redifinition of attribute \"" + std::string((*it)->name->get_string()) + "\" with attribute \"" + name + "\"");
+                }
+            }
+            ++redefinitions;
+        }
+        if (local_scope.contains(name))
+        {
+            print_error_message(filename, current_feature->line_number, "redifinition of feature \"" + name + "\"");
+            ++redefinitions;
+        }
+        else
+            local_scope.insert(name);
+    }
+
+    return redefinitions;
+}
+
+size_t check_feature_types(const Features &features, const std::string &filename, const std::set<std::string> types_table)
+{
+    size_t faults = 0;
+
+    for (int i = 0; i < features->len(); ++i)
+    {
+        auto current_feature = features->nth(i);
+        std::string name = current_feature->name->get_string();
+        std::string type = current_feature->type_;
+        if (type == "method")
+        {
+            std::string return_type = current_feature->return_type->get_string();
+            if (!types_table.contains(return_type))
+            {
+                print_error_message(filename, current_feature->line_number, "return type \"" + return_type + "\" of method \"" + name + "\" undefined");
+                ++faults;
+            }
+        }
+        else if (type == "attr")
+        {
+            std::string type_decl = current_feature->type_decl->get_string();
+            if (!types_table.contains(type_decl))
+            {
+                print_error_message(filename, current_feature->line_number, "type \"" + type_decl + "\" of attribute \"" + name + "\" undefined");
+                ++faults;
+            }
+        }
+    }
+
+    return faults;
+}
+
+size_t Graph::make_all_checks(const std::set<std::string> &types_table)
+{
+    size_t faults_count = 0;
     std::stack<Features> features_table;
     std::stack<graph_node_ptr> stack_;
     for (auto &kid : first_level_)
@@ -214,9 +332,16 @@ void Graph::make_all_checks(std::set<std::string> types_table)
             features_table.pop();
 
         current_level = (*vertex).level_;
-        features_table.push((*vertex).class_->features);
+        auto current_class_features = (*vertex).class_->features;
+        std::string current_class_filename = vertex->class_->filename->get_string();
+
+        faults_count += check_feature_redefinitions(current_class_features, current_class_filename, features_table);
+        faults_count += check_feature_types(current_class_features, current_class_filename, types_table);
+
+        features_table.push(current_class_features);
 
         for (auto &kid : vertex->kids)
             stack_.push(kid);
     }
+    return faults_count;
 }

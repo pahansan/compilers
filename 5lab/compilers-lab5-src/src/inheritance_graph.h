@@ -49,7 +49,7 @@ public:
     std::vector<std::vector<graph_node_ptr>> find_cycles();
     void print() const;
     std::vector<graph_node_ptr> check_first_level();
-    void make_all_checks(std::set<std::string> types_table);
+    size_t make_all_checks(const std::set<std::string> &types_table);
 };
 
 bool operator==(const GraphNode &lhs, const GraphNode &rhs);

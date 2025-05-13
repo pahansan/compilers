@@ -11,4 +11,5 @@ extern size_t faults_attend;
 size_t find_class_redefinitions();
 Graph make_inheritance_graph();
 std::set<std::string> make_types_table();
+void print_error_message(const std::string &filename, const int &line, const std::string &message);
 void semant();

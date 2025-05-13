@@ -78,7 +78,7 @@ Graph make_inheritance_graph()
 
 std::set<std::string> make_types_table()
 {
-    std::set<std::string> types_table{"Object", "IO", "Int", "String", "Bool"};
+    std::set<std::string> types_table{"Object", "IO", "Int", "String", "Bool", "SELF_TYPE"};
     auto classes = ast_root->classes;
 
     for (int i = 0; i < classes->len(); i++)
@@ -138,4 +138,8 @@ void semant()
     }
     if (faults_attend)
         return;
+
+    auto types_table = make_types_table();
+
+    faults_attend += graph.make_all_checks(types_table);
 }
