@@ -1,7 +1,5 @@
 #include "inheritance_graph.h"
 
-bool faults_attend = false;
-
 bool operator==(const GraphNode &lhs, const GraphNode &rhs)
 {
     return lhs.class_name == rhs.class_name;
@@ -86,6 +84,14 @@ void Graph::add_edge(const GraphNode &parent, const GraphNode &kid)
     auto parent_vertex = find(parent);
     auto kid_vertex = find(kid);
 
+    // if (parent.class_name == kid.class_name)
+    // {
+    //     first_level_.push_back(std::make_shared<GraphNode>(parent.class_name, kid.class_, 1));
+    //     parent_vertex = find(parent);
+    //     (*parent_vertex).kids.push_back(std::make_shared<GraphNode>(kid.class_name, kid.class_, (*parent_vertex).level_ + 1));
+    //     return;
+    // }
+
     if (kid_vertex == nullptr)
     {
         if (parent_vertex == nullptr)
@@ -114,22 +120,23 @@ void Graph::add_edge(const GraphNode &parent, const GraphNode &kid)
     }
 }
 
-std::vector<std::vector<std::string>> Graph::find_cycles()
+std::vector<std::vector<graph_node_ptr>> Graph::find_cycles()
 {
-    std::vector<std::vector<std::string>> cycles;
-    std::vector<std::string> cycle;
+    std::vector<std::vector<graph_node_ptr>> cycles;
+    std::vector<graph_node_ptr> cycle;
     std::stack<graph_node_ptr> stack_;
     for (auto &kid : first_level_)
         stack_.push(kid);
-    std::vector<std::string> visited;
+    std::vector<graph_node_ptr> visited;
     while (!stack_.empty())
     {
         graph_node_ptr vertex = stack_.top();
         stack_.pop();
-        const auto &it = std::ranges::find(visited, vertex->class_name);
+        const auto &it = std::find_if(visited.begin(), visited.end(), [vertex](const graph_node_ptr node)
+                                      { return node->class_name == vertex->class_name; });
         if (it == visited.end())
         {
-            visited.push_back(vertex->class_name);
+            visited.push_back(vertex);
         }
         else
         {
@@ -208,8 +215,6 @@ void Graph::make_all_checks(std::set<std::string> types_table)
 
         current_level = (*vertex).level_;
         features_table.push((*vertex).class_->features);
-
-        
 
         for (auto &kid : vertex->kids)
             stack_.push(kid);

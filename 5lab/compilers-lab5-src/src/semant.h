@@ -6,8 +6,9 @@
 #include <set>
 
 extern std::vector<Program> ast_roots;
+extern size_t faults_attend;
 
-bool find_class_redefinitions();
+size_t find_class_redefinitions();
 Graph make_inheritance_graph();
 std::set<std::string> make_types_table();
-bool semant();
+void semant();

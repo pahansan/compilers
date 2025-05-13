@@ -1,6 +1,4 @@
-class A {};
-class B {};
-class Object {};
+class A inherits B {};
 
 class Main {
     aboba : Float <- 10;
@@ -8,3 +6,6 @@ class Main {
         10
     };
 };
+
+class C inherits B{};
+class B {};

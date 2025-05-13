@@ -13,8 +13,6 @@
 
 extern Program ast_root;
 
-extern bool faults_attend;
-
 struct GraphNode
 {
     std::string class_name;
@@ -48,7 +46,7 @@ public:
     graph_node_ptr find(const GraphNode &v);
     graph_node_ptr detach(const GraphNode &v);
     void add_edge(const GraphNode &parent, const GraphNode &kid);
-    std::vector<std::vector<std::string>> find_cycles();
+    std::vector<std::vector<graph_node_ptr>> find_cycles();
     void print() const;
     std::vector<graph_node_ptr> check_first_level();
     void make_all_checks(std::set<std::string> types_table);
