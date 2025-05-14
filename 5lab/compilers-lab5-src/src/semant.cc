@@ -140,6 +140,6 @@ void semant()
         return;
 
     auto types_table = make_types_table();
-
+    
     faults_attend += graph.make_all_checks(types_table);
 }

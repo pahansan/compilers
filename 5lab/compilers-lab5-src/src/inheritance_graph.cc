@@ -376,6 +376,44 @@ size_t check_methods_formal_parameters(const Features &features, const std::stri
     return redefinitions;
 }
 
+size_t Graph::check_main_class()
+{
+    size_t faults_count = 0;
+    auto main_class = find(GraphNode("Main"));
+    if (main_class == nullptr)
+    {
+        print_error_message("", -1, "none of the files contain the Main class");
+        ++faults_count;
+        return faults_count;
+    }
+    auto main_features = main_class->class_->features;
+    std::string filename = main_class->class_->filename->get_string();
+    bool contains_main_method = false;
+    for (int i = 0; i < main_features->len(); i++)
+    {
+        auto current_feature = main_features->nth(i);
+        std::string name = current_feature->name->get_string();
+        std::string type = current_feature->type_;
+        if (type == "method" && name == "main")
+        {
+            contains_main_method = true;
+            if (current_feature->formals->len() > 0)
+            {
+                auto line = current_feature->line_number;
+                print_error_message(filename, line, "formal parameters in method \"main\"");
+                ++faults_count;
+            }
+        }
+    }
+    if (!contains_main_method)
+    {
+        auto line = main_class->class_->line_number;
+        print_error_message(filename, line, "class \"Main\" does not contain method \"main\"");
+        ++faults_count;
+    }
+    return faults_count;
+}
+
 size_t Graph::make_all_checks(const std::set<std::string> &types_table)
 {
     size_t faults_count = 0;
@@ -414,5 +452,6 @@ size_t Graph::make_all_checks(const std::set<std::string> &types_table)
         for (auto &kid : vertex->kids)
             stack_.push(kid);
     }
+    faults_count += check_main_class();
     return faults_count;
 }

@@ -50,6 +50,7 @@ public:
     void print() const;
     std::vector<graph_node_ptr> check_first_level();
     size_t check_inheritance_from_basic();
+    size_t check_main_class();
     size_t make_all_checks(const std::set<std::string> &types_table);
 };
 
