@@ -333,6 +333,49 @@ size_t Graph::check_inheritance_from_basic()
     return faults_count;
 }
 
+size_t check_methods_formal_parameters(const Features &features, const std::string &filename, std::stack<Features> features_table)
+{
+    size_t redefinitions = 0;
+    auto scope = unroll_stack(features_table);
+    std::set<std::string> formals_set;
+
+    for (int i = 0; i < features->len(); i++)
+    {
+        auto current_feature = features->nth(i);
+        if (current_feature->type_ == "method")
+        {
+            auto formals = current_feature->formals;
+            std::string method_name = current_feature->name->get_string();
+            for (int i = 0; i < formals->len(); i++)
+            {
+                auto formal = formals->nth(i);
+                std::string formal_name = formal->name->get_string();
+                auto line = formal->line_number;
+                auto it = std::ranges::find_if(scope, [formal_name](Feature feature)
+                                               { return formal_name == std::string(feature->name->get_string()); });
+
+                if (it != scope.end())
+                {
+                    if ((*it)->type_ == "method")
+                    {
+                        print_error_message(filename, line, "formal parameter \"" + formal_name + "\" of method \"" + method_name + "\" has same name as method \"" + std::string((*it)->name->get_string()) + "\"");
+                        redefinitions++;
+                    }
+                }
+                if (formals_set.contains(formal_name))
+                {
+                    print_error_message(filename, line, "redifinition of formal parameter \"" + formal_name + "\" in method \"" + method_name + "\"");
+                    redefinitions++;
+                }
+                else
+                    (formals_set.insert(formal_name));
+            }
+            formals_set.clear();
+        }
+    }
+    return redefinitions;
+}
+
 size_t Graph::make_all_checks(const std::set<std::string> &types_table)
 {
     size_t faults_count = 0;
@@ -364,6 +407,7 @@ size_t Graph::make_all_checks(const std::set<std::string> &types_table)
 
         faults_count += check_feature_redefinitions(current_class_features, current_class_filename, features_table);
         faults_count += check_feature_types(current_class_features, current_class_filename, types_table);
+        faults_count += check_methods_formal_parameters(current_class_features, current_class_filename, features_table);
 
         features_table.push(current_class_features);
 
