@@ -112,6 +112,12 @@ void Graph::add_edge(const GraphNode &parent, const GraphNode &kid)
     }
 }
 
+auto find_in_unrolled_by_name(const std::vector<Feature> &unrolled, const std::string &str)
+{
+    return std::ranges::find_if(unrolled, [str](const Feature &feature)
+                                { return str == std::string(feature->name->get_string()); });
+}
+
 std::vector<std::vector<graph_node_ptr>> Graph::find_cycles()
 {
     std::vector<std::vector<graph_node_ptr>> cycles;
@@ -351,9 +357,7 @@ size_t check_methods_formal_parameters(const Features &features, const std::stri
                 auto formal = formals->nth(i);
                 std::string formal_name = formal->name->get_string();
                 auto line = formal->line_number;
-                auto it = std::ranges::find_if(scope, [formal_name](Feature feature)
-                                               { return formal_name == std::string(feature->name->get_string()); });
-
+                auto it = find_in_unrolled_by_name(scope, formal_name);
                 if (it != scope.end())
                 {
                     if ((*it)->type_ == "method")
@@ -437,8 +441,7 @@ size_t parse_expression(const std::string &filename,
     else if (type == "object")
     {
         std::string object_name = expression->name->get_string();
-        auto expr_object = std::ranges::find_if(unrolled_stack, [object_name](Feature feature)
-                                                { return object_name == std::string(feature->name->get_string()); });
+        auto expr_object = find_in_unrolled_by_name(unrolled_stack, object_name);
         if (expr_object == unrolled_stack.end())
         {
             auto line = expression->line_number;
@@ -483,8 +486,7 @@ size_t parse_expression(const std::string &filename,
         auto assign = static_cast<assign_class *>(expression);
         std::string lvalue = assign->name->get_string();
         auto rvalue = assign->expr;
-        auto expr_object = std::ranges::find_if(unrolled_stack, [lvalue](Feature feature)
-                                                { return lvalue == std::string(feature->name->get_string()); });
+        auto expr_object = find_in_unrolled_by_name(unrolled_stack, lvalue);
         if (expr_object == unrolled_stack.end())
         {
             auto line = assign->line_number;
@@ -507,6 +509,31 @@ size_t parse_expression(const std::string &filename,
             auto attr = static_cast<attr_class *>(*expr_object);
             std::string type_decl = attr->type_decl->get_string();
             faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, type_decl, faults_count);
+        }
+    }
+    else if (type == "dispatch")
+    //  <expr>.<id>(<expr>,...,<expr>)
+    //  <id>(<expr>,...,<expr>)
+    {
+        auto dispatch = static_cast<dispatch_class *>(expression);
+        auto left_expr = dispatch->expr;
+        std::string id = dispatch->name->get_string();
+        auto right_expr = dispatch->actual;
+        auto it = find_in_unrolled_by_name(unrolled_stack, id);
+        auto line = dispatch->line_number;
+
+        if (it == unrolled_stack.end())
+        {
+            print_error_message(filename, line, "method \"" + id + "\" undefined");
+            faults_count++;
+            return faults_count;
+        }
+
+        if ((*it)->type_ == "method")
+        {
+            auto method = static_cast<method_class *>(*it);
+            auto return_type = method->return_type->get_string();
+            // faults_count += parse_expression(filename, unrolled_stack, left_expr, feature_name, return_type, )
         }
     }
     return faults_count;
