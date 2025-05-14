@@ -1,1 +1,1 @@
-class D inherits B {};
+class D inherits Int{};

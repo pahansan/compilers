@@ -307,6 +307,32 @@ size_t check_feature_types(const Features &features, const std::string &filename
     return faults;
 }
 
+size_t Graph::check_inheritance_from_basic()
+{
+    size_t faults_count = 0;
+    auto object_class = std::ranges::find_if(first_level_, [](const graph_node_ptr &node)
+                                             { return node->class_name == "Object"; });
+    for (const auto &kid : (*object_class)->kids)
+    {
+        if (kid->class_name == "Int" || kid->class_name == "String" || kid->class_name == "Bool")
+        {
+            if (kid->kids.size() > 0)
+            {
+                for (const auto &inherited : kid->kids)
+                {
+                    std::string filename = inherited->class_->filename->get_string();
+                    auto line = inherited->class_->line_number;
+                    std::string name = inherited->class_name;
+                    std::string parent_name = kid->class_name;
+                    print_error_message(filename, line, "class \"" + name + "\" inherits from basic class \"" + parent_name + "\"");
+                    faults_count++;
+                }
+            }
+        }
+    }
+    return faults_count;
+}
+
 size_t Graph::make_all_checks(const std::set<std::string> &types_table)
 {
     size_t faults_count = 0;
@@ -317,6 +343,7 @@ size_t Graph::make_all_checks(const std::set<std::string> &types_table)
     std::vector<std::string> visited;
 
     size_t current_level = 0;
+    faults_count += check_inheritance_from_basic();
 
     while (!stack_.empty())
     {

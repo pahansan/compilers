@@ -7,6 +7,8 @@ class B inherits A {
     var() : Int {10};
 };
 
+class M inherits Int {};
+
 
 class Main {
     aboba : Float <- 10;

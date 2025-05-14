@@ -26,7 +26,7 @@ void print_error_message(const std::string &filename, const int &line, const std
 
 size_t find_class_redefinitions()
 {
-    std::set<std::string> classes_set{"Object", "IO", "Int", "String", "Bool"};
+    std::set<std::string> classes_set{"Object", "IO", "Int", "String", "Bool", "SELF_TYPE"};
     size_t redefinitions = 0;
 
     for (const auto root : ast_roots)
