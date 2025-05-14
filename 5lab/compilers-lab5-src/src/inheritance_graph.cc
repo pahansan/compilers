@@ -461,10 +461,44 @@ size_t parse_expression(const std::string &filename,
             return faults_count;
         }
     }
+    else if (type == "assign")
+    {
+        std::string lvalue = expression->name->get_string();
+        auto rvalue = expression->expr;
+        auto expr_object = std::ranges::find_if(unrolled_stack, [lvalue](Feature feature)
+                                                { return lvalue == std::string(feature->name->get_string()); });
+        if (expr_object == unrolled_stack.end())
+        {
+            auto line = expression->line_number;
+            print_error_message(filename, line, "using undefined object \"" + lvalue + "\"");
+            ++faults_count;
+            return faults_count;
+        }
+        std::string expr_object_type = (*expr_object)->type_;
+        if (expr_object_type == "method")
+        {
+            auto line = expression->line_number;
+            print_error_message(filename, line, "using method \"" + lvalue + "\" like it's object");
+            ++faults_count;
+        }
+        std::string decl_type = expr_object_type == "method" ? (*expr_object)->return_type->get_string() : (*expr_object)->type_decl->get_string();
+        faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, decl_type, faults_count);
+    }
     return faults_count;
 }
 
-size_t check_expressions(const std::string &filename, const Features &features, const std::stack<Features> &features_table)
+Features formals_to_features(const Formals formals)
+{
+    if (formals->len() == 0)
+        return nullptr;
+    auto features = single_Features(attr(formals->nth(0)->name, formals->nth(0)->type_decl, no_expr()));
+    for (int i = 0; i < formals->len(); i++)
+        features = append_Features(features, single_Features(attr(formals->nth(i)->name, formals->nth(i)->type_decl, no_expr())));
+
+    return features;
+}
+
+size_t check_expressions(const std::string &filename, const Features &features, std::stack<Features> features_table)
 {
     size_t faults_count = 0;
     for (int i = 0; i < features->len(); i++)
@@ -474,8 +508,17 @@ size_t check_expressions(const std::string &filename, const Features &features, 
         std::string type = current_feature->type_;
         auto expression = type == "method" ? current_feature->expr : current_feature->init;
         std::string ret_type = type == "method" ? current_feature->return_type->get_string() : current_feature->type_decl->get_string();
+        Features new_frame = nullptr;
+        if (type == "method")
+        {
+            new_frame = formals_to_features(current_feature->formals);
+            if (new_frame)
+                features_table.push(new_frame);
+        }
         auto unrolled = unroll_stack(features_table);
         faults_count += parse_expression(filename, unrolled, expression, name, ret_type, faults_count);
+        if (new_frame)
+            features_table.pop();
     }
     return faults_count;
 }
