@@ -188,16 +188,17 @@ std::vector<graph_node_ptr> Graph::check_first_level()
     return extra_classes;
 }
 
-std::vector<Feature> unroll_stack(std::stack<Features> stack)
+std::vector<Feature> unroll_stack(std::stack<Class_> stack)
 {
     std::vector<Feature> features_list;
     while (!stack.empty())
     {
-        auto frame = stack.top();
+        auto frame = stack.top()->features;
         stack.pop();
         for (int i = 0; i < frame->len(); i++)
             features_list.push_back(frame->nth(i));
     }
+    features_list.push_back(attr(make_symbol("self"), make_symbol("SELF_TYPE"), no_expr()));
     return features_list;
 }
 
@@ -217,7 +218,7 @@ bool check_signatures(const method_class &first, const method_class &second)
     return true;
 }
 
-size_t check_feature_redefinitions(const Features &features, const std::string &filename, const std::stack<Features> &stack)
+size_t check_feature_redefinitions(const Features &features, const std::string &filename, const std::stack<Class_> &stack)
 {
     size_t redefinitions = 0;
     auto scope = unroll_stack(stack);
@@ -338,7 +339,7 @@ size_t Graph::check_inheritance_from_basic()
     return faults_count;
 }
 
-size_t check_methods_formal_parameters(const Features &features, const std::string &filename, std::stack<Features> features_table)
+size_t check_methods_formal_parameters(const Features &features, const std::string &filename, std::stack<Class_> features_table)
 {
     size_t redefinitions = 0;
     auto scope = unroll_stack(features_table);
@@ -419,12 +420,53 @@ size_t Graph::check_main_class()
     return faults_count;
 }
 
+std::string find_parent_of_feature(std::stack<Class_> features_table, const std::string &id)
+{
+    while (!features_table.empty())
+    {
+        auto current_class = features_table.top();
+        features_table.pop();
+        auto features = current_class->features;
+        for (int i = 0; i < features->len(); i++)
+        {
+            auto feature = features->nth(i);
+            std::string name = feature->name->get_string();
+            if (name == id)
+                return current_class->name->get_string();
+        }
+    }
+    return "";
+}
+
+Feature find_feature_in_its_class(std::stack<Class_> features_table, const std::string &classname, const std::string &id)
+{
+    while (!features_table.empty())
+    {
+        auto current_class = features_table.top();
+        auto current_class_name = current_class->name->get_string();
+        features_table.pop();
+        if (current_class_name == classname)
+        {
+            auto features = current_class->features;
+            for (int i = 0; i < features->len(); i++)
+            {
+                auto feature = features->nth(i);
+                std::string name = feature->name->get_string();
+                if (name == id)
+                    return feature;
+            }
+        }
+    }
+    return nullptr;
+}
+
 size_t parse_expression(const std::string &filename,
                         std::vector<Feature> unrolled_stack,
                         const Expression &expression,
                         const std::string &feature_name,
                         const std::string &target_type,
-                        size_t faults_count)
+                        size_t faults_count,
+                        const std::stack<Class_> &features_table)
 {
     const std::string &type = expression->type_;
     if (type == "int_const" || type == "string_const" || type == "bool_const")
@@ -502,13 +544,13 @@ size_t parse_expression(const std::string &filename,
             print_error_message(filename, line, "using method \"" + lvalue + "\" like it's object");
             ++faults_count;
             std::string return_type = method->return_type->get_string();
-            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, return_type, faults_count);
+            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, return_type, faults_count, features_table);
         }
         else
         {
             auto attr = static_cast<attr_class *>(*expr_object);
             std::string type_decl = attr->type_decl->get_string();
-            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, type_decl, faults_count);
+            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, type_decl, faults_count, features_table);
         }
     }
     else if (type == "dispatch")
@@ -518,7 +560,7 @@ size_t parse_expression(const std::string &filename,
         auto dispatch = static_cast<dispatch_class *>(expression);
         auto left_expr = dispatch->expr;
         std::string id = dispatch->name->get_string();
-        auto right_expr = dispatch->actual;
+        auto args = dispatch->actual;
         auto it = find_in_unrolled_by_name(unrolled_stack, id);
         auto line = dispatch->line_number;
 
@@ -533,7 +575,54 @@ size_t parse_expression(const std::string &filename,
         {
             auto method = static_cast<method_class *>(*it);
             auto return_type = method->return_type->get_string();
-            // faults_count += parse_expression(filename, unrolled_stack, left_expr, feature_name, return_type, )
+            faults_count += parse_expression(filename, unrolled_stack, left_expr, feature_name, find_parent_of_feature(features_table, id), faults_count, features_table);
+            if (method->formals->len() != args->len())
+                print_error_message(filename, line, "wrong number of arguments in method \"" + id + "\"");
+
+            for (int i = 0; i < std::min(method->formals->len(), args->len()); i++)
+                faults_count += parse_expression(filename, unrolled_stack, args->nth(i), feature_name, method->formals->nth(i)->type_decl->get_string(), faults_count, features_table);
+        }
+        else
+        {
+            auto attr = static_cast<attr_class *>(*it);
+            auto type_decl = attr->type_decl;
+            print_error_message(filename, line, "using attr \"" + id + "\" like it's method");
+        }
+    }
+    else if (type == "static_dispatch")
+    // <expr>@<type>.id(<expr>,...,<expr>)
+    {
+        auto dispatch = static_cast<static_dispatch_class *>(expression);
+        auto left_expr = dispatch->expr;
+        std::string type_name = dispatch->type_name->get_string();
+        std::string id = dispatch->name->get_string();
+        auto args = dispatch->actual;
+        auto line = dispatch->line_number;
+        auto feature = find_feature_in_its_class(features_table, type_name, id);
+
+        if (feature == nullptr)
+        {
+            print_error_message(filename, line, "class \"" + type_name + "\" does not contain method \"" + id + "\"");
+            faults_count++;
+            return faults_count;
+        }
+
+        if (feature->type_ == "method")
+        {
+            auto method = static_cast<method_class *>(feature);
+            auto return_type = method->return_type->get_string();
+            faults_count += parse_expression(filename, unrolled_stack, left_expr, feature_name, find_parent_of_feature(features_table, id), faults_count, features_table);
+            if (method->formals->len() != args->len())
+                print_error_message(filename, line, "wrong number of arguments in method \"" + id + "\"");
+
+            for (int i = 0; i < std::min(method->formals->len(), args->len()); i++)
+                faults_count += parse_expression(filename, unrolled_stack, args->nth(i), feature_name, method->formals->nth(i)->type_decl->get_string(), faults_count, features_table);
+        }
+        else
+        {
+            auto attr = static_cast<attr_class *>(feature);
+            auto type_decl = attr->type_decl;
+            print_error_message(filename, line, "using attr \"" + id + "\" like it's method");
         }
     }
     return faults_count;
@@ -550,7 +639,7 @@ Features formals_to_features(const Formals formals)
     return features;
 }
 
-size_t check_expressions(const std::string &filename, const Features &features, std::stack<Features> features_table)
+size_t check_expressions(const std::string &filename, const Features &features, const std::stack<Class_> &features_table)
 {
     size_t faults_count = 0;
     for (int i = 0; i < features->len(); i++)
@@ -561,21 +650,21 @@ size_t check_expressions(const std::string &filename, const Features &features, 
         if (type == "method")
         {
             auto method = static_cast<method_class *>(current_feature);
+            auto unrolled = unroll_stack(features_table);
             auto new_frame = formals_to_features(method->formals);
             if (new_frame)
-                features_table.push(new_frame);
-            auto unrolled = unroll_stack(features_table);
+                for (int i = 0; i < new_frame->len(); i++)
+                    unrolled.insert(unrolled.begin(), new_frame->nth(i));
+
             std::string return_type = method->return_type->get_string();
-            faults_count += parse_expression(filename, unrolled, method->expr, name, return_type, faults_count);
-            if (new_frame)
-                features_table.pop();
+            faults_count += parse_expression(filename, unrolled, method->expr, name, return_type, faults_count, features_table);
         }
         else
         {
             auto attr = static_cast<attr_class *>(current_feature);
             auto unrolled = unroll_stack(features_table);
             std::string type_decl = attr->type_decl->get_string();
-            faults_count += parse_expression(filename, unrolled, attr->init, name, type_decl, faults_count);
+            faults_count += parse_expression(filename, unrolled, attr->init, name, type_decl, faults_count, features_table);
         }
     }
     return faults_count;
@@ -584,7 +673,7 @@ size_t check_expressions(const std::string &filename, const Features &features, 
 size_t Graph::make_all_checks(const std::set<std::string> &types_table)
 {
     size_t faults_count = 0;
-    std::stack<Features> features_table;
+    std::stack<Class_> features_table;
     std::stack<graph_node_ptr> stack_;
     for (auto &kid : first_level_)
         stack_.push(kid);
@@ -614,7 +703,7 @@ size_t Graph::make_all_checks(const std::set<std::string> &types_table)
         faults_count += check_feature_types(current_class_features, current_class_filename, types_table);
         faults_count += check_methods_formal_parameters(current_class_features, current_class_filename, features_table);
 
-        features_table.push(current_class_features);
+        features_table.push((*vertex).class_);
 
         faults_count += check_expressions(current_class_filename, current_class_features, features_table);
 
