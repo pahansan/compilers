@@ -1,5 +1,5 @@
 class Main {
-    aboba : Float <- 10;
+    aboba : Float <- true;
 
     main(): Int {
         "10"

@@ -433,6 +433,34 @@ size_t parse_expression(const std::string &filename,
             return faults_count;
         }
     }
+    else if (type == "object")
+    {
+        std::string object_name = expression->name->get_string();
+        auto expr_object = std::ranges::find_if(unrolled_stack, [object_name](Feature feature)
+                                                { return object_name == std::string(feature->name->get_string()); });
+        if (expr_object == unrolled_stack.end())
+        {
+            auto line = expression->line_number;
+            print_error_message(filename, line, "using undefined object \"" + object_name + "\"");
+            ++faults_count;
+            return faults_count;
+        }
+        std::string expr_object_type = (*expr_object)->type_;
+        if (expr_object_type == "method")
+        {
+            auto line = expression->line_number;
+            print_error_message(filename, line, "using method \"" + object_name + "\" like it's object");
+            ++faults_count;
+        }
+        std::string decl_type = expr_object_type == "method" ? (*expr_object)->return_type->get_string() : (*expr_object)->type_decl->get_string();
+        if (decl_type != target_type)
+        {
+            auto line = expression->line_number;
+            print_error_message(filename, line, "expression has type \"" + decl_type + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
+            ++faults_count;
+            return faults_count;
+        }
+    }
     return faults_count;
 }
 
