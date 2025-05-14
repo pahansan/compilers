@@ -198,7 +198,7 @@ std::vector<Feature> unroll_stack(std::stack<Class_> stack)
         for (int i = 0; i < frame->len(); i++)
             features_list.push_back(frame->nth(i));
     }
-    features_list.push_back(attr(make_symbol("self"), make_symbol("SELF_TYPE"), no_expr()));
+    // features_list.push_back(attr(make_symbol("self"), make_symbol("SELF_TYPE"), no_expr()));
     return features_list;
 }
 
@@ -465,24 +465,31 @@ size_t parse_expression(const std::string &filename,
                         const Expression &expression,
                         const std::string &feature_name,
                         const std::string &target_type,
-                        size_t faults_count,
                         const std::stack<Class_> &features_table)
 {
     const std::string &type = expression->type_;
+    size_t faults_count = 0;
     if (type == "int_const" || type == "string_const" || type == "bool_const")
     {
         std::string expression_type = expression->type->get_string();
-        if (target_type != expression_type)
-        {
-            auto line = expression->line_number;
-            print_error_message(filename, line, "expression has type \"" + expression_type + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
-            ++faults_count;
-            return faults_count;
-        }
+        if (target_type != "")
+            if (target_type != expression_type)
+            {
+                auto line = expression->line_number;
+                print_error_message(filename, line, "expression has type \"" + expression_type + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
+                ++faults_count;
+                return faults_count;
+            }
     }
     else if (type == "object")
     {
         std::string object_name = expression->name->get_string();
+        if (object_name == "self")
+        {
+            auto parent = find_parent_of_feature(features_table, feature_name);
+            if (parent == target_type || target_type != "")
+                return faults_count;
+        }
         auto expr_object = find_in_unrolled_by_name(unrolled_stack, object_name);
         if (expr_object == unrolled_stack.end())
         {
@@ -504,23 +511,25 @@ size_t parse_expression(const std::string &filename,
         {
             auto method = static_cast<method_class *>(*expr_object);
             std::string return_type = method->return_type->get_string();
-            if (return_type != target_type)
-            {
-                print_error_message(filename, line, "method has return type \"" + return_type + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
-                ++faults_count;
-                return faults_count;
-            }
+            if (target_type != "")
+                if (return_type != target_type)
+                {
+                    print_error_message(filename, line, "method has return type \"" + return_type + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
+                    ++faults_count;
+                    return faults_count;
+                }
         }
         else
         {
             auto attr = static_cast<attr_class *>(*expr_object);
             std::string type_decl = attr->type_decl->get_string();
-            if (type_decl != target_type)
-            {
-                print_error_message(filename, line, "attribute has type \"" + type_decl + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
-                ++faults_count;
-                return faults_count;
-            }
+            if (target_type != "")
+                if (type_decl != target_type)
+                {
+                    print_error_message(filename, line, "attribute has type \"" + type_decl + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
+                    ++faults_count;
+                    return faults_count;
+                }
         }
     }
     else if (type == "assign")
@@ -544,13 +553,13 @@ size_t parse_expression(const std::string &filename,
             print_error_message(filename, line, "using method \"" + lvalue + "\" like it's object");
             ++faults_count;
             std::string return_type = method->return_type->get_string();
-            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, return_type, faults_count, features_table);
+            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, return_type, features_table);
         }
         else
         {
             auto attr = static_cast<attr_class *>(*expr_object);
             std::string type_decl = attr->type_decl->get_string();
-            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, type_decl, faults_count, features_table);
+            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, type_decl, features_table);
         }
     }
     else if (type == "dispatch")
@@ -575,12 +584,12 @@ size_t parse_expression(const std::string &filename,
         {
             auto method = static_cast<method_class *>(*it);
             auto return_type = method->return_type->get_string();
-            faults_count += parse_expression(filename, unrolled_stack, left_expr, feature_name, find_parent_of_feature(features_table, id), faults_count, features_table);
+            faults_count += parse_expression(filename, unrolled_stack, left_expr, feature_name, find_parent_of_feature(features_table, id), features_table);
             if (method->formals->len() != args->len())
                 print_error_message(filename, line, "wrong number of arguments in method \"" + id + "\"");
 
             for (int i = 0; i < std::min(method->formals->len(), args->len()); i++)
-                faults_count += parse_expression(filename, unrolled_stack, args->nth(i), feature_name, method->formals->nth(i)->type_decl->get_string(), faults_count, features_table);
+                faults_count += parse_expression(filename, unrolled_stack, args->nth(i), feature_name, method->formals->nth(i)->type_decl->get_string(), features_table);
         }
         else
         {
@@ -611,12 +620,12 @@ size_t parse_expression(const std::string &filename,
         {
             auto method = static_cast<method_class *>(feature);
             auto return_type = method->return_type->get_string();
-            faults_count += parse_expression(filename, unrolled_stack, left_expr, feature_name, find_parent_of_feature(features_table, id), faults_count, features_table);
+            faults_count += parse_expression(filename, unrolled_stack, left_expr, feature_name, find_parent_of_feature(features_table, id), features_table);
             if (method->formals->len() != args->len())
                 print_error_message(filename, line, "wrong number of arguments in method \"" + id + "\"");
 
             for (int i = 0; i < std::min(method->formals->len(), args->len()); i++)
-                faults_count += parse_expression(filename, unrolled_stack, args->nth(i), feature_name, method->formals->nth(i)->type_decl->get_string(), faults_count, features_table);
+                faults_count += parse_expression(filename, unrolled_stack, args->nth(i), feature_name, method->formals->nth(i)->type_decl->get_string(), features_table);
         }
         else
         {
@@ -624,6 +633,36 @@ size_t parse_expression(const std::string &filename,
             auto type_decl = attr->type_decl;
             print_error_message(filename, line, "using attr \"" + id + "\" like it's method");
         }
+    }
+    else if (type == "cond")
+    {
+        auto cond = static_cast<cond_class *>(expression);
+        auto pred = cond->pred;
+        auto then_exp = cond->then_exp;
+        auto else_exp = cond->else_exp;
+
+        faults_count += parse_expression(filename, unrolled_stack, pred, feature_name, "Bool", features_table);
+        faults_count += parse_expression(filename, unrolled_stack, then_exp, feature_name, target_type, features_table);
+        faults_count += parse_expression(filename, unrolled_stack, pred, feature_name, target_type, features_table);
+    }
+    else if (type == "loop")
+    {
+        auto loop = static_cast<loop_class *>(expression);
+        auto pred = loop->pred;
+        auto body = loop->body;
+
+        faults_count += parse_expression(filename, unrolled_stack, pred, feature_name, "Bool", features_table);
+        faults_count += parse_expression(filename, unrolled_stack, body, feature_name, target_type, features_table);
+    }
+    else if (type == "block")
+    {
+        auto block = static_cast<block_class *>(expression);
+        auto expressions = block->body;
+        for (int i = 0; i < expressions->len(); i++)
+            if (i == expressions->len() - 1)
+                faults_count += parse_expression(filename, unrolled_stack, expressions->nth(i), feature_name, target_type, features_table);
+            else
+                faults_count += parse_expression(filename, unrolled_stack, expressions->nth(i), feature_name, "", features_table);
     }
     return faults_count;
 }
@@ -657,14 +696,16 @@ size_t check_expressions(const std::string &filename, const Features &features, 
                     unrolled.insert(unrolled.begin(), new_frame->nth(i));
 
             std::string return_type = method->return_type->get_string();
-            faults_count += parse_expression(filename, unrolled, method->expr, name, return_type, faults_count, features_table);
+            if (return_type == "SELF_TYPE")
+                return_type = find_parent_of_feature(features_table, method->name->get_string());
+            faults_count += parse_expression(filename, unrolled, method->expr, name, return_type, features_table);
         }
         else
         {
             auto attr = static_cast<attr_class *>(current_feature);
             auto unrolled = unroll_stack(features_table);
             std::string type_decl = attr->type_decl->get_string();
-            faults_count += parse_expression(filename, unrolled, attr->init, name, type_decl, faults_count, features_table);
+            faults_count += parse_expression(filename, unrolled, attr->init, name, type_decl, features_table);
         }
     }
     return faults_count;
