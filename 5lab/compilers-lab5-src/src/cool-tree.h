@@ -3,6 +3,8 @@
 #include "tree.h"
 #include "cool-tree.handcode.h"
 
+Symbol make_symbol(std::string str);
+
 class Program_class : public tree_node
 {
 public:
@@ -435,6 +437,7 @@ public:
    {
       token = a1;
       type_ = "int_const";
+      type = make_symbol("Int");
    }
    Expression copy_Expression();
    void dump(std::ostream &stream, int n);
@@ -448,6 +451,7 @@ public:
    {
       val = a1;
       type_ = "bool_const";
+      type = make_symbol("Bool");
    }
    Expression copy_Expression();
    void dump(std::ostream &stream, int n);
@@ -461,6 +465,7 @@ public:
    {
       token = a1;
       type_ = "string_const";
+      type = make_symbol("String");
    }
    Expression copy_Expression();
    void dump(std::ostream &stream, int n);

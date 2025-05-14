@@ -52,6 +52,7 @@ int main(int argc, char **argv)
 
         ast_roots.push_back(ast_root);
 
+        // ast_root->dump_with_types(std::cout, 0);
         std::fclose(token_file);
     }
     semant();

@@ -414,6 +414,44 @@ size_t Graph::check_main_class()
     return faults_count;
 }
 
+size_t parse_expression(const std::string &filename,
+                        std::vector<Feature> unrolled_stack,
+                        const Expression &expression,
+                        const std::string &feature_name,
+                        const std::string &target_type,
+                        size_t faults_count)
+{
+    const std::string &type = expression->type_;
+    if (type == "int_const" || type == "string_const" || type == "bool_const")
+    {
+        std::string expression_type = expression->type->get_string();
+        if (target_type != expression_type)
+        {
+            auto line = expression->line_number;
+            print_error_message(filename, line, "expression has type \"" + expression_type + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
+            ++faults_count;
+            return faults_count;
+        }
+    }
+    return faults_count;
+}
+
+size_t check_expressions(const std::string &filename, const Features &features, const std::stack<Features> &features_table)
+{
+    size_t faults_count = 0;
+    for (int i = 0; i < features->len(); i++)
+    {
+        auto current_feature = features->nth(i);
+        std::string name = current_feature->name->get_string();
+        std::string type = current_feature->type_;
+        auto expression = type == "method" ? current_feature->expr : current_feature->init;
+        std::string ret_type = type == "method" ? current_feature->return_type->get_string() : current_feature->type_decl->get_string();
+        auto unrolled = unroll_stack(features_table);
+        faults_count += parse_expression(filename, unrolled, expression, name, ret_type, faults_count);
+    }
+    return faults_count;
+}
+
 size_t Graph::make_all_checks(const std::set<std::string> &types_table)
 {
     size_t faults_count = 0;
@@ -448,6 +486,8 @@ size_t Graph::make_all_checks(const std::set<std::string> &types_table)
         faults_count += check_methods_formal_parameters(current_class_features, current_class_filename, features_table);
 
         features_table.push(current_class_features);
+
+        faults_count += check_expressions(current_class_filename, current_class_features, features_table);
 
         for (auto &kid : vertex->kids)
             stack_.push(kid);
