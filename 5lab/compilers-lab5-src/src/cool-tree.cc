@@ -160,13 +160,13 @@ void typcase_class::dump(std::ostream &stream, int n)
 
 Expression block_class::copy_Expression()
 {
-   return new block_class(bodys->copy_list());
+   return new block_class(body->copy_list());
 }
 
 void block_class::dump(std::ostream &stream, int n)
 {
    stream << pad(n) << "block\n";
-   bodys->dump(stream, n + 2);
+   body->dump(stream, n + 2);
 }
 
 Expression let_class::copy_Expression()
@@ -1006,8 +1006,8 @@ void block_class::dump_with_types(std::ostream &stream, int n)
 {
    dump_line(stream, n, this);
    stream << pad(n) << "_block\n";
-   for (int i = bodys->first(); bodys->more(i); i = bodys->next(i))
-      bodys->nth(i)->dump_with_types(stream, n + 2);
+   for (int i = body->first(); body->more(i); i = body->next(i))
+      body->nth(i)->dump_with_types(stream, n + 2);
    dump_type(stream, n);
 }
 

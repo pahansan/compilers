@@ -5,6 +5,9 @@
 
 Symbol make_symbol(std::string str);
 
+#include "tree.h"
+#include "cool-tree.handcode.h"
+
 class Program_class : public tree_node
 {
 public:
@@ -19,6 +22,8 @@ public:
    Program copy_Program();
    void dump(std::ostream &stream, int n);
    void dump_with_types(std::ostream &, int);
+
+   Classes get_classes();
 };
 
 class Class__class : public tree_node
@@ -28,49 +33,64 @@ public:
    Features features;
    Symbol filename;
 
-   Class__class(Symbol class_name, Symbol class_parent, Features features_list, Symbol name_of_file)
+   Class__class(Symbol a1, Symbol a2, Features a3, Symbol a4)
    {
-      name = class_name;
-      parent = class_parent;
-      features = features_list;
-      filename = name_of_file;
+      name = a1;
+      parent = a2;
+      features = a3;
+      filename = a4;
       type_ = "Class_";
    }
+
    tree_node *copy() { return copy_Class_(); }
    Class_ copy_Class_();
    void dump(std::ostream &stream, int n);
    Symbol get_filename() { return filename; }
    void dump_with_types(std::ostream &, int);
+
+   Symbol get_parent();
+   Features get_features();
+};
+
+class Formal_class : public tree_node
+{
+public:
+   Symbol type_decl;
+
+   Formal_class(Symbol a1, Symbol a2)
+   {
+      name = a1;
+      type_decl = a2;
+      type_ = "Formal";
+   }
+   Formal copy_Formal();
+   void dump(std::ostream &stream, int n);
+   void dump_with_types(std::ostream &, int);
+   tree_node *copy() { return copy_Formal(); }
 };
 
 class Feature_class : public tree_node
 {
 public:
-   // for methods
-   Formals formals;
-   // for methods
-   Symbol return_type;
-   // for methods
-   Expression expr;
-   // for attributes
-   Symbol type_decl;
-   // for attributes
-   Expression init;
-
    tree_node *copy() { return copy_Feature(); }
    virtual Feature copy_Feature() = 0;
    virtual void dump_with_types(std::ostream &, int) = 0;
+   std::string get_type() { return type_; }
 };
 
 class method_class : public Feature_class
 {
 public:
-   method_class(Symbol method_name, Formals method_formals, Symbol return_value_type, Expression method_expr)
+   Formals formals;
+   Symbol return_type;
+   Expression expr;
+
+   method_class(Symbol a1, Formals a2, Symbol a3, Expression a4)
    {
-      name = method_name;
-      formals = method_formals;
-      return_type = return_value_type;
-      expr = method_expr;
+      name = a1;
+      formals = a2;
+      return_type = a3;
+      expr = a4;
       type_ = "method";
    }
    Feature copy_Feature();
@@ -81,11 +101,14 @@ public:
 class attr_class : public Feature_class
 {
 public:
-   attr_class(Symbol class_name, Symbol decl_type, Expression init_val)
+   Symbol type_decl;
+   Expression init;
+
+   attr_class(Symbol a1, Symbol a2, Expression a3)
    {
-      name = class_name;
-      type_decl = decl_type;
-      init = init_val;
+      name = a1;
+      type_decl = a2;
+      init = a3;
       type_ = "attr";
    }
    Feature copy_Feature();
@@ -93,21 +116,23 @@ public:
    void dump_with_types(std::ostream &, int);
 };
 
-class Formal_class : public tree_node
+class Expression_class : public tree_node
 {
 public:
-   Symbol type_decl;
-
-   Formal_class(Symbol name_, Symbol decl_type)
+   Symbol type;
+   tree_node *copy() { return copy_Expression(); }
+   virtual Expression copy_Expression() = 0;
+   Symbol get_type() { return type; }
+   Expression set_type(Symbol s)
    {
-      name = name_;
-      type_decl = decl_type;
-      type_ = "Formal";
+      type = s;
+      return this;
    }
-   Formal copy_Formal();
-   void dump(std::ostream &stream, int n);
-   void dump_with_types(std::ostream &, int);
-   tree_node *copy() { return copy_Formal(); }
+   virtual void dump_with_types(std::ostream &, int) = 0;
+   void dump_type(std::ostream &, int);
+   Expression parent;
+   virtual void set_body(const Expression e) {}
+   Expression_class() { type = (Symbol)NULL; }
 };
 
 class Case_class : public tree_node
@@ -129,63 +154,11 @@ public:
    tree_node *copy() { return copy_Case(); }
 };
 
-class Expression_class : public tree_node
-{
-public:
-   // return type
-   Symbol type;
-   // parent of this expression
-   Expression parent;
-   // current expression
-   Expression expr;
-   // for static_dispatch_class or new__class
-   Symbol type_name;
-   // for dispatch_class or static_dispatch_class
-   Expressions actual;
-   // for cond_class or loop_class
-   Expression pred;
-   // for cond_class
-   Expression then_exp;
-   // for cond_class
-   Expression else_exp;
-   // for loop_class or let_class
-   Expression body;
-   // for typcase_class
-   Cases cases;
-   // for block_class
-   Expressions bodys;
-   // for let_class
-   Symbol identifier;
-   // for let_class
-   Symbol type_decl;
-   // for let_class
-   Expression init;
-   // for arithmetic classes
-   Expression e1;
-   // for arithmetic classes
-   Expression e2;
-   // for int_const_class or string_const_class
-   Symbol token;
-   // for bool_const_class
-   Boolean val;
-
-   tree_node *copy() { return copy_Expression(); }
-   virtual Expression copy_Expression() = 0;
-   Symbol get_type() { return type; }
-   Expression set_type(Symbol s)
-   {
-      type = s;
-      return this;
-   }
-   virtual void dump_with_types(std::ostream &, int) = 0;
-   void dump_type(std::ostream &, int);
-   virtual void set_body(const Expression e) {}
-   Expression_class() { type = (Symbol)NULL; }
-};
-
 class assign_class : public Expression_class
 {
 public:
+   Expression expr;
+
    assign_class(Symbol a1, Expression a2)
    {
       name = a1;
@@ -200,6 +173,10 @@ public:
 class static_dispatch_class : public Expression_class
 {
 public:
+   Expression expr;
+   Symbol type_name;
+   Expressions actual;
+
    static_dispatch_class(Expression a1, Symbol a2, Symbol a3, Expressions a4)
    {
       expr = a1;
@@ -216,6 +193,9 @@ public:
 class dispatch_class : public Expression_class
 {
 public:
+   Expression expr;
+   Expressions actual;
+
    dispatch_class(Expression a1, Symbol a2, Expressions a3)
    {
       expr = a1;
@@ -231,6 +211,10 @@ public:
 class cond_class : public Expression_class
 {
 public:
+   Expression pred;
+   Expression then_exp;
+   Expression else_exp;
+
    cond_class(Expression a1, Expression a2, Expression a3)
    {
       pred = a1;
@@ -247,6 +231,9 @@ public:
 class loop_class : public Expression_class
 {
 public:
+   Expression pred;
+   Expression body;
+
    loop_class(Expression a1, Expression a2)
    {
       pred = a1;
@@ -261,6 +248,9 @@ public:
 class typcase_class : public Expression_class
 {
 public:
+   Expression expr;
+   Cases cases;
+
    typcase_class(Expression a1, Cases a2)
    {
       expr = a1;
@@ -275,9 +265,11 @@ public:
 class block_class : public Expression_class
 {
 public:
+   Expressions body;
+
    block_class(Expressions a1)
    {
-      bodys = a1;
+      body = a1;
       type_ = "block";
    }
    Expression copy_Expression();
@@ -288,6 +280,11 @@ public:
 class let_class : public Expression_class
 {
 public:
+   Symbol identifier;
+   Symbol type_decl;
+   Expression init;
+   Expression body;
+
    let_class(Symbol a1, Symbol a2, Expression a3, Expression a4)
    {
       identifier = a1;
@@ -309,6 +306,9 @@ public:
 class plus_class : public Expression_class
 {
 public:
+   Expression e1;
+   Expression e2;
+
    plus_class(Expression a1, Expression a2)
    {
       e1 = a1;
@@ -323,6 +323,9 @@ public:
 class sub_class : public Expression_class
 {
 public:
+   Expression e1;
+   Expression e2;
+
    sub_class(Expression a1, Expression a2)
    {
       e1 = a1;
@@ -337,6 +340,9 @@ public:
 class mul_class : public Expression_class
 {
 public:
+   Expression e1;
+   Expression e2;
+
    mul_class(Expression a1, Expression a2)
    {
       e1 = a1;
@@ -351,6 +357,9 @@ public:
 class divide_class : public Expression_class
 {
 public:
+   Expression e1;
+   Expression e2;
+
    divide_class(Expression a1, Expression a2)
    {
       e1 = a1;
@@ -365,6 +374,8 @@ public:
 class neg_class : public Expression_class
 {
 public:
+   Expression e1;
+
    neg_class(Expression a1)
    {
       e1 = a1;
@@ -378,6 +389,9 @@ public:
 class lt_class : public Expression_class
 {
 public:
+   Expression e1;
+   Expression e2;
+
    lt_class(Expression a1, Expression a2)
    {
       e1 = a1;
@@ -392,6 +406,9 @@ public:
 class eq_class : public Expression_class
 {
 public:
+   Expression e1;
+   Expression e2;
+
    eq_class(Expression a1, Expression a2)
    {
       e1 = a1;
@@ -406,6 +423,9 @@ public:
 class leq_class : public Expression_class
 {
 public:
+   Expression e1;
+   Expression e2;
+
    leq_class(Expression a1, Expression a2)
    {
       e1 = a1;
@@ -420,6 +440,8 @@ public:
 class comp_class : public Expression_class
 {
 public:
+   Expression e1;
+
    comp_class(Expression a1)
    {
       e1 = a1;
@@ -433,11 +455,13 @@ public:
 class int_const_class : public Expression_class
 {
 public:
+   Symbol token;
+
    int_const_class(Symbol a1)
    {
       token = a1;
-      type_ = "int_const";
       type = make_symbol("Int");
+      type_ = "int_const";
    }
    Expression copy_Expression();
    void dump(std::ostream &stream, int n);
@@ -447,11 +471,13 @@ public:
 class bool_const_class : public Expression_class
 {
 public:
+   Boolean val;
+
    bool_const_class(Boolean a1)
    {
       val = a1;
-      type_ = "bool_const";
       type = make_symbol("Bool");
+      type_ = "bool_const";
    }
    Expression copy_Expression();
    void dump(std::ostream &stream, int n);
@@ -461,11 +487,13 @@ public:
 class string_const_class : public Expression_class
 {
 public:
+   Symbol token;
+
    string_const_class(Symbol a1)
    {
       token = a1;
-      type_ = "string_const";
       type = make_symbol("String");
+      type_ = "string_const";
    }
    Expression copy_Expression();
    void dump(std::ostream &stream, int n);
@@ -475,6 +503,8 @@ public:
 class new__class : public Expression_class
 {
 public:
+   Symbol type_name;
+
    new__class(Symbol a1)
    {
       type_name = a1;
@@ -488,6 +518,8 @@ public:
 class isvoid_class : public Expression_class
 {
 public:
+   Expression e1;
+
    isvoid_class(Expression a1)
    {
       e1 = a1;

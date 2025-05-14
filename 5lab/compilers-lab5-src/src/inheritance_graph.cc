@@ -14,7 +14,6 @@ std::ostream &operator<<(std::ostream &out, const GraphNode &node)
 
 Graph::Graph()
 {
-    // first_level_.push_back(std::make_shared<GraphNode>("Object"));
 }
 
 graph_node_ptr Graph::find(const GraphNode &v)
@@ -84,14 +83,6 @@ void Graph::add_edge(const GraphNode &parent, const GraphNode &kid)
 {
     auto parent_vertex = find(parent);
     auto kid_vertex = find(kid);
-
-    // if (parent.class_name == kid.class_name)
-    // {
-    //     first_level_.push_back(std::make_shared<GraphNode>(parent.class_name, kid.class_, 1));
-    //     parent_vertex = find(parent);
-    //     (*parent_vertex).kids.push_back(std::make_shared<GraphNode>(kid.class_name, kid.class_, (*parent_vertex).level_ + 1));
-    //     return;
-    // }
 
     if (kid_vertex == nullptr)
     {
@@ -204,12 +195,12 @@ std::vector<Feature> unroll_stack(std::stack<Features> stack)
     return features_list;
 }
 
-bool check_signatures(const Feature &first, const Feature &second)
+bool check_signatures(const method_class &first, const method_class &second)
 {
-    auto first_formals = first->formals;
-    auto second_formals = second->formals;
-    auto first_return_type = first->return_type;
-    auto second_return_type = second->return_type;
+    auto first_formals = first.formals;
+    auto second_formals = second.formals;
+    auto first_return_type = first.return_type;
+    auto second_return_type = second.return_type;
     if (std::string(first_return_type->get_string()) != std::string(second_return_type->get_string()))
         return false;
     if (first_formals->len() != second_formals->len())
@@ -231,6 +222,7 @@ size_t check_feature_redefinitions(const Features &features, const std::string &
         auto current_feature = features->nth(i);
         std::string type = current_feature->type_;
         std::string name = current_feature->name->get_string();
+        auto line = current_feature->line_number;
         auto it = std::ranges::find_if(scope, [current_feature](Feature feature)
                                        { return std::string(current_feature->name->get_string()) == std::string(feature->name->get_string()); });
 
@@ -238,27 +230,31 @@ size_t check_feature_redefinitions(const Features &features, const std::string &
         {
             if (type == "method")
             {
+                auto first = static_cast<method_class *>(current_feature);
                 if ((*it)->type_ == "method")
                 {
-                    if (!check_signatures((*it), current_feature))
+                    auto second = static_cast<method_class *>(*it);
+                    if (!check_signatures(*first, *second))
                     {
-                        print_error_message(filename, current_feature->line_number, "redifinition of method \"" + name + "\" with wrong signature");
+                        print_error_message(filename, line, "redifinition of method \"" + name + "\" with wrong signature");
                     }
                 }
                 else
                 {
-                    print_error_message(filename, current_feature->line_number, "redifinition of attribute \"" + std::string((*it)->name->get_string()) + "\" with method \"" + name + "\"");
+                    print_error_message(filename, line, "redifinition of attribute \"" + std::string((*it)->name->get_string()) + "\" with method \"" + name + "\"");
                 }
             }
             else
             {
                 if ((*it)->type_ == "method")
                 {
-                    print_error_message(filename, current_feature->line_number, "redifinition of method \"" + std::string((*it)->name->get_string()) + "\" with attribute \"" + name + "\"");
+                    auto second = static_cast<method_class *>(*it);
+                    print_error_message(filename, line, "redifinition of method \"" + std::string(second->name->get_string()) + "\" with attribute \"" + name + "\"");
                 }
                 else
                 {
-                    print_error_message(filename, current_feature->line_number, "redifinition of attribute \"" + std::string((*it)->name->get_string()) + "\" with attribute \"" + name + "\"");
+                    auto second = static_cast<attr_class *>(*it);
+                    print_error_message(filename, line, "redifinition of attribute \"" + std::string(second->name->get_string()) + "\" with attribute \"" + name + "\"");
                 }
             }
             ++redefinitions;
@@ -284,21 +280,24 @@ size_t check_feature_types(const Features &features, const std::string &filename
         auto current_feature = features->nth(i);
         std::string name = current_feature->name->get_string();
         std::string type = current_feature->type_;
+        auto line = current_feature->line_number;
         if (type == "method")
         {
-            std::string return_type = current_feature->return_type->get_string();
+            auto method = static_cast<method_class *>(current_feature);
+            std::string return_type = method->return_type->get_string();
             if (!types_table.contains(return_type))
             {
-                print_error_message(filename, current_feature->line_number, "return type \"" + return_type + "\" of method \"" + name + "\" undefined");
+                print_error_message(filename, line, "return type \"" + return_type + "\" of method \"" + name + "\" undefined");
                 ++faults;
             }
         }
         else if (type == "attr")
         {
-            std::string type_decl = current_feature->type_decl->get_string();
+            auto attr = static_cast<attr_class *>(current_feature);
+            std::string type_decl = attr->type_decl->get_string();
             if (!types_table.contains(type_decl))
             {
-                print_error_message(filename, current_feature->line_number, "type \"" + type_decl + "\" of attribute \"" + name + "\" undefined");
+                print_error_message(filename, line, "type \"" + type_decl + "\" of attribute \"" + name + "\" undefined");
                 ++faults;
             }
         }
@@ -344,8 +343,9 @@ size_t check_methods_formal_parameters(const Features &features, const std::stri
         auto current_feature = features->nth(i);
         if (current_feature->type_ == "method")
         {
-            auto formals = current_feature->formals;
             std::string method_name = current_feature->name->get_string();
+            auto method = static_cast<method_class *>(current_feature);
+            auto formals = method->formals;
             for (int i = 0; i < formals->len(); i++)
             {
                 auto formal = formals->nth(i);
@@ -396,8 +396,9 @@ size_t Graph::check_main_class()
         std::string type = current_feature->type_;
         if (type == "method" && name == "main")
         {
+            auto method = static_cast<method_class *>(current_feature);
             contains_main_method = true;
-            if (current_feature->formals->len() > 0)
+            if (method->formals->len() > 0)
             {
                 auto line = current_feature->line_number;
                 print_error_message(filename, line, "formal parameters in method \"main\"");
@@ -452,37 +453,61 @@ size_t parse_expression(const std::string &filename,
             print_error_message(filename, line, "using method \"" + object_name + "\" like it's object");
             ++faults_count;
         }
-        std::string decl_type = expr_object_type == "method" ? (*expr_object)->return_type->get_string() : (*expr_object)->type_decl->get_string();
-        if (decl_type != target_type)
+
+        auto line = expression->line_number;
+        if (expr_object_type == "method")
         {
-            auto line = expression->line_number;
-            print_error_message(filename, line, "expression has type \"" + decl_type + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
-            ++faults_count;
-            return faults_count;
+            auto method = static_cast<method_class *>(*expr_object);
+            std::string return_type = method->return_type->get_string();
+            if (return_type != target_type)
+            {
+                print_error_message(filename, line, "method has return type \"" + return_type + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
+                ++faults_count;
+                return faults_count;
+            }
+        }
+        else
+        {
+            auto attr = static_cast<attr_class *>(*expr_object);
+            std::string type_decl = attr->type_decl->get_string();
+            if (type_decl != target_type)
+            {
+                print_error_message(filename, line, "attribute has type \"" + type_decl + "\" and feature \"" + feature_name + "\" has type \"" + target_type + "\"");
+                ++faults_count;
+                return faults_count;
+            }
         }
     }
     else if (type == "assign")
     {
-        std::string lvalue = expression->name->get_string();
-        auto rvalue = expression->expr;
+        auto assign = static_cast<assign_class *>(expression);
+        std::string lvalue = assign->name->get_string();
+        auto rvalue = assign->expr;
         auto expr_object = std::ranges::find_if(unrolled_stack, [lvalue](Feature feature)
                                                 { return lvalue == std::string(feature->name->get_string()); });
         if (expr_object == unrolled_stack.end())
         {
-            auto line = expression->line_number;
+            auto line = assign->line_number;
             print_error_message(filename, line, "using undefined object \"" + lvalue + "\"");
             ++faults_count;
             return faults_count;
         }
         std::string expr_object_type = (*expr_object)->type_;
+        auto line = assign->line_number;
         if (expr_object_type == "method")
         {
-            auto line = expression->line_number;
+            auto method = static_cast<method_class *>(*expr_object);
             print_error_message(filename, line, "using method \"" + lvalue + "\" like it's object");
             ++faults_count;
+            std::string return_type = method->return_type->get_string();
+            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, return_type, faults_count);
         }
-        std::string decl_type = expr_object_type == "method" ? (*expr_object)->return_type->get_string() : (*expr_object)->type_decl->get_string();
-        faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, decl_type, faults_count);
+        else
+        {
+            auto attr = static_cast<attr_class *>(*expr_object);
+            std::string type_decl = attr->type_decl->get_string();
+            faults_count += parse_expression(filename, unrolled_stack, rvalue, lvalue, type_decl, faults_count);
+        }
     }
     return faults_count;
 }
@@ -504,21 +529,27 @@ size_t check_expressions(const std::string &filename, const Features &features, 
     for (int i = 0; i < features->len(); i++)
     {
         auto current_feature = features->nth(i);
-        std::string name = current_feature->name->get_string();
         std::string type = current_feature->type_;
-        auto expression = type == "method" ? current_feature->expr : current_feature->init;
-        std::string ret_type = type == "method" ? current_feature->return_type->get_string() : current_feature->type_decl->get_string();
-        Features new_frame = nullptr;
+        std::string name = current_feature->name->get_string();
         if (type == "method")
         {
-            new_frame = formals_to_features(current_feature->formals);
+            auto method = static_cast<method_class *>(current_feature);
+            auto new_frame = formals_to_features(method->formals);
             if (new_frame)
                 features_table.push(new_frame);
+            auto unrolled = unroll_stack(features_table);
+            std::string return_type = method->return_type->get_string();
+            faults_count += parse_expression(filename, unrolled, method->expr, name, return_type, faults_count);
+            if (new_frame)
+                features_table.pop();
         }
-        auto unrolled = unroll_stack(features_table);
-        faults_count += parse_expression(filename, unrolled, expression, name, ret_type, faults_count);
-        if (new_frame)
-            features_table.pop();
+        else
+        {
+            auto attr = static_cast<attr_class *>(current_feature);
+            auto unrolled = unroll_stack(features_table);
+            std::string type_decl = attr->type_decl->get_string();
+            faults_count += parse_expression(filename, unrolled, attr->init, name, type_decl, faults_count);
+        }
     }
     return faults_count;
 }
