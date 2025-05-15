@@ -135,25 +135,6 @@ public:
    Expression_class() { type = (Symbol)NULL; }
 };
 
-class Case_class : public tree_node
-{
-public:
-   Symbol type_decl;
-   Expression expr;
-
-   Case_class(Symbol a1, Symbol a2, Expression a3)
-   {
-      name = a1;
-      type_decl = a2;
-      expr = a3;
-      type_ = "Case";
-   }
-   Case copy_Case();
-   void dump(std::ostream &stream, int n);
-   void dump_with_types(std::ostream &, int);
-   tree_node *copy() { return copy_Case(); }
-};
-
 class assign_class : public Expression_class
 {
 public:
@@ -243,6 +224,25 @@ public:
    Expression copy_Expression();
    void dump(std::ostream &stream, int n);
    void dump_with_types(std::ostream &, int);
+};
+
+class Case_class : public tree_node
+{
+public:
+   Symbol type_decl;
+   Expression expr;
+
+   Case_class(Symbol a1, Symbol a2, Expression a3)
+   {
+      name = a1;
+      type_decl = a2;
+      expr = a3;
+      type_ = "Case";
+   }
+   Case copy_Case();
+   void dump(std::ostream &stream, int n);
+   void dump_with_types(std::ostream &, int);
+   tree_node *copy() { return copy_Case(); }
 };
 
 class typcase_class : public Expression_class

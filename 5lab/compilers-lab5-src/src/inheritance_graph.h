@@ -43,7 +43,8 @@ class Graph
 
 public:
     Graph();
-    graph_node_ptr find(const GraphNode &v);
+    graph_node_ptr find(const GraphNode &v) const;
+    graph_node_ptr is_parent(const std::string &older, const std::string &younger) const;
     graph_node_ptr detach(const GraphNode &v);
     void add_edge(const GraphNode &parent, const GraphNode &kid);
     std::vector<std::vector<graph_node_ptr>> find_cycles();
@@ -52,6 +53,7 @@ public:
     size_t check_inheritance_from_basic();
     size_t check_main_class();
     size_t make_all_checks(const std::set<std::string> &types_table);
+    std::stack<Class_> get_scope_of_type(const std::string &type) const;
 };
 
 bool operator==(const GraphNode &lhs, const GraphNode &rhs);

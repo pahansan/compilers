@@ -87,11 +87,12 @@ std::set<std::string> make_types_table()
     return types_table;
 }
 
-Class_ find_not_null(std::vector<graph_node_ptr> kids)
+Class_ find_not_null(std::vector<graph_node_ptr> nodes)
 {
-    for (const auto &kid : kids)
-        if (kid->class_)
-            return kid->class_;
+    for (const auto &node : nodes)
+        for (const auto &kid : node->kids)
+            if (kid->class_)
+                return kid->class_;
     return nullptr;
 }
 
@@ -140,6 +141,6 @@ void semant()
         return;
 
     auto types_table = make_types_table();
-    
+
     faults_attend += graph.make_all_checks(types_table);
 }
