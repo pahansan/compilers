@@ -208,7 +208,7 @@ std::vector<graph_node_ptr> Graph::check_first_level()
     std::vector<graph_node_ptr> extra_classes;
     if (first_level_.size() > 1)
         std::copy_if(first_level_.begin(), first_level_.end(), std::back_inserter(extra_classes), [](graph_node_ptr node)
-                     { return node->class_name != "Object"; });
+                     { return node->class_name != "Object" && node->class_ == nullptr; });
 
     return extra_classes;
 }
@@ -267,19 +267,9 @@ std::vector<Feature> unroll_stack(std::stack<Class_> stack)
         for (int i = 0; i < frame->len(); i++)
         {
             auto feature = frame->nth(i);
-            // if (feature->type_ == "method")
-            // {
-            //     auto method = static_cast<method_class *>(feature);
-            //     if (std::string(method->return_type->get_string()) == "SELF_TYPE")
-            //     {
-            //         method->return_type = make_symbol(current_class_name);
-            //     }
-            //     feature = static_cast<Feature>(method);
-            // }
             features_list.push_back(feature);
         }
     }
-    // features_list.push_back(attr(make_symbol("self"), make_symbol("SELF_TYPE"), no_expr()));
     return features_list;
 }
 
@@ -569,11 +559,8 @@ std::string parse_expression(const std::string &filename,
         auto object = static_cast<object_class *>(expression);
         std::string object_name = expression->name->get_string();
         if (object_name == "self")
-        {
-            // auto parent = find_parent_of_feature(features_table, feature_name);
-            // return parent;
             return target_type;
-        }
+
         auto expr_object = find_in_unrolled_by_name(unrolled_stack, object_name);
         if (expr_object == unrolled_stack.end())
         {
@@ -608,7 +595,7 @@ std::string parse_expression(const std::string &filename,
         {
             auto line = assign->line_number;
             print_error_message(filename, line, "using undefined object \"" + lvalue + "\"");
-            return "";
+            return "unknown";
         }
         std::string expr_object_type = (*expr_object)->type_;
         auto line = assign->line_number;
@@ -1201,9 +1188,6 @@ size_t check_expressions(const std::string &filename, const Features &features, 
                 }
             }
             std::string return_type = method->return_type->get_string();
-
-            // if (return_type == "SELF_TYPE")
-            //     return_type = find_parent_of_feature(features_table, method->name->get_string());
 
             auto method_name = std::string(method->name->get_string());
             auto expression_type = parse_expression(filename, method_name, unrolled, method->expr, return_type, graph, features_table);

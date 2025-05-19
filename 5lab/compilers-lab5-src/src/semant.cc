@@ -99,8 +99,10 @@ Class_ find_not_null(std::vector<graph_node_ptr> nodes)
 void semant()
 {
     faults_attend += find_class_redefinitions();
+
     if (faults_attend)
         return;
+
     auto graph = make_inheritance_graph();
 
     auto cycles = graph.find_cycles();
@@ -120,9 +122,6 @@ void semant()
         auto line = current_class->line_number;
         print_error_message(filename, line, "cyclic inheritance: " + cycle_string);
     }
-
-    if (faults_attend)
-        return;
 
     auto extra_classes = graph.check_first_level();
     faults_attend += extra_classes.size();

@@ -6,5 +6,5 @@ case, or as a formal parameter. It is also illegal to have attributes named self
 class Main inherits IO {
 	main(): IO { out_string("Hello World!")};
 
-	test(self: IO): IO { self };
+	self: IO <- self;
 };

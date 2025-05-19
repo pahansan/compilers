@@ -8,8 +8,6 @@ class Main inherits IO {
 
 class A {
 	x: Int <- 3;
-
-	x(): String { ":)" };
 };
 
 class B inherits A {

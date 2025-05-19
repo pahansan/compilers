@@ -7,4 +7,4 @@ class Main inherits IO {
 	main(): IO { out_string("Hello World!")};
 
 	test(): IO { let self: Main <- new Main in self };
-}; 
+};
