@@ -4,7 +4,7 @@ MODULE Gcd;
 
 VAR x: INTEGER;
 
-PROCEDURE GCD(a, b: INTEGER) : INTEGER;
+PROCEDURE GCD(a, a: INTEGER) : INTEGER;
 VAR t: INTEGER;
 BEGIN
   IF b = 0 THEN
@@ -12,11 +12,10 @@ BEGIN
   END;
   WHILE b # 0 DO
     t := a MOD b;
-    t := 1 + "string";
     a := b;
     b := t;
   END;
-  RETURN 10;
+  RETURN a;
 END GCD;
 
 END Gcd.

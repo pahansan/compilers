@@ -10,13 +10,12 @@ BEGIN
   IF b = 0 THEN
     RETURN a;
   END;
-  WHILE b # 0 DO
+  WHILE 1 DO
     t := a MOD b;
-    t := 1 + "string";
     a := b;
     b := t;
   END;
-  RETURN 10;
+  RETURN a;
 END GCD;
 
 END Gcd.

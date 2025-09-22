@@ -193,6 +193,8 @@ void Sema::actOnProcedureDeclaration(
 
 void Sema::actOnAssignment(StmtList &Stmts, SMLoc Loc,
                            Decl *D, Expr *E) {
+  if (!D || !E)
+    return;
   if (auto Var = dyn_cast<VariableDeclaration>(D)) {
     if (Var->getType() != E->getType()) {
       Diags.report(

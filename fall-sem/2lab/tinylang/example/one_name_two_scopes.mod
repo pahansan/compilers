@@ -5,18 +5,17 @@ MODULE Gcd;
 VAR x: INTEGER;
 
 PROCEDURE GCD(a, b: INTEGER) : INTEGER;
-VAR t: INTEGER;
+VAR x: INTEGER;
 BEGIN
   IF b = 0 THEN
     RETURN a;
   END;
   WHILE b # 0 DO
-    t := a MOD b;
-    t := 1 + "string";
+    x := a MOD b;
     a := b;
-    b := t;
+    b := x;
   END;
-  RETURN 10;
+  RETURN a;
 END GCD;
 
 END Gcd.

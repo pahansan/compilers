@@ -632,6 +632,8 @@ bool Parser::parseFactor(Expr *&E) {
     E = Actions.actOnPrefixExpression(E, Op);
   } else {
     /*ERROR*/
+    getDiagnostics().report(Tok.getLocation(),
+                            diag::err_unexpected_literal);
     return _errorhandler();
   }
   return false;
