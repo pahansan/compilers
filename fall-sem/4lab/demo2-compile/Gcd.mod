@@ -1,9 +1,5 @@
 MODULE Gcd;
 
-(* Пример вычисления НОД *)
-
-VAR x: INTEGER;
-
 PROCEDURE GCD(a, b: INTEGER) : INTEGER;
 VAR t: INTEGER;
 BEGIN
@@ -12,11 +8,10 @@ BEGIN
   END;
   WHILE b # 0 DO
     t := a MOD b;
-    t := t + "string";
     a := b;
     b := t;
   END;
-  RETURN 10;
+  RETURN a;
 END GCD;
 
 END Gcd.

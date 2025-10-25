@@ -31,8 +31,8 @@ return:
 
 define i32 @main() {
   %gcdResult = call i32 @gcd(i32 12, i32 15)
-  call i32 (ptr, ...) @printf(ptr @.str, i32 %gcdResult)
+  call i32 @printf(ptr @.str, i32 %gcdResult)
   ret i32 0
 }
 
-declare i32 @printf(ptr noundef, ...)
+declare i32 @printf(ptr, ...)
