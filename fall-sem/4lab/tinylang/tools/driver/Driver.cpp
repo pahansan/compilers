@@ -24,20 +24,13 @@ using namespace tinylang;
 
 static codegen::RegisterCodeGenFlags CGF;
 
-static llvm::cl::opt<std::string> InputFile(llvm::cl::Positional,
-                                            llvm::cl::desc("<input-files>"),
-                                            cl::init("-"));
+static llvm::cl::opt<std::string> InputFile(llvm::cl::Positional, llvm::cl::desc("<input-files>"), cl::init("-"));
 
-static llvm::cl::opt<std::string>
-    OutputFilename("o", llvm::cl::desc("Output filename"),
-                   llvm::cl::value_desc("filename"));
+static llvm::cl::opt<std::string> OutputFilename("o", llvm::cl::desc("Output filename"), llvm::cl::value_desc("filename"));
 
-static llvm::cl::opt<std::string>
-    MTriple("mtriple", llvm::cl::desc("Override target triple for module"));
+static llvm::cl::opt<std::string> MTriple("mtriple", llvm::cl::desc("Override target triple for module"));
 
-static llvm::cl::opt<bool>
-    EmitLLVM("emit-llvm", llvm::cl::desc("Emit IR code instead of assembler"),
-             llvm::cl::init(false));
+static llvm::cl::opt<bool> EmitLLVM("emit-llvm", llvm::cl::desc("Emit IR code instead of assembler"), llvm::cl::init(false));
 
 static const char *Head = "tinylang - Tinylang compiler";
 
@@ -53,32 +46,25 @@ void printVersion(llvm::raw_ostream &OS) {
 }
 
 llvm::TargetMachine *createTargetMachine(const char *Argv0) {
-  llvm::Triple Triple =
-      llvm::Triple(!MTriple.empty() ? llvm::Triple::normalize(MTriple)
-                                    : llvm::sys::getDefaultTargetTriple());
+  llvm::Triple Triple = llvm::Triple(!MTriple.empty() ? llvm::Triple::normalize(MTriple) : llvm::sys::getDefaultTargetTriple());
 
-  llvm::TargetOptions TargetOptions =
-      codegen::InitTargetOptionsFromCodeGenFlags(Triple);
+  llvm::TargetOptions TargetOptions = codegen::InitTargetOptionsFromCodeGenFlags(Triple);
   std::string CPUStr = codegen::getCPUStr();
   std::string FeatureStr = codegen::getFeaturesStr();
 
   std::string Error;
-  const llvm::Target *Target =
-      llvm::TargetRegistry::lookupTarget(codegen::getMArch(), Triple, Error);
+  const llvm::Target *Target = llvm::TargetRegistry::lookupTarget(codegen::getMArch(), Triple, Error);
 
   if (!Target) {
     llvm::WithColor::error(llvm::errs(), Argv0) << Error;
     return nullptr;
   }
 
-  llvm::TargetMachine *TM = Target->createTargetMachine(
-      Triple, CPUStr, FeatureStr, TargetOptions,
-      std::optional<llvm::Reloc::Model>(codegen::getRelocModel()));
+  llvm::TargetMachine *TM = Target->createTargetMachine(Triple, CPUStr, FeatureStr, TargetOptions, std::optional<llvm::Reloc::Model>(codegen::getRelocModel()));
   return TM;
 }
 
-bool emit(StringRef Argv0, llvm::Module *M, llvm::TargetMachine *TM,
-          StringRef InputFilename) {
+bool emit(StringRef Argv0, llvm::Module *M, llvm::TargetMachine *TM, StringRef InputFilename) {
   CodeGenFileType FileType = codegen::getFileType();
   if (OutputFilename.empty()) {
     if (InputFilename == "-") {
@@ -107,8 +93,7 @@ bool emit(StringRef Argv0, llvm::Module *M, llvm::TargetMachine *TM,
   sys::fs::OpenFlags OpenFlags = sys::fs::OF_None;
   if (FileType == llvm::CodeGenFileType::AssemblyFile)
     OpenFlags |= sys::fs::OF_TextWithCRLF;
-  auto Out =
-      std::make_unique<llvm::ToolOutputFile>(OutputFilename, EC, OpenFlags);
+  auto Out = std::make_unique<llvm::ToolOutputFile>(OutputFilename, EC, OpenFlags);
   if (EC) {
     WithColor::error(llvm::errs(), Argv0) << EC.message() << '\n';
     return false;
@@ -139,18 +124,14 @@ int main(int Argc, const char **Argv) {
   llvm::cl::SetVersionPrinter(&printVersion);
   llvm::cl::ParseCommandLineOptions(Argc, Argv, Head);
 
-  if (codegen::getMCPU() == "help" ||
-      std::any_of(codegen::getMAttrs().begin(), codegen::getMAttrs().end(),
-                  [](const std::string &a) { return a == "help"; })) {
+  if (codegen::getMCPU() == "help" || std::any_of(codegen::getMAttrs().begin(), codegen::getMAttrs().end(), [](const std::string &a) { return a == "help"; })) {
     auto Triple = llvm::Triple(LLVM_DEFAULT_TARGET_TRIPLE);
     std::string ErrMsg;
-    if (auto Target =
-            llvm::TargetRegistry::lookupTarget(Triple.getTriple(), ErrMsg)) {
+    if (auto Target = llvm::TargetRegistry::lookupTarget(Triple.getTriple(), ErrMsg)) {
       llvm::errs() << "Targeting " << Target->getName() << ". ";
       // This prints the available CPUs and features of the
       // target to stderr...
-      Target->createMCSubtargetInfo(Triple.getTriple(), codegen::getCPUStr(),
-                                    codegen::getFeaturesStr());
+      Target->createMCSubtargetInfo(Triple.getTriple(), codegen::getCPUStr(), codegen::getFeaturesStr());
     } else {
       llvm::errs() << ErrMsg << "\n";
       exit(EXIT_FAILURE);
@@ -162,12 +143,9 @@ int main(int Argc, const char **Argv) {
   if (!TM)
     exit(EXIT_FAILURE);
 
-  llvm::ErrorOr<std::unique_ptr<llvm::MemoryBuffer>> FileOrErr =
-      llvm::MemoryBuffer::getFile(InputFile);
+  llvm::ErrorOr<std::unique_ptr<llvm::MemoryBuffer>> FileOrErr = llvm::MemoryBuffer::getFile(InputFile);
   if (std::error_code BufferError = FileOrErr.getError()) {
-    llvm::WithColor::error(llvm::errs(), Argv[0])
-        << "Error reading " << InputFile << ": " << BufferError.message()
-        << "\n";
+    llvm::WithColor::error(llvm::errs(), Argv[0]) << "Error reading " << InputFile << ": " << BufferError.message() << "\n";
   }
 
   llvm::SourceMgr SrcMgr;
@@ -186,8 +164,7 @@ int main(int Argc, const char **Argv) {
     if (CodeGenerator *CG = CodeGenerator::create(Ctx, TM)) {
       std::unique_ptr<llvm::Module> M = CG->run(Mod, InputFile);
       if (!emit(Argv[0], M.get(), TM, InputFile)) {
-        llvm::WithColor::error(llvm::errs(), Argv[0])
-            << "Error writing output\n";
+        llvm::WithColor::error(llvm::errs(), Argv[0]) << "Error writing output\n";
       }
       delete CG;
     }
