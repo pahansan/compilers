@@ -1,0 +1,1066 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      The system is: Linux - 6.14.0-35-generic - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/bin/cc 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/3.31.6/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/c++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/3.31.6/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-MHlrzx"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-MHlrzx"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-MHlrzx'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0855d/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_0855d.dir/build.make CMakeFiles/cmTC_0855d.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-MHlrzx'
+        Building C object CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o
+        /usr/bin/cc   -v -o CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.31/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 14.2.0-19ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-14/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2,rust --prefix=/usr --with-gcc-major-version-only --program-suffix=-14 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 14.2.0 (Ubuntu 14.2.0-19ubuntu2) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_0855d.dir/'
+         /usr/libexec/gcc/x86_64-linux-gnu/14/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/share/cmake-3.31/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_0855d.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccJzYKm4.s
+        GNU C17 (Ubuntu 14.2.0-19ubuntu2) version 14.2.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 14.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/include-fixed/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-linux-gnu/14/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        Compiler executable checksum: 8d75a8b870b18ead058f0fb05febd3df
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_0855d.dir/'
+         as -v --64 -o CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o /tmp/ccJzYKm4.s
+        GNU assembler version 2.44 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.44
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_0855d
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0855d.dir/link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 14.2.0-19ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-14/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2,rust --prefix=/usr --with-gcc-major-version-only --program-suffix=-14 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 14.2.0 (Ubuntu 14.2.0-19ubuntu2) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0855d' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_0855d.'
+         /usr/libexec/gcc/x86_64-linux-gnu/14/collect2 -plugin /usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWYVO0p.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_0855d /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/14 -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/14/../../.. -v CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o
+        collect2 version 14.2.0
+        /usr/bin/ld -plugin /usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWYVO0p.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_0855d /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/14 -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/14/../../.. -v CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o
+        GNU ld (GNU Binutils for Ubuntu) 2.44
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0855d' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_0855d.'
+        /usr/bin/cc  -v -Wl,-v CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o -o cmTC_0855d
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-MHlrzx'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib/gcc/x86_64-linux-gnu/14/include]
+          add: [/usr/local/include]
+          add: [/usr/include/x86_64-linux-gnu]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/14/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/14/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/lib/gcc/x86_64-linux-gnu/14/include;/usr/local/include;/usr/include/x86_64-linux-gnu;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-MHlrzx']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0855d/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_0855d.dir/build.make CMakeFiles/cmTC_0855d.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-MHlrzx']
+        ignore line: [Building C object CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake-3.31/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 14.2.0-19ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-14/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 rust --prefix=/usr --with-gcc-major-version-only --program-suffix=-14 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 14.2.0 (Ubuntu 14.2.0-19ubuntu2) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_0855d.dir/']
+        ignore line: [ /usr/libexec/gcc/x86_64-linux-gnu/14/cc1 -quiet -v -imultiarch x86_64-linux-gnu /usr/share/cmake-3.31/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_0855d.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccJzYKm4.s]
+        ignore line: [GNU C17 (Ubuntu 14.2.0-19ubuntu2) version 14.2.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 14.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/include-fixed/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/14/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 8d75a8b870b18ead058f0fb05febd3df]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_0855d.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o /tmp/ccJzYKm4.s]
+        ignore line: [GNU assembler version 2.44 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.44]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_0855d]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0855d.dir/link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 14.2.0-19ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-14/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 rust --prefix=/usr --with-gcc-major-version-only --program-suffix=-14 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 14.2.0 (Ubuntu 14.2.0-19ubuntu2) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_0855d' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_0855d.']
+        link line: [ /usr/libexec/gcc/x86_64-linux-gnu/14/collect2 -plugin /usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWYVO0p.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_0855d /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/14 -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/14/../../.. -v CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o]
+          arg [/usr/libexec/gcc/x86_64-linux-gnu/14/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccWYVO0p.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_0855d] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/14] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/14]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/14/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../..]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o]
+        ignore line: [collect2 version 14.2.0]
+        ignore line: [/usr/bin/ld -plugin /usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper -plugin-opt=-fresolution=/tmp/ccWYVO0p.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_0855d /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/14 -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/14/../../.. -v CMakeFiles/cmTC_0855d.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o]
+        linker tool for 'C': /usr/bin/ld
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/14] ==> [/usr/lib/gcc/x86_64-linux-gnu/14]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../..] ==> [/usr/lib]
+        implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o;/usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/14;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Running the C compiler's linker: "/usr/bin/ld" "-v"
+      GNU ld (GNU Binutils for Ubuntu) 2.44
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-tdcCYm"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-tdcCYm"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-tdcCYm'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_fcbd3/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_fcbd3.dir/build.make CMakeFiles/cmTC_fcbd3.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-tdcCYm'
+        Building CXX object CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -v -o CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 14.2.0-19ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-14/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2,rust --prefix=/usr --with-gcc-major-version-only --program-suffix=-14 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 14.2.0 (Ubuntu 14.2.0-19ubuntu2) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_fcbd3.dir/'
+         /usr/libexec/gcc/x86_64-linux-gnu/14/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_fcbd3.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccMMJTb6.s
+        GNU C++17 (Ubuntu 14.2.0-19ubuntu2) version 14.2.0 (x86_64-linux-gnu)
+        	compiled by GNU C version 14.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/14"
+        ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/include-fixed/x86_64-linux-gnu"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/../../../../x86_64-linux-gnu/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/include/c++/14
+         /usr/include/x86_64-linux-gnu/c++/14
+         /usr/include/c++/14/backward
+         /usr/lib/gcc/x86_64-linux-gnu/14/include
+         /usr/local/include
+         /usr/include/x86_64-linux-gnu
+         /usr/include
+        End of search list.
+        Compiler executable checksum: 5018c062212e1c72e1ce61830114a4ab
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_fcbd3.dir/'
+         as -v --64 -o CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccMMJTb6.s
+        GNU assembler version 2.44 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.44
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_fcbd3
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fcbd3.dir/link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-linux-gnu
+        Configured with: ../src/configure -v --with-pkgversion='Ubuntu 14.2.0-19ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-14/README.Bugs --enable-languages=c,ada,c++,go,d,fortran,objc,obj-c++,m2,rust --prefix=/usr --with-gcc-major-version-only --program-suffix=-14 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-nvptx/usr,amdgcn-amdhsa=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 14.2.0 (Ubuntu 14.2.0-19ubuntu2) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_fcbd3' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_fcbd3.'
+         /usr/libexec/gcc/x86_64-linux-gnu/14/collect2 -plugin /usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper -plugin-opt=-fresolution=/tmp/ccb50a0t.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_fcbd3 /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/14 -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/14/../../.. -v CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o
+        collect2 version 14.2.0
+        /usr/bin/ld -plugin /usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper -plugin-opt=-fresolution=/tmp/ccb50a0t.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_fcbd3 /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/14 -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/14/../../.. -v CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o
+        GNU ld (GNU Binutils for Ubuntu) 2.44
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_fcbd3' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_fcbd3.'
+        /usr/bin/c++  -v -Wl,-v CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_fcbd3
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-tdcCYm'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/include/c++/14]
+          add: [/usr/include/x86_64-linux-gnu/c++/14]
+          add: [/usr/include/c++/14/backward]
+          add: [/usr/lib/gcc/x86_64-linux-gnu/14/include]
+          add: [/usr/local/include]
+          add: [/usr/include/x86_64-linux-gnu]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/include/c++/14] ==> [/usr/include/c++/14]
+        collapse include dir [/usr/include/x86_64-linux-gnu/c++/14] ==> [/usr/include/x86_64-linux-gnu/c++/14]
+        collapse include dir [/usr/include/c++/14/backward] ==> [/usr/include/c++/14/backward]
+        collapse include dir [/usr/lib/gcc/x86_64-linux-gnu/14/include] ==> [/usr/lib/gcc/x86_64-linux-gnu/14/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include/x86_64-linux-gnu] ==> [/usr/include/x86_64-linux-gnu]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/include/c++/14;/usr/include/x86_64-linux-gnu/c++/14;/usr/include/c++/14/backward;/usr/lib/gcc/x86_64-linux-gnu/14/include;/usr/local/include;/usr/include/x86_64-linux-gnu;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-tdcCYm']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_fcbd3/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_fcbd3.dir/build.make CMakeFiles/cmTC_fcbd3.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-tdcCYm']
+        ignore line: [Building CXX object CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 14.2.0-19ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-14/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 rust --prefix=/usr --with-gcc-major-version-only --program-suffix=-14 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 14.2.0 (Ubuntu 14.2.0-19ubuntu2) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_fcbd3.dir/']
+        ignore line: [ /usr/libexec/gcc/x86_64-linux-gnu/14/cc1plus -quiet -v -imultiarch x86_64-linux-gnu -D_GNU_SOURCE /usr/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_fcbd3.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -fasynchronous-unwind-tables -fstack-protector-strong -Wformat -Wformat-security -fstack-clash-protection -fcf-protection -o /tmp/ccMMJTb6.s]
+        ignore line: [GNU C++17 (Ubuntu 14.2.0-19ubuntu2) version 14.2.0 (x86_64-linux-gnu)]
+        ignore line: [	compiled by GNU C version 14.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring duplicate directory "/usr/include/x86_64-linux-gnu/c++/14"]
+        ignore line: [ignoring nonexistent directory "/usr/local/include/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/include-fixed/x86_64-linux-gnu"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-linux-gnu/14/../../../../x86_64-linux-gnu/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/include/c++/14]
+        ignore line: [ /usr/include/x86_64-linux-gnu/c++/14]
+        ignore line: [ /usr/include/c++/14/backward]
+        ignore line: [ /usr/lib/gcc/x86_64-linux-gnu/14/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include/x86_64-linux-gnu]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 5018c062212e1c72e1ce61830114a4ab]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_fcbd3.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccMMJTb6.s]
+        ignore line: [GNU assembler version 2.44 (x86_64-linux-gnu) using BFD version (GNU Binutils for Ubuntu) 2.44]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_fcbd3]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fcbd3.dir/link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-linux-gnu]
+        ignore line: [Configured with: ../src/configure -v --with-pkgversion='Ubuntu 14.2.0-19ubuntu2' --with-bugurl=file:///usr/share/doc/gcc-14/README.Bugs --enable-languages=c ada c++ go d fortran objc obj-c++ m2 rust --prefix=/usr --with-gcc-major-version-only --program-suffix=-14 --program-prefix=x86_64-linux-gnu- --enable-shared --enable-linker-build-id --libexecdir=/usr/libexec --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --enable-bootstrap --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-libstdcxx-backtrace --enable-gnu-unique-object --disable-vtable-verify --enable-plugin --enable-default-pie --with-system-zlib --enable-libphobos-checking=release --with-target-system-zlib=auto --enable-objc-gc=auto --enable-multiarch --disable-werror --enable-cet --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32 m64 mx32 --enable-multilib --with-tune=generic --enable-offload-targets=nvptx-none=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-nvptx/usr amdgcn-amdhsa=/build/gcc-14-C86vgL/gcc-14-14.2.0/debian/tmp-gcn/usr --enable-offload-defaulted --without-cuda-driver --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --with-build-config=bootstrap-lto-lean --enable-link-serialization=2]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 14.2.0 (Ubuntu 14.2.0-19ubuntu2) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/14/:/usr/libexec/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/14/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/14/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_fcbd3' '-foffload-options=-l_GCC_m' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_fcbd3.']
+        link line: [ /usr/libexec/gcc/x86_64-linux-gnu/14/collect2 -plugin /usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper -plugin-opt=-fresolution=/tmp/ccb50a0t.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_fcbd3 /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/14 -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/14/../../.. -v CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o]
+          arg [/usr/libexec/gcc/x86_64-linux-gnu/14/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccb50a0t.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-znow] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_fcbd3] ==> ignore
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/14] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/14]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib]
+          arg [-L/lib/x86_64-linux-gnu] ==> dir [/lib/x86_64-linux-gnu]
+          arg [-L/lib/../lib] ==> dir [/lib/../lib]
+          arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
+          arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
+          arg [-L/usr/lib/gcc/x86_64-linux-gnu/14/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../..]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o]
+          arg [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o] ==> obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o]
+        ignore line: [collect2 version 14.2.0]
+        ignore line: [/usr/bin/ld -plugin /usr/libexec/gcc/x86_64-linux-gnu/14/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-linux-gnu/14/lto-wrapper -plugin-opt=-fresolution=/tmp/ccb50a0t.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_fcbd3 /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/14 -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/14/../../.. -v CMakeFiles/cmTC_fcbd3.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o]
+        linker tool for 'CXX': /usr/bin/ld
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/Scrt1.o] ==> [/usr/lib/x86_64-linux-gnu/Scrt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crti.o] ==> [/usr/lib/x86_64-linux-gnu/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu/crtn.o] ==> [/usr/lib/x86_64-linux-gnu/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/14] ==> [/usr/lib/gcc/x86_64-linux-gnu/14]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../../x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../../../lib] ==> [/usr/lib]
+        collapse library dir [/lib/x86_64-linux-gnu] ==> [/lib/x86_64-linux-gnu]
+        collapse library dir [/lib/../lib] ==> [/lib]
+        collapse library dir [/usr/lib/x86_64-linux-gnu] ==> [/usr/lib/x86_64-linux-gnu]
+        collapse library dir [/usr/lib/../lib] ==> [/usr/lib]
+        collapse library dir [/usr/lib/gcc/x86_64-linux-gnu/14/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/usr/lib/x86_64-linux-gnu/Scrt1.o;/usr/lib/x86_64-linux-gnu/crti.o;/usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o;/usr/lib/gcc/x86_64-linux-gnu/14/crtendS.o;/usr/lib/x86_64-linux-gnu/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-linux-gnu/14;/usr/lib/x86_64-linux-gnu;/usr/lib;/lib/x86_64-linux-gnu;/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:6 (project)"
+    message: |
+      Running the CXX compiler's linker: "/usr/bin/ld" "-v"
+      GNU ld (GNU Binutils for Ubuntu) 2.44
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:178 (CHECK_CXX_SOURCE_COMPILES)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test LLVM_USES_LIBSTDCXX"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-glOzRE"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-glOzRE"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "LLVM_USES_LIBSTDCXX"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-glOzRE'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d3dcf/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d3dcf.dir/build.make CMakeFiles/cmTC_d3dcf.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-glOzRE'
+        Building CXX object CMakeFiles/cmTC_d3dcf.dir/src.cxx.o
+        /usr/bin/c++ -DLLVM_USES_LIBSTDCXX   -o CMakeFiles/cmTC_d3dcf.dir/src.cxx.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-glOzRE/src.cxx
+        Linking CXX executable cmTC_d3dcf
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d3dcf.dir/link.txt --verbose=1
+        /usr/bin/c++ CMakeFiles/cmTC_d3dcf.dir/src.cxx.o -o cmTC_d3dcf
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-glOzRE'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:186 (CHECK_CXX_SOURCE_COMPILES)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test LLVM_DEFAULT_TO_GLIBCXX_USE_CXX11_ABI"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-d6KNU1"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-d6KNU1"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "LLVM_DEFAULT_TO_GLIBCXX_USE_CXX11_ABI"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-d6KNU1'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_2631b/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_2631b.dir/build.make CMakeFiles/cmTC_2631b.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-d6KNU1'
+        Building CXX object CMakeFiles/cmTC_2631b.dir/src.cxx.o
+        /usr/bin/c++ -DLLVM_DEFAULT_TO_GLIBCXX_USE_CXX11_ABI   -o CMakeFiles/cmTC_2631b.dir/src.cxx.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-d6KNU1/src.cxx
+        Linking CXX executable cmTC_2631b
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2631b.dir/link.txt --verbose=1
+        /usr/bin/c++ CMakeFiles/cmTC_2631b.dir/src.cxx.o -o cmTC_2631b
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-d6KNU1'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:387 (check_c_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:455 (add_flag_or_print_warning)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test C_SUPPORTS_FPIC"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-ZN7jUg"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-ZN7jUg"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "C_SUPPORTS_FPIC"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-ZN7jUg'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_99560/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_99560.dir/build.make CMakeFiles/cmTC_99560.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-ZN7jUg'
+        Building C object CMakeFiles/cmTC_99560.dir/src.c.o
+        /usr/bin/cc -DC_SUPPORTS_FPIC  -Werror -fPIC -o CMakeFiles/cmTC_99560.dir/src.c.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-ZN7jUg/src.c
+        Linking C executable cmTC_99560
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_99560.dir/link.txt --verbose=1
+        /usr/bin/cc CMakeFiles/cmTC_99560.dir/src.c.o -o cmTC_99560
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-ZN7jUg'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:388 (check_cxx_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:455 (add_flag_or_print_warning)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test CXX_SUPPORTS_FPIC"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-cpR8rR"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-cpR8rR"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "CXX_SUPPORTS_FPIC"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-cpR8rR'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_9d993/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_9d993.dir/build.make CMakeFiles/cmTC_9d993.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-cpR8rR'
+        Building CXX object CMakeFiles/cmTC_9d993.dir/src.cxx.o
+        /usr/bin/c++ -DCXX_SUPPORTS_FPIC  -Werror -fPIC -o CMakeFiles/cmTC_9d993.dir/src.cxx.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-cpR8rR/src.cxx
+        Linking CXX executable cmTC_9d993
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9d993.dir/link.txt --verbose=1
+        /usr/bin/c++ CMakeFiles/cmTC_9d993.dir/src.cxx.o -o cmTC_9d993
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-cpR8rR'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:380 (check_c_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:466 (add_flag_if_supported)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test C_SUPPORTS_FNO_SEMANTIC_INTERPOSITION"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-5Ne165"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-5Ne165"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -fPIC"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "C_SUPPORTS_FNO_SEMANTIC_INTERPOSITION"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-5Ne165'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b1fec/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b1fec.dir/build.make CMakeFiles/cmTC_b1fec.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-5Ne165'
+        Building C object CMakeFiles/cmTC_b1fec.dir/src.c.o
+        /usr/bin/cc -DC_SUPPORTS_FNO_SEMANTIC_INTERPOSITION  -fPIC    -Werror -fno-semantic-interposition -o CMakeFiles/cmTC_b1fec.dir/src.c.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-5Ne165/src.c
+        Linking C executable cmTC_b1fec
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b1fec.dir/link.txt --verbose=1
+        /usr/bin/cc  -fPIC  CMakeFiles/cmTC_b1fec.dir/src.c.o -o cmTC_b1fec
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-5Ne165'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:382 (check_cxx_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:466 (add_flag_if_supported)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test CXX_SUPPORTS_FNO_SEMANTIC_INTERPOSITION"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-sITHzb"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-sITHzb"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: " -fPIC"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "CXX_SUPPORTS_FNO_SEMANTIC_INTERPOSITION"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-sITHzb'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_6ee96/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_6ee96.dir/build.make CMakeFiles/cmTC_6ee96.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-sITHzb'
+        Building CXX object CMakeFiles/cmTC_6ee96.dir/src.cxx.o
+        /usr/bin/c++ -DCXX_SUPPORTS_FNO_SEMANTIC_INTERPOSITION  -fPIC    -Werror -fno-semantic-interposition -o CMakeFiles/cmTC_6ee96.dir/src.cxx.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-sITHzb/src.cxx
+        Linking CXX executable cmTC_6ee96
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6ee96.dir/link.txt --verbose=1
+        /usr/bin/c++  -fPIC  CMakeFiles/cmTC_6ee96.dir/src.cxx.o -o cmTC_6ee96
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-sITHzb'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:491 (check_cxx_compiler_flag)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test SUPPORTS_FVISIBILITY_INLINES_HIDDEN_FLAG"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-J80Tql"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-J80Tql"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: " -fPIC -fno-semantic-interposition"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "SUPPORTS_FVISIBILITY_INLINES_HIDDEN_FLAG"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-J80Tql'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_7ffa1/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_7ffa1.dir/build.make CMakeFiles/cmTC_7ffa1.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-J80Tql'
+        Building CXX object CMakeFiles/cmTC_7ffa1.dir/src.cxx.o
+        /usr/bin/c++ -DSUPPORTS_FVISIBILITY_INLINES_HIDDEN_FLAG  -fPIC -fno-semantic-interposition    -fvisibility-inlines-hidden -o CMakeFiles/cmTC_7ffa1.dir/src.cxx.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-J80Tql/src.cxx
+        Linking CXX executable cmTC_7ffa1
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7ffa1.dir/link.txt --verbose=1
+        /usr/bin/c++  -fPIC -fno-semantic-interposition  CMakeFiles/cmTC_7ffa1.dir/src.cxx.o -o cmTC_7ffa1
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-J80Tql'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:917 (check_cxx_compiler_flag)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test CXX_SUPPORTS_SUGGEST_OVERRIDE_FLAG"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-yFmSMQ"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-yFmSMQ"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: " -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "CXX_SUPPORTS_SUGGEST_OVERRIDE_FLAG"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-yFmSMQ'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_2781c/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_2781c.dir/build.make CMakeFiles/cmTC_2781c.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-yFmSMQ'
+        Building CXX object CMakeFiles/cmTC_2781c.dir/src.cxx.o
+        /usr/bin/c++ -DCXX_SUPPORTS_SUGGEST_OVERRIDE_FLAG  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor    -Wsuggest-override -o CMakeFiles/cmTC_2781c.dir/src.cxx.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-yFmSMQ/src.cxx
+        Linking CXX executable cmTC_2781c
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2781c.dir/link.txt --verbose=1
+        /usr/bin/c++  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor  CMakeFiles/cmTC_2781c.dir/src.cxx.o -o cmTC_2781c
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-yFmSMQ'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/CheckCXXSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:921 (CHECK_CXX_SOURCE_COMPILES)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test CXX_WSUGGEST_OVERRIDE_ALLOWS_ONLY_FINAL"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-qOBQrS"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-qOBQrS"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: " -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "CXX_WSUGGEST_OVERRIDE_ALLOWS_ONLY_FINAL"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-qOBQrS'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0432c/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_0432c.dir/build.make CMakeFiles/cmTC_0432c.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-qOBQrS'
+        Building CXX object CMakeFiles/cmTC_0432c.dir/src.cxx.o
+        /usr/bin/c++ -DCXX_WSUGGEST_OVERRIDE_ALLOWS_ONLY_FINAL  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor  -Werror=suggest-override -o CMakeFiles/cmTC_0432c.dir/src.cxx.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-qOBQrS/src.cxx
+        Linking CXX executable cmTC_0432c
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0432c.dir/link.txt --verbose=1
+        /usr/bin/c++  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor  -Werror=suggest-override CMakeFiles/cmTC_0432c.dir/src.cxx.o -o cmTC_0432c
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-qOBQrS'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:933 (CHECK_C_SOURCE_COMPILES)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test C_WCOMMENT_ALLOWS_LINE_WRAP"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-Da2NFh"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-Da2NFh"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "C_WCOMMENT_ALLOWS_LINE_WRAP"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-Da2NFh'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d2a9b/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d2a9b.dir/build.make CMakeFiles/cmTC_d2a9b.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-Da2NFh'
+        Building C object CMakeFiles/cmTC_d2a9b.dir/src.c.o
+        /usr/bin/cc -DC_WCOMMENT_ALLOWS_LINE_WRAP  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough  -Werror -Wcomment -o CMakeFiles/cmTC_d2a9b.dir/src.c.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-Da2NFh/src.c
+        /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-Da2NFh/src.c:1:1: error: multi-line comment [-Werror=comment]
+            1 | // \\
+              | ^
+        cc1: all warnings being treated as errors
+        gmake[1]: *** [CMakeFiles/cmTC_d2a9b.dir/build.make:81: CMakeFiles/cmTC_d2a9b.dir/src.c.o] Error 1
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-Da2NFh'
+        gmake: *** [Makefile:134: cmTC_d2a9b/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:380 (check_c_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:956 (add_flag_if_supported)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test C_SUPPORTS_CTAD_MAYBE_UNSPPORTED_FLAG"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-1Ebw3k"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-1Ebw3k"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-comment"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "C_SUPPORTS_CTAD_MAYBE_UNSPPORTED_FLAG"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-1Ebw3k'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_8107c/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_8107c.dir/build.make CMakeFiles/cmTC_8107c.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-1Ebw3k'
+        Building C object CMakeFiles/cmTC_8107c.dir/src.c.o
+        /usr/bin/cc -DC_SUPPORTS_CTAD_MAYBE_UNSPPORTED_FLAG  -fPIC -fno-semantic-interposition -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-comment    -Werror -Wctad-maybe-unsupported -o CMakeFiles/cmTC_8107c.dir/src.c.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-1Ebw3k/src.c
+        cc1: error: command-line option '-Wctad-maybe-unsupported' is valid for C++/ObjC++ but not for C [-Werror]
+        cc1: all warnings being treated as errors
+        gmake[1]: *** [CMakeFiles/cmTC_8107c.dir/build.make:81: CMakeFiles/cmTC_8107c.dir/src.c.o] Error 1
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-1Ebw3k'
+        gmake: *** [Makefile:134: cmTC_8107c/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.31/Modules/CheckCXXCompilerFlag.cmake:55 (cmake_check_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:382 (check_cxx_compiler_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:956 (add_flag_if_supported)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Performing Test CXX_SUPPORTS_CTAD_MAYBE_UNSPPORTED_FLAG"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-03qZ1Q"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-03qZ1Q"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: " -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "CXX_SUPPORTS_CTAD_MAYBE_UNSPPORTED_FLAG"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-03qZ1Q'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_3fbbf/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_3fbbf.dir/build.make CMakeFiles/cmTC_3fbbf.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-03qZ1Q'
+        Building CXX object CMakeFiles/cmTC_3fbbf.dir/src.cxx.o
+        /usr/bin/c++ -DCXX_SUPPORTS_CTAD_MAYBE_UNSPPORTED_FLAG  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation    -Werror -Wctad-maybe-unsupported -o CMakeFiles/cmTC_3fbbf.dir/src.cxx.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-03qZ1Q/src.cxx
+        Linking CXX executable cmTC_3fbbf
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3fbbf.dir/link.txt --verbose=1
+        /usr/bin/c++  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation  CMakeFiles/cmTC_3fbbf.dir/src.cxx.o -o cmTC_3fbbf
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-03qZ1Q'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CheckSymbolExists.cmake:163 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/CheckSymbolExists.cmake:68 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/HandleLLVMOptions.cmake:1381 (check_symbol_exists)"
+      - "CMakeLists.txt:12 (include)"
+    checks:
+      - "Looking for os_signpost_interval_begin"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-G62KtG"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-G62KtG"
+    cmakeVariables:
+      CMAKE_C_FLAGS: " -fPIC -fno-semantic-interposition -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-comment"
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm"
+    buildResult:
+      variable: "macos_signposts_available"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-G62KtG'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_14e75/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_14e75.dir/build.make CMakeFiles/cmTC_14e75.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-G62KtG'
+        Building C object CMakeFiles/cmTC_14e75.dir/CheckSymbolExists.c.o
+        /usr/bin/cc   -fPIC -fno-semantic-interposition -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-comment  -o CMakeFiles/cmTC_14e75.dir/CheckSymbolExists.c.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-G62KtG/CheckSymbolExists.c
+        /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-G62KtG/CheckSymbolExists.c:2:10: fatal error: os/signpost.h: No such file or directory
+            2 | #include <os/signpost.h>
+              |          ^~~~~~~~~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_14e75.dir/build.make:81: CMakeFiles/cmTC_14e75.dir/CheckSymbolExists.c.o] Error 1
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-G62KtG'
+        gmake: *** [Makefile:134: cmTC_14e75/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/Internal/CheckLinkerFlag.cmake:37 (cmake_check_source_compiles)"
+      - "/usr/share/cmake-3.31/Modules/CheckLinkerFlag.cmake:44 (cmake_check_linker_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/AddLLVM.cmake:356 (check_linker_flag)"
+      - "/home/pahansan/opt/clang/lib/cmake/llvm/AddLLVM.cmake:699 (add_link_opts)"
+      - "cmake/modules/AddTinylang.cmake:11 (llvm_add_library)"
+      - "lib/Basic/CMakeLists.txt:1 (add_tinylang_library)"
+    checks:
+      - "Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS"
+    directories:
+      source: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-E6EYfw"
+      binary: "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-E6EYfw"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: " -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/opt/clang/lib/cmake/llvm;/home/pahansan/code/compilers/fall-sem/5lab/tinylang/cmake/modules"
+    buildResult:
+      variable: "LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS"
+      cached: true
+      stdout: |
+        Change Dir: '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-E6EYfw'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_41d7e/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_41d7e.dir/build.make CMakeFiles/cmTC_41d7e.dir/build
+        gmake[1]: Entering directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-E6EYfw'
+        Building CXX object CMakeFiles/cmTC_41d7e.dir/src.cxx.o
+        /usr/bin/c++ -DLLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported  -o CMakeFiles/cmTC_41d7e.dir/src.cxx.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-E6EYfw/src.cxx
+        Linking CXX executable cmTC_41d7e
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_41d7e.dir/link.txt --verbose=1
+        /usr/bin/c++  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported  -Wl,-Bsymbolic-functions CMakeFiles/cmTC_41d7e.dir/src.cxx.o -o cmTC_41d7e
+        gmake[1]: Leaving directory '/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/CMakeFiles/CMakeScratch/TryCompile-E6EYfw'
+        
+      exitCode: 0
+...

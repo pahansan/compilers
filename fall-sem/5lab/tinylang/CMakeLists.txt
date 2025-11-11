@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.20.0)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
   project(Tinylang)
 

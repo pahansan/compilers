@@ -1,4 +1,5 @@
 #include "tinylang/Sema/Sema.h"
+#include "tinylang/Basic/Diagnostic.h"
 #include "llvm/ADT/StringSet.h"
 #include "llvm/Support/raw_ostream.h"
 
@@ -17,8 +18,7 @@ void Sema::leaveScope() {
   CurrentDecl = CurrentDecl->getEnclosingDecl();
 }
 
-bool Sema::isOperatorForType(tok::TokenKind Op,
-                             TypeDeclaration *Ty) {
+bool Sema::isOperatorForType(tok::TokenKind Op, TypeDeclaration *Ty) {
   switch (Op) {
   case tok::plus:
   case tok::minus:
@@ -37,26 +37,19 @@ bool Sema::isOperatorForType(tok::TokenKind Op,
   }
 }
 
-void Sema::checkFormalAndActualParameters(
-    SMLoc Loc, const FormalParamList &Formals,
-    const ExprList &Actuals) {
+void Sema::checkFormalAndActualParameters(SMLoc Loc, const FormalParamList &Formals, const ExprList &Actuals) {
   if (Formals.size() != Actuals.size()) {
     Diags.report(Loc, diag::err_wrong_number_of_parameters);
     return;
   }
   auto A = Actuals.begin();
-  for (auto I = Formals.begin(), E = Formals.end(); I != E;
-       ++I, ++A) {
+  for (auto I = Formals.begin(), E = Formals.end(); I != E; ++I, ++A) {
     FormalParameterDeclaration *F = *I;
     Expr *Arg = *A;
     if (F->getType() != Arg->getType())
-      Diags.report(
-          Loc,
-          diag::
-              err_type_of_formal_and_actual_parameter_not_compatible);
+      Diags.report(Loc, diag::err_type_of_formal_and_actual_parameter_not_compatible);
     if (F->isVar() && isa<Designator>(Arg))
-      Diags.report(Loc,
-                   diag::err_var_parameter_requires_var);
+      Diags.report(Loc, diag::err_var_parameter_requires_var);
   }
 }
 
@@ -64,66 +57,44 @@ void Sema::initialize() {
   // Setup global scope.
   CurrentScope = new Scope();
   CurrentDecl = nullptr;
-  IntegerType = new PervasiveTypeDeclaration(
-      CurrentDecl, SMLoc(), "INTEGER");
-  BooleanType = new PervasiveTypeDeclaration(
-      CurrentDecl, SMLoc(), "BOOLEAN");
+  IntegerType = new PervasiveTypeDeclaration(CurrentDecl, SMLoc(), "INTEGER");
+  BooleanType = new PervasiveTypeDeclaration(CurrentDecl, SMLoc(), "BOOLEAN");
   TrueLiteral = new BooleanLiteral(true, BooleanType);
   FalseLiteral = new BooleanLiteral(false, BooleanType);
-  TrueConst = new ConstantDeclaration(CurrentDecl, SMLoc(),
-                                      "TRUE", TrueLiteral);
-  FalseConst = new ConstantDeclaration(
-      CurrentDecl, SMLoc(), "FALSE", FalseLiteral);
+  TrueConst = new ConstantDeclaration(CurrentDecl, SMLoc(), "TRUE", TrueLiteral);
+  FalseConst = new ConstantDeclaration(CurrentDecl, SMLoc(), "FALSE", FalseLiteral);
   CurrentScope->insert(IntegerType);
   CurrentScope->insert(BooleanType);
   CurrentScope->insert(TrueConst);
   CurrentScope->insert(FalseConst);
 }
 
-ModuleDeclaration *
-Sema::actOnModuleDeclaration(SMLoc Loc, StringRef Name) {
-  return new ModuleDeclaration(CurrentDecl, Loc, Name);
-}
+ModuleDeclaration *Sema::actOnModuleDeclaration(SMLoc Loc, StringRef Name) { return new ModuleDeclaration(CurrentDecl, Loc, Name); }
 
-void Sema::actOnModuleDeclaration(
-    ModuleDeclaration *ModDecl, SMLoc Loc, StringRef Name,
-    DeclList &Decls, StmtList &Stmts) {
+void Sema::actOnModuleDeclaration(ModuleDeclaration *ModDecl, SMLoc Loc, StringRef Name, DeclList &Decls, StmtList &Stmts) {
   if (Name != ModDecl->getName()) {
-    Diags.report(Loc,
-                 diag::err_module_identifier_not_equal);
-    Diags.report(ModDecl->getLocation(),
-                 diag::note_module_identifier_declaration);
+    Diags.report(Loc, diag::err_module_identifier_not_equal);
+    Diags.report(ModDecl->getLocation(), diag::note_module_identifier_declaration);
   }
   ModDecl->setDecls(Decls);
   ModDecl->setStmts(Stmts);
 }
 
-void Sema::actOnImport(StringRef ModuleName,
-                       IdentList &Ids) {
-  Diags.report(SMLoc(), diag::err_not_yet_implemented);
-}
+void Sema::actOnImport(StringRef ModuleName, IdentList &Ids) { Diags.report(SMLoc(), diag::err_not_yet_implemented); }
 
-void Sema::actOnConstantDeclaration(DeclList &Decls,
-                                    SMLoc Loc,
-                                    StringRef Name,
-                                    Expr *E) {
+void Sema::actOnConstantDeclaration(DeclList &Decls, SMLoc Loc, StringRef Name, Expr *E) {
   assert(CurrentScope && "CurrentScope not set");
-  ConstantDeclaration *Decl =
-      new ConstantDeclaration(CurrentDecl, Loc, Name, E);
+  ConstantDeclaration *Decl = new ConstantDeclaration(CurrentDecl, Loc, Name, E);
   if (CurrentScope->insert(Decl))
     Decls.push_back(Decl);
   else
     Diags.report(Loc, diag::err_symbold_declared, Name);
 }
 
-void Sema::actOnAliasTypeDeclaration(DeclList &Decls,
-                                     SMLoc Loc,
-                                     StringRef Name,
-                                     Decl *D) {
+void Sema::actOnAliasTypeDeclaration(DeclList &Decls, SMLoc Loc, StringRef Name, Decl *D) {
   assert(CurrentScope && "CurrentScope not set");
   if (TypeDeclaration *Ty = dyn_cast<TypeDeclaration>(D)) {
-    AliasTypeDeclaration *Decl = new AliasTypeDeclaration(
-        CurrentDecl, Loc, Name, Ty);
+    AliasTypeDeclaration *Decl = new AliasTypeDeclaration(CurrentDecl, Loc, Name, Ty);
     if (CurrentScope->insert(Decl))
       Decls.push_back(Decl);
     else
@@ -134,37 +105,28 @@ void Sema::actOnAliasTypeDeclaration(DeclList &Decls,
   }
 }
 
-void Sema::actOnArrayTypeDeclaration(DeclList &Decls,
-                                     SMLoc Loc,
-                                     StringRef Name,
-                                     Expr *E, Decl *D) {
+void Sema::actOnArrayTypeDeclaration(DeclList &Decls, SMLoc Loc, StringRef Name, Expr *E, Decl *D) {
   assert(CurrentScope && "CurrentScope not set");
-  if (E && E->isConst() &&
-      E->getType()->getName() == "INTEGER") {
-    if (TypeDeclaration *Ty =
-            dyn_cast<TypeDeclaration>(D)) {
-      ArrayTypeDeclaration *Decl = new ArrayTypeDeclaration(
-          CurrentDecl, Loc, Name, E, Ty);
+  if (E && E->isConst() && E->getType()->getName() == "INTEGER") {
+    if (TypeDeclaration *Ty = dyn_cast<TypeDeclaration>(D)) {
+      ArrayTypeDeclaration *Decl = new ArrayTypeDeclaration(CurrentDecl, Loc, Name, E, Ty);
       if (CurrentScope->insert(Decl))
         Decls.push_back(Decl);
       else
         Diags.report(Loc, diag::err_symbold_declared, Name);
     } else {
-      Diags.report(Loc,
-                   diag::err_vardecl_requires_type); // TODO
+      Diags.report(Loc, diag::err_vardecl_requires_type); // TODO
     }
+  } else {
+    Diags.report(Loc, diag::err_expression_in_array_size);
+    exit(1);
   }
 }
 
-void Sema::actOnPointerTypeDeclaration(DeclList &Decls,
-                                       SMLoc Loc,
-                                       StringRef Name,
-                                       Decl *D) {
+void Sema::actOnPointerTypeDeclaration(DeclList &Decls, SMLoc Loc, StringRef Name, Decl *D) {
   assert(CurrentScope && "CurrentScope not set");
   if (TypeDeclaration *Ty = dyn_cast<TypeDeclaration>(D)) {
-    PointerTypeDeclaration *Decl =
-        new PointerTypeDeclaration(CurrentDecl, Loc, Name,
-                                   Ty);
+    PointerTypeDeclaration *Decl = new PointerTypeDeclaration(CurrentDecl, Loc, Name, Ty);
     if (CurrentScope->insert(Decl))
       Decls.push_back(Decl);
     else
@@ -175,8 +137,7 @@ void Sema::actOnPointerTypeDeclaration(DeclList &Decls,
   }
 }
 
-void Sema::actOnFieldDeclaration(FieldList &Fields,
-                                 IdentList &Ids, Decl *D) {
+void Sema::actOnFieldDeclaration(FieldList &Fields, IdentList &Ids, Decl *D) {
   if (TypeDeclaration *Ty = dyn_cast<TypeDeclaration>(D)) {
     for (auto I = Ids.begin(), E = Ids.end(); I != E; ++I) {
       SMLoc Loc = I->first;
@@ -190,35 +151,28 @@ void Sema::actOnFieldDeclaration(FieldList &Fields,
   }
 }
 
-void Sema::actOnRecordTypeDeclaration(
-    DeclList &Decls, SMLoc Loc, StringRef Name,
-    const FieldList &Fields) {
+void Sema::actOnRecordTypeDeclaration(DeclList &Decls, SMLoc Loc, StringRef Name, const FieldList &Fields) {
   assert(CurrentScope && "CurrentScope not set");
   llvm::StringSet<> FieldSet;
   for (const auto &F : Fields) {
     if (FieldSet.find(F.getName()) != FieldSet.end()) {
-      Diags.report(F.getLoc(), diag::err_symbold_declared,
-                   F.getName());
+      Diags.report(F.getLoc(), diag::err_symbold_declared, F.getName());
       return;
     }
     FieldSet.insert(F.getName());
   }
-  RecordTypeDeclaration *Decl = new RecordTypeDeclaration(
-      CurrentDecl, Loc, Name, Fields);
+  RecordTypeDeclaration *Decl = new RecordTypeDeclaration(CurrentDecl, Loc, Name, Fields);
   if (CurrentScope->insert(Decl))
     Decls.push_back(Decl);
   else
     Diags.report(Loc, diag::err_symbold_declared, Name);
 }
 
-void Sema::actOnVariableDeclaration(DeclList &Decls,
-                                    IdentList &Ids,
-                                    Decl *D) {
+void Sema::actOnVariableDeclaration(DeclList &Decls, IdentList &Ids, Decl *D) {
   assert(CurrentScope && "CurrentScope not set");
   if (TypeDeclaration *Ty = dyn_cast<TypeDeclaration>(D)) {
     for (auto &[Loc, Name] : Ids) {
-      auto *Decl = new VariableDeclaration(CurrentDecl, Loc,
-                                           Name, Ty);
+      auto *Decl = new VariableDeclaration(CurrentDecl, Loc, Name, Ty);
       if (CurrentScope->insert(Decl))
         Decls.push_back(Decl);
       else
@@ -230,15 +184,11 @@ void Sema::actOnVariableDeclaration(DeclList &Decls,
   }
 }
 
-void Sema::actOnFormalParameterDeclaration(
-    FormalParamList &Params, IdentList &Ids, Decl *D,
-    bool IsVar) {
+void Sema::actOnFormalParameterDeclaration(FormalParamList &Params, IdentList &Ids, Decl *D, bool IsVar) {
   assert(CurrentScope && "CurrentScope not set");
   if (TypeDeclaration *Ty = dyn_cast<TypeDeclaration>(D)) {
     for (auto &[Loc, Name] : Ids) {
-      FormalParameterDeclaration *Decl =
-          new FormalParameterDeclaration(CurrentDecl, Loc,
-                                         Name, Ty, IsVar);
+      FormalParameterDeclaration *Decl = new FormalParameterDeclaration(CurrentDecl, Loc, Name, Ty, IsVar);
       if (CurrentScope->insert(Decl))
         Params.push_back(Decl);
       else
@@ -250,48 +200,36 @@ void Sema::actOnFormalParameterDeclaration(
   }
 }
 
-ProcedureDeclaration *
-Sema::actOnProcedureDeclaration(SMLoc Loc, StringRef Name) {
-  ProcedureDeclaration *P =
-      new ProcedureDeclaration(CurrentDecl, Loc, Name);
+ProcedureDeclaration *Sema::actOnProcedureDeclaration(SMLoc Loc, StringRef Name) {
+  ProcedureDeclaration *P = new ProcedureDeclaration(CurrentDecl, Loc, Name);
   if (!CurrentScope->insert(P))
     Diags.report(Loc, diag::err_symbold_declared, Name);
   return P;
 }
 
-void Sema::actOnProcedureHeading(
-    ProcedureDeclaration *ProcDecl, FormalParamList &Params,
-    Decl *RetType) {
+void Sema::actOnProcedureHeading(ProcedureDeclaration *ProcDecl, FormalParamList &Params, Decl *RetType) {
   ProcDecl->setFormalParams(Params);
-  auto *RetTypeDecl =
-      dyn_cast_or_null<TypeDeclaration>(RetType);
+  auto *RetTypeDecl = dyn_cast_or_null<TypeDeclaration>(RetType);
   if (!RetTypeDecl && RetType)
-    Diags.report(RetType->getLocation(),
-                 diag::err_returntype_must_be_type);
+    Diags.report(RetType->getLocation(), diag::err_returntype_must_be_type);
   else
     ProcDecl->setRetType(RetTypeDecl);
 }
 
-void Sema::actOnProcedureDeclaration(
-    ProcedureDeclaration *ProcDecl, SMLoc Loc,
-    StringRef Name, DeclList &Decls, StmtList &Stmts) {
+void Sema::actOnProcedureDeclaration(ProcedureDeclaration *ProcDecl, SMLoc Loc, StringRef Name, DeclList &Decls, StmtList &Stmts) {
 
   if (Name != ProcDecl->getName()) {
     Diags.report(Loc, diag::err_proc_identifier_not_equal);
-    Diags.report(ProcDecl->getLocation(),
-                 diag::note_proc_identifier_declaration);
+    Diags.report(ProcDecl->getLocation(), diag::note_proc_identifier_declaration);
   }
   ProcDecl->setDecls(Decls);
   ProcDecl->setStmts(Stmts);
 }
 
-void Sema::actOnAssignment(StmtList &Stmts, SMLoc Loc,
-                           Expr *D, Expr *E) {
+void Sema::actOnAssignment(StmtList &Stmts, SMLoc Loc, Expr *D, Expr *E) {
   if (auto Var = dyn_cast<Designator>(D)) {
     if (Var->getType() != E->getType()) {
-      Diags.report(
-          Loc, diag::err_types_for_operator_not_compatible,
-          tok::getPunctuatorSpelling(tok::colonequal));
+      Diags.report(Loc, diag::err_types_for_operator_not_compatible, tok::getPunctuatorSpelling(tok::colonequal));
     }
     Stmts.push_back(new AssignmentStatement(Var, E));
   } else if (D) {
@@ -299,38 +237,28 @@ void Sema::actOnAssignment(StmtList &Stmts, SMLoc Loc,
   }
 }
 
-void Sema::actOnProcCall(StmtList &Stmts, SMLoc Loc,
-                         Decl *D, ExprList &Params) {
+void Sema::actOnProcCall(StmtList &Stmts, SMLoc Loc, Decl *D, ExprList &Params) {
   if (auto Proc = dyn_cast<ProcedureDeclaration>(D)) {
-    checkFormalAndActualParameters(
-        Loc, Proc->getFormalParams(), Params);
+    checkFormalAndActualParameters(Loc, Proc->getFormalParams(), Params);
     if (Proc->getRetType())
-      Diags.report(
-          Loc, diag::err_procedure_call_on_nonprocedure);
-    Stmts.push_back(
-        new ProcedureCallStatement(Proc, Params));
+      Diags.report(Loc, diag::err_procedure_call_on_nonprocedure);
+    Stmts.push_back(new ProcedureCallStatement(Proc, Params));
   } else if (D) {
-    Diags.report(Loc,
-                 diag::err_procedure_call_on_nonprocedure);
+    Diags.report(Loc, diag::err_procedure_call_on_nonprocedure);
   }
 }
 
-void Sema::actOnIfStatement(StmtList &Stmts, SMLoc Loc,
-                            Expr *Cond, StmtList &IfStmts,
-                            StmtList &ElseStmts) {
+void Sema::actOnIfStatement(StmtList &Stmts, SMLoc Loc, Expr *Cond, StmtList &IfStmts, StmtList &ElseStmts) {
   if (!Cond)
     Cond = FalseLiteral;
 
   if (Cond->getType() != BooleanType) {
     Diags.report(Loc, diag::err_if_expr_must_be_bool);
   }
-  Stmts.push_back(
-      new IfStatement(Cond, IfStmts, ElseStmts));
+  Stmts.push_back(new IfStatement(Cond, IfStmts, ElseStmts));
 }
 
-void Sema::actOnWhileStatement(StmtList &Stmts, SMLoc Loc,
-                               Expr *Cond,
-                               StmtList &WhileStmts) {
+void Sema::actOnWhileStatement(StmtList &Stmts, SMLoc Loc, Expr *Cond, StmtList &WhileStmts) {
   if (!Cond)
     Cond = FalseLiteral;
 
@@ -340,14 +268,12 @@ void Sema::actOnWhileStatement(StmtList &Stmts, SMLoc Loc,
   Stmts.push_back(new WhileStatement(Cond, WhileStmts));
 }
 
-void Sema::actOnReturnStatement(StmtList &Stmts, SMLoc Loc,
-                                Expr *RetVal) {
+void Sema::actOnReturnStatement(StmtList &Stmts, SMLoc Loc, Expr *RetVal) {
   auto *Proc = cast<ProcedureDeclaration>(CurrentDecl);
   if (Proc->getRetType() && !RetVal)
     Diags.report(Loc, diag::err_function_requires_return);
   else if (!Proc->getRetType() && RetVal)
-    Diags.report(Loc,
-                 diag::err_procedure_requires_empty_return);
+    Diags.report(Loc, diag::err_procedure_requires_empty_return);
   else if (Proc->getRetType() && RetVal) {
     if (Proc->getRetType() != RetVal->getType())
       Diags.report(Loc, diag::err_function_and_return_type);
@@ -356,8 +282,7 @@ void Sema::actOnReturnStatement(StmtList &Stmts, SMLoc Loc,
   Stmts.push_back(new ReturnStatement(RetVal));
 }
 
-Expr *Sema::actOnExpression(Expr *Left, Expr *Right,
-                            const OperatorInfo &Op) {
+Expr *Sema::actOnExpression(Expr *Left, Expr *Right, const OperatorInfo &Op) {
   // Relation
   if (!Left)
     return Right;
@@ -365,18 +290,14 @@ Expr *Sema::actOnExpression(Expr *Left, Expr *Right,
     return Left;
 
   if (Left->getType() != Right->getType()) {
-    Diags.report(
-        Op.getLocation(),
-        diag::err_types_for_operator_not_compatible,
-        tok::getPunctuatorSpelling(Op.getKind()));
+    Diags.report(Op.getLocation(), diag::err_types_for_operator_not_compatible, tok::getPunctuatorSpelling(Op.getKind()));
   }
-  bool IsConst = Left->isConst() && Right->isConst();
-  return new InfixExpression(Left, Right, Op, BooleanType,
-                             IsConst);
+  // bool IsConst = Left->isConst() && Right->isConst();
+  bool IsConst = false;
+  return new InfixExpression(Left, Right, Op, BooleanType, IsConst);
 }
 
-Expr *Sema::actOnSimpleExpression(Expr *Left, Expr *Right,
-                                  const OperatorInfo &Op) {
+Expr *Sema::actOnSimpleExpression(Expr *Left, Expr *Right, const OperatorInfo &Op) {
   // Addition
   if (!Left)
     return Right;
@@ -384,58 +305,45 @@ Expr *Sema::actOnSimpleExpression(Expr *Left, Expr *Right,
     return Left;
 
   if (Left->getType() != Right->getType()) {
-    Diags.report(
-        Op.getLocation(),
-        diag::err_types_for_operator_not_compatible,
-        tok::getPunctuatorSpelling(Op.getKind()));
+    Diags.report(Op.getLocation(), diag::err_types_for_operator_not_compatible, tok::getPunctuatorSpelling(Op.getKind()));
   }
   TypeDeclaration *Ty = Left->getType();
-  bool IsConst = Left->isConst() && Right->isConst();
+  // bool IsConst = Left->isConst() && Right->isConst();
+  bool IsConst = false;
   if (IsConst && Op.getKind() == tok::kw_OR) {
     BooleanLiteral *L = dyn_cast<BooleanLiteral>(Left);
     BooleanLiteral *R = dyn_cast<BooleanLiteral>(Right);
-    return L->getValue() || R->getValue() ? TrueLiteral
-                                          : FalseLiteral;
+    return L->getValue() || R->getValue() ? TrueLiteral : FalseLiteral;
   }
   return new InfixExpression(Left, Right, Op, Ty, IsConst);
 }
 
-Expr *Sema::actOnTerm(Expr *Left, Expr *Right,
-                      const OperatorInfo &Op) {
+Expr *Sema::actOnTerm(Expr *Left, Expr *Right, const OperatorInfo &Op) {
   // Multiplication
   if (!Left)
     return Right;
   if (!Right)
     return Left;
 
-  if (Left->getType() != Right->getType() ||
-      !isOperatorForType(Op.getKind(), Left->getType())) {
-    Diags.report(
-        Op.getLocation(),
-        diag::err_types_for_operator_not_compatible,
-        tok::getPunctuatorSpelling(Op.getKind()));
+  if (Left->getType() != Right->getType() || !isOperatorForType(Op.getKind(), Left->getType())) {
+    Diags.report(Op.getLocation(), diag::err_types_for_operator_not_compatible, tok::getPunctuatorSpelling(Op.getKind()));
   }
   TypeDeclaration *Ty = Left->getType();
   bool IsConst = Left->isConst() && Right->isConst();
   if (IsConst && Op.getKind() == tok::kw_AND) {
     BooleanLiteral *L = dyn_cast<BooleanLiteral>(Left);
     BooleanLiteral *R = dyn_cast<BooleanLiteral>(Right);
-    return L->getValue() && R->getValue() ? TrueLiteral
-                                          : FalseLiteral;
+    return L->getValue() && R->getValue() ? TrueLiteral : FalseLiteral;
   }
   return new InfixExpression(Left, Right, Op, Ty, IsConst);
 }
 
-Expr *Sema::actOnPrefixExpression(Expr *E,
-                                  const OperatorInfo &Op) {
+Expr *Sema::actOnPrefixExpression(Expr *E, const OperatorInfo &Op) {
   if (!E)
     return nullptr;
 
   if (!isOperatorForType(Op.getKind(), E->getType())) {
-    Diags.report(
-        Op.getLocation(),
-        diag::err_types_for_operator_not_compatible,
-        tok::getPunctuatorSpelling(Op.getKind()));
+    Diags.report(Op.getLocation(), diag::err_types_for_operator_not_compatible, tok::getPunctuatorSpelling(Op.getKind()));
   }
 
   if (E->isConst() && Op.getKind() == tok::kw_NOT) {
@@ -445,59 +353,49 @@ Expr *Sema::actOnPrefixExpression(Expr *E,
 
   if (Op.getKind() == tok::minus) {
     bool Ambiguous = true;
-    if (isa<IntegerLiteral>(E) || isa<Designator>(E) ||
-        isa<ConstantAccess>(E))
+    if (isa<IntegerLiteral>(E) || isa<Designator>(E) || isa<ConstantAccess>(E))
       Ambiguous = false;
     else if (auto *Infix = dyn_cast<InfixExpression>(E)) {
-      tok::TokenKind Kind =
-          Infix->getOperatorInfo().getKind();
+      tok::TokenKind Kind = Infix->getOperatorInfo().getKind();
       if (Kind == tok::star || Kind == tok::slash)
         Ambiguous = false;
     }
     if (Ambiguous) {
-      Diags.report(Op.getLocation(),
-                   diag::warn_ambigous_negation);
+      Diags.report(Op.getLocation(), diag::warn_ambigous_negation);
     }
   }
 
-  return new PrefixExpression(E, Op, E->getType(),
-                              E->isConst());
+  return new PrefixExpression(E, Op, E->getType(), E->isConst());
 }
 
-Expr *Sema::actOnIntegerLiteral(SMLoc Loc,
-                                StringRef Literal) {
+Expr *Sema::actOnIntegerLiteral(SMLoc Loc, StringRef Literal) {
   uint8_t Radix = 10;
   if (Literal.ends_with("H")) {
     Literal = Literal.drop_back();
     Radix = 16;
   }
   llvm::APInt Value(64, Literal, Radix);
-  return new IntegerLiteral(Loc, llvm::APSInt(Value, false),
-                            IntegerType);
+  return new IntegerLiteral(Loc, llvm::APSInt(Value, false), IntegerType);
 }
 
-void Sema::actOnIndexSelector(Expr *Desig, SMLoc Loc,
-                              Expr *E) {
+void Sema::actOnIndexSelector(Expr *Desig, SMLoc Loc, Expr *E) {
   if (auto *D = dyn_cast<Designator>(Desig)) {
     if (auto *Ty = dyn_cast<ArrayTypeDeclaration>(D->getType())) {
       D->addSelector(new IndexSelector(E, Ty->getType()));
     }
-  // TODO Error message
+    // TODO Error message
   }
   // TODO Error message
 }
 
-void Sema::actOnFieldSelector(Expr *Desig, SMLoc Loc,
-                              StringRef Name) {
+void Sema::actOnFieldSelector(Expr *Desig, SMLoc Loc, StringRef Name) {
   // TODO Implement
   if (auto *D = dyn_cast<Designator>(Desig)) {
-    if (auto *R =
-            dyn_cast<RecordTypeDeclaration>(D->getType())) {
+    if (auto *R = dyn_cast<RecordTypeDeclaration>(D->getType())) {
       uint32_t Index = 0;
       for (const auto &F : R->getFields()) {
         if (F.getName() == Name) {
-          D->addSelector(
-              new FieldSelector(Index, Name, F.getType()));
+          D->addSelector(new FieldSelector(Index, Name, F.getType()));
           return;
         }
         ++Index;
@@ -509,13 +407,12 @@ void Sema::actOnFieldSelector(Expr *Desig, SMLoc Loc,
   // TODO Error message
 }
 
-void Sema::actOnDereferenceSelector(Expr *Desig,
-                                    SMLoc Loc) {
+void Sema::actOnDereferenceSelector(Expr *Desig, SMLoc Loc) {
   if (auto *D = dyn_cast<Designator>(Desig)) {
     if (auto *Ty = dyn_cast<PointerTypeDeclaration>(D->getType())) {
       D->addSelector(new DereferenceSelector(Ty->getType()));
     }
-  // TODO Error message
+    // TODO Error message
   }
   // TODO Error message
 }
@@ -525,8 +422,7 @@ Expr *Sema::actOnDesignator(Decl *D) {
     return nullptr;
   if (auto *V = dyn_cast<VariableDeclaration>(D))
     return new Designator(V);
-  else if (auto *P =
-               dyn_cast<FormalParameterDeclaration>(D))
+  else if (auto *P = dyn_cast<FormalParameterDeclaration>(D))
     return new Designator(P);
   else if (auto *C = dyn_cast<ConstantDeclaration>(D)) {
     if (C == TrueConst)
@@ -543,28 +439,22 @@ Expr *Sema::actOnFunctionCall(Decl *D, ExprList &Params) {
   if (!D)
     return nullptr;
   if (auto *P = dyn_cast<ProcedureDeclaration>(D)) {
-    checkFormalAndActualParameters(
-        D->getLocation(), P->getFormalParams(), Params);
+    checkFormalAndActualParameters(D->getLocation(), P->getFormalParams(), Params);
     if (!P->getRetType())
-      Diags.report(D->getLocation(),
-                   diag::err_function_call_on_nonfunction);
+      Diags.report(D->getLocation(), diag::err_function_call_on_nonfunction);
     return new FunctionCallExpr(P, Params);
   }
-  Diags.report(D->getLocation(),
-               diag::err_function_call_on_nonfunction);
+  Diags.report(D->getLocation(), diag::err_function_call_on_nonfunction);
   return nullptr;
 }
 
-Decl *Sema::actOnQualIdentPart(Decl *Prev, SMLoc Loc,
-                               StringRef Name) {
+Decl *Sema::actOnQualIdentPart(Decl *Prev, SMLoc Loc, StringRef Name) {
   if (!Prev) {
     if (Decl *D = CurrentScope->lookup(Name))
       return D;
-  } else if (auto *Mod =
-                 dyn_cast<ModuleDeclaration>(Prev)) {
+  } else if (auto *Mod = dyn_cast<ModuleDeclaration>(Prev)) {
     auto Decls = Mod->getDecls();
-    for (auto I = Decls.begin(), E = Decls.end(); I != E;
-         ++I) {
+    for (auto I = Decls.begin(), E = Decls.end(); I != E; ++I) {
       if ((*I)->getName() == Name) {
         return *I;
       }

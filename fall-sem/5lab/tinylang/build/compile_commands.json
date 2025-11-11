@@ -1,0 +1,68 @@
+[
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/Basic",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangBasic.dir/Diagnostic.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Basic/Diagnostic.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Basic/Diagnostic.cpp",
+  "output": "lib/Basic/CMakeFiles/tinylangBasic.dir/Diagnostic.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/Basic",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangBasic.dir/TokenKinds.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Basic/TokenKinds.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Basic/TokenKinds.cpp",
+  "output": "lib/Basic/CMakeFiles/tinylangBasic.dir/TokenKinds.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/Basic",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangBasic.dir/Version.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Basic/Version.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Basic/Version.cpp",
+  "output": "lib/Basic/CMakeFiles/tinylangBasic.dir/Version.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/CodeGen",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangCodeGen.dir/CGModule.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/CodeGen/CGModule.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/CodeGen/CGModule.cpp",
+  "output": "lib/CodeGen/CMakeFiles/tinylangCodeGen.dir/CGModule.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/CodeGen",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangCodeGen.dir/CGProcedure.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/CodeGen/CGProcedure.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/CodeGen/CGProcedure.cpp",
+  "output": "lib/CodeGen/CMakeFiles/tinylangCodeGen.dir/CGProcedure.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/CodeGen",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangCodeGen.dir/CodeGenerator.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/CodeGen/CodeGenerator.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/CodeGen/CodeGenerator.cpp",
+  "output": "lib/CodeGen/CMakeFiles/tinylangCodeGen.dir/CodeGenerator.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/Lexer",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangLexer.dir/Lexer.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Lexer/Lexer.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Lexer/Lexer.cpp",
+  "output": "lib/Lexer/CMakeFiles/tinylangLexer.dir/Lexer.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/Parser",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangParser.dir/Parser.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Parser/Parser.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Parser/Parser.cpp",
+  "output": "lib/Parser/CMakeFiles/tinylangParser.dir/Parser.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/Sema",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangSema.dir/Scope.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Sema/Scope.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Sema/Scope.cpp",
+  "output": "lib/Sema/CMakeFiles/tinylangSema.dir/Scope.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/lib/Sema",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylangSema.dir/Sema.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Sema/Sema.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/lib/Sema/Sema.cpp",
+  "output": "lib/Sema/CMakeFiles/tinylangSema.dir/Sema.cpp.o"
+},
+{
+  "directory": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/tools/driver",
+  "command": "/usr/bin/c++ -DGTEST_HAS_RTTI=0 -DLLVM_BUILD_STATIC -D_GLIBCXX_USE_CXX11_ABI=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/include -I/home/pahansan/code/compilers/fall-sem/5lab/tinylang/build/include -I/home/pahansan/opt/clang/include  -fPIC -fno-semantic-interposition -fvisibility-inlines-hidden -Werror=date-time -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -Wimplicit-fallthrough -Wno-nonnull -Wno-class-memaccess -Wno-redundant-move -Wno-pessimizing-move -Wno-noexcept-type -Wdelete-non-virtual-dtor -Wsuggest-override -Wno-comment -Wno-misleading-indentation -Wctad-maybe-unsupported -g  -fno-exceptions -funwind-tables -fno-rtti -o CMakeFiles/tinylang.dir/Driver.cpp.o -c /home/pahansan/code/compilers/fall-sem/5lab/tinylang/tools/driver/Driver.cpp",
+  "file": "/home/pahansan/code/compilers/fall-sem/5lab/tinylang/tools/driver/Driver.cpp",
+  "output": "tools/driver/CMakeFiles/tinylang.dir/Driver.cpp.o"
+}
+]
